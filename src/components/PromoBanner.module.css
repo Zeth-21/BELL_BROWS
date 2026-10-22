@@ -1,0 +1,146 @@
+.promoWrapper {
+  width: 100%;
+  padding-top: clamp(16px, 3vw, 24px);
+  padding-bottom: clamp(12px, 2.5vw, 20px);
+  animation: fadeIn 0.4s ease-out;
+}
+
+.promoContainer {
+  width: 100%;
+}
+
+.promoCard {
+  position: relative;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(35, 27, 21, 0.95) 0%, rgba(20, 16, 14, 0.98) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 14px 40px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(212, 175, 55, 0.15);
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+
+.promoCard:hover {
+  border-color: rgba(212, 175, 55, 0.55);
+}
+
+.glowEffect {
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 140%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.08), transparent 60%);
+  pointer-events: none;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 768px) {
+  .contentGrid {
+    grid-template-columns: 340px 1fr;
+  }
+}
+
+.imageColumn {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+  max-height: 280px;
+}
+
+@media (min-width: 768px) {
+  .imageColumn {
+    min-height: 100%;
+    max-height: none;
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+}
+
+.promoImage {
+  object-fit: cover;
+  object-position: center;
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(20, 16, 14, 0.8) 100%);
+}
+
+@media (min-width: 768px) {
+  .imageOverlay {
+    background: linear-gradient(to right, transparent 50%, rgba(20, 16, 14, 0.95) 100%);
+  }
+}
+
+.textColumn {
+  padding: clamp(18px, 4vw, 32px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.textColumnFull {
+  grid-column: 1 / -1;
+  padding: clamp(24px, 5vw, 40px);
+}
+
+.badgeRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.badgePulse {
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
+}
+
+.promoUrgency {
+  font-size: 0.8rem;
+  color: var(--rose-accent);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.promoTitle {
+  font-size: clamp(1.25rem, 3.5vw, 1.85rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.promoDescription {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.actionRow {
+  margin-top: 6px;
+}
+
+.claimButton {
+  width: 100%;
+  max-width: 380px;
+  font-size: 0.95rem;
+  border-radius: var(--radius-md);
+}
+
+@media (min-width: 640px) {
+  .claimButton {
+    width: auto;
+  }
+}

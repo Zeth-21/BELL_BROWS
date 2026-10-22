@@ -1,0 +1,55 @@
+'use client';
+
+import React from 'react';
+import { Sparkles, MessageCircle, Clock, MapPin } from 'lucide-react';
+import styles from './Header.module.css';
+
+export default function Header() {
+  const handleBooking = () => {
+    const text = '¡Hola Bell Brows! Me gustaría obtener información sobre sus servicios y disponibilidad de citas.';
+    window.open(`https://wa.me/5215512345678?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
+  return (
+    <header className={styles.header}>
+      {/* Top micro info bar */}
+      <div className={styles.topBar}>
+        <div className={`container ${styles.topBarContent}`}>
+          <div className={styles.infoItem}>
+            <Clock size={13} className={styles.topIcon} />
+            <span>Lun a Sáb: 10:00 AM - 7:00 PM</span>
+          </div>
+          <div className={styles.infoDivider}>•</div>
+          <div className={styles.infoItem}>
+            <MapPin size={13} className={styles.topIcon} />
+            <span>Citas Personalizadas & Atención VIP</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Main navigation / brand bar */}
+      <div className={`container ${styles.mainBar}`}>
+        <div className={styles.brand}>
+          <div className={styles.logoIcon}>
+            <Sparkles size={20} />
+          </div>
+          <div className={styles.brandText}>
+            <span className={styles.brandName}>BELL BROWS</span>
+            <span className={styles.brandTagline}>ESTUDIO DE MIRADA & BELLEZA</span>
+          </div>
+        </div>
+
+        <div className={styles.actions}>
+          <button 
+            onClick={handleBooking}
+            className={`btn btn-whatsapp ${styles.ctaButton}`}
+            aria-label="Agendar cita por WhatsApp"
+          >
+            <MessageCircle size={18} />
+            <span className={styles.btnText}>Agendar Cita</span>
+          </button>
+        </div>
+      </div>
+    </header>
+  );
+}

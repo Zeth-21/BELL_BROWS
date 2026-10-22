@@ -1,0 +1,121 @@
+.header {
+  width: 100%;
+  background: rgba(12, 10, 9, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+.topBar {
+  background: rgba(20, 16, 14, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 6px 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.topBarContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.topIcon {
+  color: var(--gold-primary);
+}
+
+.infoDivider {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.mainBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  gap: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--gold-gradient);
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-gold);
+  flex-shrink: 0;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+}
+
+.brandName {
+  font-size: clamp(1.15rem, 4vw, 1.45rem);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+}
+
+.brandTagline {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--rose-accent);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ctaButton {
+  min-height: 44px;
+  padding: 8px 16px;
+  font-size: 0.88rem;
+  border-radius: var(--radius-full);
+}
+
+@media (max-width: 480px) {
+  .topBarContent {
+    font-size: 0.7rem;
+    gap: 8px;
+  }
+  .infoDivider {
+    display: none;
+  }
+  .infoItem:nth-child(3) {
+    display: none;
+  }
+  .btnText {
+    display: inline-block;
+  }
+}
