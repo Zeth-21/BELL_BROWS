@@ -6,7 +6,7 @@ import { Lock, Mail, Eye, EyeOff, Loader2, Sparkles, AlertCircle } from 'lucide-
 import styles from './portal.module.css';
 
 interface LoginFormProps {
-  onLoginSuccess: () => void;
+  onLoginSuccess: (user?: any) => void;
 }
 
 export default function LoginForm({ onLoginSuccess }: LoginFormProps) {
@@ -37,7 +37,7 @@ export default function LoginForm({ onLoginSuccess }: LoginFormProps) {
       }
 
       if (data.user) {
-        onLoginSuccess();
+        onLoginSuccess(data.user);
       }
     } catch (err: any) {
       setErrorMessage(err?.message || 'Error de conexión. Intenta nuevamente.');

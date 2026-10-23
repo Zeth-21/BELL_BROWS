@@ -32,6 +32,7 @@ export default function PortalInternoPage() {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setSessionUser(session?.user || null);
+        setCheckingAuth(false);
       }
     );
 
@@ -57,7 +58,14 @@ export default function PortalInternoPage() {
 
   // ROUTE GUARDIAN: If not authenticated, block all panel data and render ONLY LoginForm
   if (!sessionUser) {
-    return <LoginForm onLoginSuccess={() => setCheckingAuth(true)} />;
+    return (
+      <LoginForm
+        onLoginSuccess={(user) => {
+          if (user) setSessionUser(user);
+          setCheckingAuth(false);
+        }}
+      />
+    );
   }
 
   // Authenticated Admin Dashboard
