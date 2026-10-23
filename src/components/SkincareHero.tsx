@@ -1,15 +1,19 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Sprout, 
   ShoppingBag, 
   Menu, 
+  X,
   ArrowRight, 
   ShieldCheck, 
   Droplets, 
   Leaf, 
-  Sparkles 
+  Sparkles,
+  MessageCircle,
+  ExternalLink,
+  ChevronRight
 } from 'lucide-react';
 import { Promotion } from '@/types/database';
 import { buildWhatsAppPromoLink, buildWhatsAppBookingLink } from '@/lib/utils';
@@ -20,6 +24,33 @@ interface SkincareHeroProps {
 }
 
 export default function SkincareHero({ promotion }: SkincareHeroProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Close mobile drawer on ESC key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [mobileMenuOpen]);
+
+  const scrollToSection = (id: string) => {
+    setMobileMenuOpen(false);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   // Action when clicking main CTA ("SHOP NOW ->" or "APROVECHAR OFERTA ->")
   const handleMainAction = () => {
     if (promotion && promotion.is_active) {
@@ -64,31 +95,164 @@ export default function SkincareHero({ promotion }: SkincareHeroProps) {
           </nav>
 
           <div className={styles.navActions}>
+            {/* Offer / Catalog Bag with Badge (Present on desktop & mobile, with crystal-clear white icon) */}
             <button 
-              onClick={() => {
-                const el = document.getElementById('catalogo');
-                el?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className={styles.iconBtn}
-              aria-label="Ver carrito y catálogo"
-              title="Explorar servicios"
+              onClick={() => scrollToSection('catalogo')}
+              className={styles.cartIconBtn}
+              aria-label="Ver catálogo y ofertas"
+              title="Promociones y servicios"
             >
-              <ShoppingBag size={18} />
+              <ShoppingBag size={18} stroke="#ffffff" strokeWidth={2.2} />
               <span className={styles.cartBadge}>{promotion ? '1' : '0'}</span>
             </button>
 
+            {/* Desktop Action: Quick WhatsApp appointment booking CTA */}
             <button 
-              onClick={() => {
-                const el = document.getElementById('catalogo');
-                el?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className={styles.iconBtn}
-              aria-label="Menú de navegación"
+              onClick={handleMainAction}
+              className={styles.desktopBookingBtn}
+              aria-label="Agendar Cita por WhatsApp"
             >
-              <Menu size={18} />
+              <MessageCircle size={16} />
+              <span>Agendar Cita</span>
+            </button>
+
+            {/* Mobile Action: Ultra-intuitive 3-bar hamburger button with explicit 'MENÚ' label */}
+            <button 
+              onClick={() => setMobileMenuOpen(true)}
+              className={styles.menuPillBtn}
+              aria-label="Abrir menú de navegación"
+              aria-expanded={mobileMenuOpen}
+            >
+              <span className={styles.hamburgerBars}>
+                <span className={styles.hamburgerBar}></span>
+                <span className={styles.hamburgerBar}></span>
+                <span className={styles.hamburgerBar}></span>
+              </span>
+              <span className={styles.menuBtnText}>MENÚ</span>
             </button>
           </div>
         </header>
+
+        {/* Mobile Quick Navigation Bar: Preserving ALL Desktop Navigation Fields */}
+        <nav className={styles.mobileCategoriesBar} aria-label="Categorías principales">
+          <button onClick={() => scrollToSection('catalogo')} className={`${styles.catChip} ${styles.catChipActive}`}>
+            <Sparkles size={12} />
+            <span>TODOS</span>
+          </button>
+          <button onClick={() => scrollToSection('catalogo')} className={styles.catChip}>
+            <span>SKINCARE</span>
+          </button>
+          <button onClick={() => scrollToSection('catalogo')} className={styles.catChip}>
+            <span>CEJAS</span>
+          </button>
+          <button onClick={() => scrollToSection('catalogo')} className={styles.catChip}>
+            <span>PESTAÑAS</span>
+          </button>
+          <button onClick={() => scrollToSection('catalogo')} className={styles.catChip}>
+            <span>TRATAMIENTOS</span>
+          </button>
+          <button onClick={() => scrollToSection('catalogo')} className={styles.catChip}>
+            <span>PROMOS</span>
+          </button>
+          <a href="/portal-interno" className={styles.catChip}>
+            <span>ACCESO</span>
+          </a>
+        </nav>
+
+        {/* Mobile Navigation Drawer & Backdrop */}
+        {mobileMenuOpen && (
+          <div 
+            className={styles.drawerBackdrop}
+            onClick={() => setMobileMenuOpen(false)}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menú móvil"
+          >
+            <div 
+              className={styles.drawerSheet}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className={styles.drawerHeader}>
+                <div className={styles.drawerBrand}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/logo.svg"
+                    alt="Logo Bell Brows"
+                    style={{ width: '36px', height: '36px', objectFit: 'contain', borderRadius: '8px' }}
+                  />
+                  <div>
+                    <span className={styles.drawerBrandName}>BELL BROWS</span>
+                    <span className={styles.drawerBrandSub}>ESTUDIO DE BELLEZA</span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={styles.drawerCloseBtn}
+                  aria-label="Cerrar menú"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              <div className={styles.drawerBody}>
+                <nav className={styles.drawerNavLinks} aria-label="Menú de navegación móvil">
+                  <button 
+                    onClick={() => scrollToSection('catalogo')}
+                    className={styles.drawerLink}
+                  >
+                    <span>Tratamientos & Catálogo</span>
+                    <ChevronRight size={16} />
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection('catalogo')}
+                    className={styles.drawerLink}
+                  >
+                    <span>Cejas (Microblading / Lamination)</span>
+                    <ChevronRight size={16} />
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection('catalogo')}
+                    className={styles.drawerLink}
+                  >
+                    <span>Pestañas (Lash Lifting & Extensiones)</span>
+                    <ChevronRight size={16} />
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection('catalogo')}
+                    className={styles.drawerLink}
+                  >
+                    <span>Skincare & Cuidado Facial</span>
+                    <ChevronRight size={16} />
+                  </button>
+                  <a 
+                    href="/portal-interno"
+                    className={styles.drawerLink}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span>Portal de Gestión (Admin)</span>
+                    <ExternalLink size={15} />
+                  </a>
+                </nav>
+
+                <div className={styles.drawerFooter}>
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      handleMainAction();
+                    }}
+                    className={`btn btn-whatsapp ${styles.drawerWaBtn}`}
+                  >
+                    <MessageCircle size={18} />
+                    <span>Agendar Cita por WhatsApp</span>
+                  </button>
+                  <p className={styles.drawerHours}>
+                    Horario: Lun - Sáb 10:00 AM - 7:00 PM
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* High-Impact Headline: NEW SKIN CARE COLLECTION */}
         <div className={styles.headlineContainer}>
@@ -172,18 +336,18 @@ export default function SkincareHero({ promotion }: SkincareHeroProps) {
               </div>
             </div>
 
-            {/* Mobile badges row for clean mobile layout */}
+            {/* Mobile badges row for clean mobile layout: ALL 3 Desktop badges prominently displayed */}
             <div className={styles.mobileBadgesRow}>
-              <div className={styles.floatingBadge}>
-                <ShieldCheck size={15} className={styles.badgeIcon} />
+              <div className={styles.mobileBadgeChip}>
+                <ShieldCheck size={14} className={styles.badgeIcon} />
                 <span>DERMATOLOGIST TESTED</span>
               </div>
-              <div className={styles.floatingBadge}>
-                <Droplets size={15} className={styles.badgeIcon} />
+              <div className={styles.mobileBadgeChip}>
+                <Droplets size={14} className={styles.badgeIcon} />
                 <span>SUITABLE FOR SENSITIVE SKIN</span>
               </div>
-              <div className={styles.floatingBadge}>
-                <Leaf size={15} className={styles.badgeIcon} />
+              <div className={styles.mobileBadgeChip}>
+                <Leaf size={14} className={styles.badgeIcon} />
                 <span>NATURAL INGREDIENTS</span>
               </div>
             </div>

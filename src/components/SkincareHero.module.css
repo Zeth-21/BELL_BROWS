@@ -117,45 +117,353 @@
   gap: 10px;
 }
 
-.iconBtn {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background-color: #173826;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  cursor: pointer;
-  position: relative;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+/* Offer / Catalog Bag with Badge */
+.cartIconBtn {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  border-radius: 50% !important;
+  background-color: var(--forest-primary) !important;
+  color: #ffffff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: none !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  position: relative !important;
+  box-shadow: 0 4px 12px rgba(23, 56, 38, 0.25) !important;
+  transition: transform 0.2s ease, background-color 0.2s ease !important;
+  flex-shrink: 0;
+  user-select: none;
 }
 
-.iconBtn:hover {
-  background-color: #0e271a;
+.cartIconBtn:hover {
+  background-color: var(--forest-dark) !important;
   transform: scale(1.05);
+}
+
+.cartIconBtn:active {
+  transform: scale(0.95);
+}
+
+.cartIconBtn svg {
+  display: block !important;
+  flex-shrink: 0 !important;
+  stroke: #ffffff !important;
 }
 
 .cartBadge {
   position: absolute;
-  bottom: 4px;
-  right: 4px;
-  background-color: #6f8770;
-  color: #ffffff;
-  font-size: 0.62rem;
+  top: -2px;
+  right: -2px;
+  background-color: #8fa691;
+  color: #173826;
+  font-size: 0.65rem;
   font-weight: 800;
-  width: 14px;
-  height: 14px;
+  width: 17px;
+  height: 17px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1.5px solid #173826;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Desktop appointment booking CTA */
+.desktopBookingBtn {
+  display: none;
+  background: var(--forest-primary);
+  color: #ffffff !important;
+  padding: 10px 22px !important;
+  min-height: 42px !important;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 14px rgba(23, 56, 38, 0.25);
+  user-select: none;
+}
+
+.desktopBookingBtn:hover {
+  background: #0f261a;
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 18px rgba(23, 56, 38, 0.35);
+}
+
+@media (min-width: 960px) {
+  .desktopBookingBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+/* Intuitive mobile MENÚ button with high contrast icon and clear text */
+.menuPillBtn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background: var(--forest-primary) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: var(--radius-full) !important;
+  padding: 0 16px !important;
+  height: 40px !important;
+  min-height: 40px !important;
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 14px rgba(23, 56, 38, 0.3) !important;
+  transition: all 0.2s ease !important;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.menuPillBtn:hover {
+  background: #0f261a !important;
+  transform: scale(1.03);
+}
+
+.menuPillBtn:active {
+  transform: scale(0.96);
+}
+
+/* 3 Clean, Sharp White Horizontal Bars (Unmistakable Hamburger Icon) */
+.hamburgerBars {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 16px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.hamburgerBar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #ffffff;
+  border-radius: 2px;
+}
+
+.menuBtnText {
+  color: #ffffff;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+@media (min-width: 960px) {
+  .menuPillBtn {
+    display: none !important;
+  }
+}
+
+/* Mobile Quick Navigation Bar - Displays ALL Desktop Categories on Mobile */
+.mobileCategoriesBar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0 14px 0;
+  scrollbar-width: none;
+  width: 100%;
+  border-bottom: 1px solid rgba(23, 56, 38, 0.08);
+  margin-bottom: 8px;
+  box-sizing: border-box;
+}
+
+.mobileCategoriesBar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .mobileCategoriesBar {
+    display: none !important;
+  }
+}
+
+.catChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(23, 56, 38, 0.05);
+  color: var(--forest-primary);
+  border: 1px solid rgba(23, 56, 38, 0.12);
+  border-radius: var(--radius-full);
+  padding: 6px 14px !important;
+  min-height: 34px !important;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.catChip:hover, .catChipActive {
+  background: var(--forest-primary);
+  color: #ffffff !important;
+  border-color: var(--forest-primary);
 }
 
 /* ------------------------------------------------------------
-   Massive Headline: NEW SKIN CARE COLLECTION
+   Mobile Navigation Drawer & Sheet
+   ------------------------------------------------------------ */
+.drawerBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 38, 26, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.drawerSheet {
+  width: 100%;
+  max-width: 360px;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: -10px 0 35px rgba(23, 56, 38, 0.2);
+  display: flex;
+  flex-direction: column;
+  padding: clamp(20px, 4vw, 28px);
+  animation: slideLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(23, 56, 38, 0.08);
+}
+
+.drawerBrand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.drawerBrandName {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #173826;
+  display: block;
+}
+
+.drawerBrandSub {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: #5d7565;
+  display: block;
+}
+
+.drawerCloseBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(23, 56, 38, 0.06);
+  color: #173826;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.drawerCloseBtn:hover {
+  background: rgba(23, 56, 38, 0.12);
+}
+
+.drawerBody {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  padding-top: 24px;
+}
+
+.drawerNavLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.drawerLink {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: rgba(23, 56, 38, 0.03);
+  border: 1px solid rgba(23, 56, 38, 0.06);
+  border-radius: var(--radius-md);
+  color: #173826;
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.drawerLink:hover {
+  background: rgba(23, 56, 38, 0.08);
+  border-color: rgba(23, 56, 38, 0.15);
+  transform: translateX(3px);
+}
+
+.drawerFooter {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(23, 56, 38, 0.08);
+}
+
+.drawerWaBtn {
+  width: 100%;
+  font-size: 0.92rem;
+  min-height: 48px;
+}
+
+.drawerHours {
+  font-size: 0.78rem;
+  color: #5d7565;
+  text-align: center;
+  margin: 0;
+}
+
+/* ------------------------------------------------------------
+   Massive Headline: NEW SKIN CARE COLLECTION (Fluid & Zero-Overflow)
    ------------------------------------------------------------ */
 .headlineContainer {
   width: 100%;
@@ -169,15 +477,16 @@
 
 .headlineText {
   font-family: 'Bebas Neue', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(3.2rem, 9.8vw, 10.5rem);
-  line-height: 0.85;
+  font-size: clamp(2.1rem, 7.5vw, 10.5rem);
+  line-height: 0.9;
   letter-spacing: 0.02em;
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: clamp(10px, 2.2vw, 36px);
-  white-space: nowrap;
+  gap: clamp(8px, 2vw, 36px);
+  flex-wrap: wrap;
+  text-align: center;
 }
 
 .headlineNew {
@@ -222,12 +531,15 @@
   position: relative;
   z-index: 5;
   order: 2;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 @media (min-width: 960px) {
   .leftColumn {
     order: 1;
     margin-bottom: 24px;
+    width: auto;
   }
 }
 
@@ -246,13 +558,17 @@
 }
 
 .tagline {
-  font-size: clamp(1.15rem, 1.55vw, 1.45rem);
+  font-size: clamp(1.15rem, 4.2vw, 1.45rem);
   font-weight: 900;
   color: #173826;
-  line-height: 1.15;
+  line-height: 1.2;
   letter-spacing: 0.01em;
   text-transform: uppercase;
   margin: 0;
+  width: 100%;
+  overflow-wrap: break-word;
+  word-break: normal;
+  box-sizing: border-box;
 }
 
 .description {
@@ -348,7 +664,7 @@
 .catImg {
   width: 100%;
   height: auto;
-  max-height: clamp(380px, 46vw, 560px);
+  max-height: clamp(240px, 48vw, 560px);
   object-fit: contain;
   display: block;
   filter: drop-shadow(0 20px 35px rgba(23, 56, 38, 0.12));
@@ -383,36 +699,6 @@
   animation: floatSlow 5s ease-in-out 0.5s infinite alternate;
 }
 
-/* Mobile & Tablet arrangement */
-@media (max-width: 959px) {
-  .badgeLeft,
-  .badgeRight,
-  .badgeBottom {
-    position: static;
-    transform: none;
-    animation: none;
-  }
-
-  .desktopBadges {
-    display: none;
-  }
-
-  .mobileBadgesRow {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 16px;
-    width: 100%;
-  }
-}
-
-@media (min-width: 960px) {
-  .mobileBadgesRow {
-    display: none;
-  }
-}
-
 .floatingBadge {
   display: inline-flex;
   align-items: center;
@@ -431,6 +717,44 @@
   text-transform: uppercase;
 }
 
+/* Strict mobile & tablet isolation for badges */
+@media (max-width: 959px) {
+  .desktopBadges {
+    display: none !important;
+  }
+
+  .mobileBadgesRow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+    width: 100%;
+  }
+}
+
+@media (min-width: 960px) {
+  .mobileBadgesRow {
+    display: none !important;
+  }
+}
+
+.mobileBadgeChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #ffffff;
+  border: 1px solid rgba(23, 56, 38, 0.12);
+  border-radius: var(--radius-full);
+  padding: 6px 12px;
+  box-shadow: 0 3px 10px rgba(23, 56, 38, 0.06);
+  color: #173826;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
 .badgeIcon {
   color: #2b573a;
   flex-shrink: 0;
@@ -441,30 +765,34 @@
    ------------------------------------------------------------ */
 .rightColumn {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 18px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 12px;
   position: relative;
   z-index: 5;
   order: 3;
+  margin-top: 12px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
 }
 
-@media (max-width: 959px) {
+@media (min-width: 960px) {
   .rightColumn {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-end;
     gap: 18px;
-    margin-top: 10px;
+    width: auto;
+    margin-top: 0;
+    flex-wrap: nowrap;
   }
 }
 
 /* Clean Beauty Circular Seal */
 .cleanBeautySeal {
-  width: 96px;
-  height: 96px;
+  width: clamp(74px, 19vw, 96px);
+  height: clamp(74px, 19vw, 96px);
   border-radius: 50%;
   background-color: #6f8770;
   color: #ffffff;
@@ -473,14 +801,17 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 10px;
-  box-shadow: 0 10px 25px -5px rgba(23, 56, 38, 0.22);
-  margin-bottom: 6px;
+  padding: 6px;
+  box-shadow: 0 8px 20px -4px rgba(23, 56, 38, 0.2);
+  flex-shrink: 0;
+  box-sizing: border-box;
   transition: transform 0.3s ease;
 }
 
-.cleanBeautySeal:hover {
-  transform: rotate(5deg) scale(1.05);
+@media (hover: hover) {
+  .cleanBeautySeal:hover {
+    transform: rotate(5deg) scale(1.05);
+  }
 }
 
 .sealIcon {
@@ -488,7 +819,7 @@
 }
 
 .sealTitle {
-  font-size: 0.68rem;
+  font-size: 0.64rem;
   font-weight: 800;
   letter-spacing: 0.06em;
   line-height: 1.1;
@@ -496,7 +827,7 @@
 }
 
 .sealSub {
-  font-size: 0.54rem;
+  font-size: 0.52rem;
   letter-spacing: 0.04em;
   opacity: 0.9;
   text-transform: uppercase;
@@ -505,28 +836,32 @@
 /* Stack of 2 Product Cards */
 .productsStack {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  box-sizing: border-box;
 }
 
-@media (max-width: 959px) {
+@media (min-width: 960px) {
   .productsStack {
-    flex-direction: row;
+    flex-direction: column;
     gap: 16px;
   }
 }
 
 .productCard {
-  width: 116px;
-  height: 116px;
-  border-radius: 20px;
+  width: clamp(80px, 22vw, 116px);
+  height: clamp(80px, 22vw, 116px);
+  border-radius: clamp(12px, 3vw, 20px);
   overflow: hidden;
   background-color: #f5f8f5;
   border: 2px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 0 10px 25px -4px rgba(23, 56, 38, 0.12);
+  box-shadow: 0 8px 20px -4px rgba(23, 56, 38, 0.12);
   position: relative;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 @media (min-width: 1200px) {
@@ -536,9 +871,15 @@
   }
 }
 
-.productCard:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 16px 32px -4px rgba(23, 56, 38, 0.2);
+@media (hover: hover) {
+  .productCard:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 16px 32px -4px rgba(23, 56, 38, 0.2);
+  }
+}
+
+.productCard:active {
+  transform: scale(0.96);
 }
 
 .productImg {

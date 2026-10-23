@@ -6,7 +6,7 @@ import ServiceCard from '@/components/ServiceCard';
 import Footer from '@/components/Footer';
 import { supabase } from '@/lib/supabase/client';
 import { Service, Promotion } from '@/types/database';
-import { Sparkles, Star, ShieldCheck, HeartHandshake } from 'lucide-react';
+import { Sparkles, Star, ShieldCheck, HeartHandshake, MessageCircle } from 'lucide-react';
 import styles from './page.module.css';
 
 export default function HomePage() {
@@ -210,6 +210,21 @@ export default function HomePage() {
             )}
           </div>
         </section>
+
+        {/* Omnipresent Floating WhatsApp Action Button */}
+        <a
+          href="https://wa.me/5215512345678?text=Hola%20Bell%20Brows%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita%20o%20recibir%20asesor%C3%ADa."
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.fabWhatsApp}
+          aria-label="Contactar por WhatsApp para dudas o agendar cita"
+          id="floating-whatsapp-btn"
+        >
+          <span className={styles.fabIconWrap}>
+            <MessageCircle size={24} />
+          </span>
+          <span className={styles.fabText}>¿Dudas? Escríbenos</span>
+        </a>
       </main>
 
       <Footer />
