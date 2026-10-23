@@ -1,12 +1,13 @@
 'use client';
 
 import React, { useEffect, useState, useMemo } from 'react';
+import Image from 'next/image';
 import SkincareHero from '@/components/SkincareHero';
 import ServiceCard from '@/components/ServiceCard';
 import Footer from '@/components/Footer';
 import { supabase } from '@/lib/supabase/client';
 import { Service, Promotion } from '@/types/database';
-import { Sparkles, Star, ShieldCheck, HeartHandshake, MessageCircle } from 'lucide-react';
+import { Sparkles, MessageCircle, ArrowRight } from 'lucide-react';
 import styles from './page.module.css';
 
 export default function HomePage() {
@@ -21,7 +22,7 @@ export default function HomePage() {
       try {
         setLoading(true);
 
-        // Fetch active promotion (RLS allows only active for public)
+        // Fetch active promotion
         const { data: promoData, error: promoError } = await supabase
           .from('promotions')
           .select('*')
@@ -55,14 +56,13 @@ export default function HomePage() {
 
     loadData();
 
-    // Setup real-time listener for promotions & services changes
+    // Setup real-time listeners
     const promoChannel = supabase
       .channel('public_promotions_changes')
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'promotions' },
         async () => {
-          // Re-fetch promotion state
           const { data } = await supabase
             .from('promotions')
             .select('*')
@@ -115,99 +115,273 @@ export default function HomePage() {
   return (
     <div className={styles.page}>
       <main className={styles.mainContent}>
-        {/* Editorial Skincare Hero Banner with Cat Mascot, Floating Badges & Products */}
+        {/* Editorial Skincare Hero Banner */}
         <SkincareHero promotion={promotion} />
 
-        {/* Social Proof & Trust markers */}
-        <section className={styles.trustSection}>
-          <div className="container">
-            <div className={styles.trustRow}>
-              <div className={styles.trustItem}>
-                <div className={styles.stars}>
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={15} fill="#f59e0b" color="#f59e0b" />
-                  ))}
-                </div>
-                <span>+500 Clientes Felices</span>
-              </div>
-              <div className={styles.trustItem}>
-                <ShieldCheck size={18} className={styles.trustIcon} />
-                <span>Pigmentos Hipoalergénicos</span>
-              </div>
-              <div className={styles.trustItem}>
-                <HeartHandshake size={18} className={styles.trustIcon} />
-                <span>Atención Personalizada 1 a 1</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Services Catalog Section */}
+        {/* =========================================================================
+            EDITORIAL CATALOG SECTION: Exact 5-Module Structure from Image 1
+           ========================================================================= */}
         <section className={styles.catalogSection} id="catalogo">
           <div className="container">
-            <div className={styles.catalogHeader}>
-              <div className={styles.sectionHeaderWrap}>
-                <span className={styles.sectionOverline}>NUESTRO MENÚ EXCLUSIVO</span>
-                <h2 className={styles.sectionHeading}>Servicios Profesionales</h2>
-                <p className={styles.sectionSub}>
-                  Elige el tratamiento ideal para consentirte y transformar tu mirada
+
+            {/* -------------------------------------------------------------------
+                BLOQUE 1: INTRODUCCIÓN EDITORIAL & FILOSOFÍA
+                (Imagen 1: "О СЕЗОНЕ / Вдохновлены вкусом жизни / Наша философия ->")
+               ------------------------------------------------------------------- */}
+            <div className={styles.editorialIntroBlock}>
+              <div className={styles.introLeftText}>
+                <span className={styles.introOverline}>FILOSOFÍA & TÉCNICA</span>
+                <h2 className={styles.introHeading}>
+                  Inspiradas en la belleza natural de tu mirada
+                </h2>
+                <p className={styles.introParagraph}>
+                  Bell Brows — es la cúspide del diseño de cejas y pestañas, donde el arte milimétrico,
+                  los pigmentos orgánicos y la atención al detalle crean una armonía facial que trasciende modas pasajeras.
                 </p>
+                <div className={styles.introLinkWrapper}>
+                  <div className={styles.introDividerLine} />
+                  <a
+                    href="https://wa.me/5215512345678?text=Hola%20Bell%20Brows%2C%20quisiera%20conocer%20m%C3%A1s%20sobre%20su%20filosof%C3%ADa%20y%20t%C3%A9cnicas."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.introLink}
+                  >
+                    <span>Nuestra filosofía</span>
+                    <ArrowRight size={17} className={styles.introLinkArrow} />
+                  </a>
+                </div>
               </div>
 
-              {/* Category Filter Pills (Mobile friendly swipe) */}
-              {categories.length > 1 && (
-                <div className={styles.filterScrollWrapper}>
-                  <div className={styles.filterPills}>
-                    {categories.map((cat) => (
-                      <button
-                        key={cat}
-                        onClick={() => setSelectedCategory(cat)}
-                        className={`${styles.filterBtn} ${
-                          selectedCategory === cat ? styles.filterBtnActive : ''
-                        }`}
-                        aria-pressed={selectedCategory === cat}
-                      >
-                        {cat}
-                      </button>
-                    ))}
+              <div className={styles.introRightVisual}>
+                <div className={styles.introImageFrame} style={{ position: 'relative' }}>
+                  <Image
+                    src="/editorial-intro.jpg"
+                    alt="Filosofía Bell Brows"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 520px"
+                    className={styles.introImg}
+                    priority
+                  />
+                </div>
+                <div className={styles.introArtBadge}>
+                  <span className={styles.badgeVerticalText}>ARTE EN CADA TRAZO</span>
+                  <div className={styles.badgeLine} />
+                  <span className={styles.badgeEst}>EST. 2024</span>
+                </div>
+              </div>
+            </div>
+
+            {/* -------------------------------------------------------------------
+                BLOQUE 2: MENÚ DE SERVICIOS EXCLUSIVOS
+                (Imagen 1: "ФИРМЕННАЯ КОЛЛЕКЦИЯ ─── / Смотреть всю коллекцию ->")
+               ------------------------------------------------------------------- */}
+            <div className={styles.featuredMenuSection}>
+              <div className={styles.featuredHeaderRow}>
+                <div className={styles.featuredTitleWrap}>
+                  <span className={styles.featuredOverline}>COLECCIÓN EXCLUSIVA</span>
+                  <div className={styles.featuredLineRule} />
+                </div>
+
+                {/* Refined Filter Navigation */}
+                {categories.length > 1 && (
+                  <div className={styles.filterScrollWrapper}>
+                    <div className={styles.filterPillsRow}>
+                      {categories.map((cat) => (
+                        <button
+                          key={cat}
+                          onClick={() => setSelectedCategory(cat)}
+                          className={`${styles.editorialFilterBtn} ${
+                            selectedCategory === cat ? styles.editorialFilterBtnActive : ''
+                          }`}
+                          aria-pressed={selectedCategory === cat}
+                        >
+                          {cat}
+                        </button>
+                      ))}
+                    </div>
                   </div>
+                )}
+              </div>
+
+              {/* Service Cards Grid (Centered editorial cards matching Image 1) */}
+              {loading ? (
+                <div className={styles.servicesGrid}>
+                  {[1, 2, 3].map((n) => (
+                    <div key={n} className={styles.skeletonCard}>
+                      <div className={styles.skeletonImg} />
+                      <div className={styles.skeletonContent}>
+                        <div className={styles.skeletonTitle} />
+                        <div className={styles.skeletonText} />
+                        <div className={styles.skeletonBtn} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : filteredServices.length > 0 ? (
+                <div className={styles.servicesGrid}>
+                  {filteredServices.map((service) => (
+                    <ServiceCard key={service.id} service={service} />
+                  ))}
+                </div>
+              ) : (
+                <div className={styles.emptyState}>
+                  <Sparkles size={40} className={styles.emptyIcon} />
+                  <h3>No hay servicios en esta categoría</h3>
+                  <p>Prueba seleccionando otra categoría para explorar nuestros tratamientos.</p>
+                  <button
+                    onClick={() => setSelectedCategory('Todos')}
+                    className="btn btn-secondary"
+                  >
+                    Ver Todos los Servicios
+                  </button>
                 </div>
               )}
             </div>
 
-            {/* Loading Skeleton */}
-            {loading ? (
-              <div className={styles.servicesGrid}>
-                {[1, 2, 3, 4, 5, 6].map((n) => (
-                  <div key={n} className={styles.skeletonCard}>
-                    <div className={styles.skeletonImg} />
-                    <div className={styles.skeletonContent}>
-                      <div className={styles.skeletonTitle} />
-                      <div className={styles.skeletonText} />
-                      <div className={styles.skeletonBtn} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : filteredServices.length > 0 ? (
-              <div className={styles.servicesGrid}>
-                {filteredServices.map((service) => (
-                  <ServiceCard key={service.id} service={service} />
-                ))}
-              </div>
-            ) : (
-              <div className={styles.emptyState}>
-                <Sparkles size={40} className={styles.emptyIcon} />
-                <h3>No hay servicios en esta categoría</h3>
-                <p>Prueba seleccionando otra categoría para explorar nuestros tratamientos.</p>
-                <button
-                  onClick={() => setSelectedCategory('Todos')}
-                  className="btn btn-secondary"
+            {/* -------------------------------------------------------------------
+                BLOQUE 3: TRATAMIENTO ESTRELLA DE TEMPORADA
+                (Imagen 1: "СЕЗОННАЯ КОЛЛЕКЦИЯ / ВЕСНА В КАЖДОМ ВКУСЕ / Создано с вдохновением")
+               ------------------------------------------------------------------- */}
+            <div className={styles.seasonalSpotlightBlock}>
+              <div className={styles.spotlightContent}>
+                <span className={styles.spotlightOverline}>COLECCIÓN DE TEMPORADA</span>
+                <h3 className={styles.spotlightHeading}>
+                  BELLEZA EN CADA TRAZO
+                </h3>
+                <p className={styles.spotlightText}>
+                  Ligeras y armoniosas como los primeros días cálidos. Nuevos tratamientos botánicos de nutrición
+                  profunda con sérums vitamínicos, diseño visagista y fijación natural.
+                </p>
+                <a
+                  href="https://wa.me/5215512345678?text=Hola%20Bell%20Brows%2C%20me%20interesa%20reservar%20el%20tratamiento%20de%20temporada."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.spotlightPillBtn}
                 >
-                  Ver Todos los Servicios
-                </button>
+                  <span>Reservar tratamiento</span>
+                  <ArrowRight size={16} className={styles.btnArrowHover} />
+                </a>
               </div>
-            )}
+
+              <div className={styles.spotlightVisualWrap}>
+                <div className={styles.spotlightScriptAccent}>
+                  Creado con devoción
+                </div>
+                <div className={styles.spotlightImageContainer} style={{ position: 'relative' }}>
+                  <Image
+                    src="/editorial-spotlight.jpg"
+                    alt="Tratamiento de temporada Bell Brows"
+                    fill
+                    sizes="(max-width: 900px) 100vw, 580px"
+                    className={styles.spotlightImg}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* -------------------------------------------------------------------
+                BLOQUE 4: DISEÑO PERSONALIZADO & NOVIAS
+                (Imagen 1: "Свадебные торты / Ваши истории в наших десертах / Обсудить заказ ->")
+               ------------------------------------------------------------------- */}
+            <div className={styles.customStoriesBlock}>
+              {/* Left Column: Tall Event / Bridal Photo with vertical text */}
+              <div className={styles.storiesLeftColumn}>
+                <div className={styles.verticalTextColumn}>
+                  <span>EVENTOS ESPECIALES</span>
+                  <span>LOOKS DE NOVIA</span>
+                  <span>EXCLUSIVOS</span>
+                  <span>PARA TU MOMENTO</span>
+                </div>
+                <div className={styles.tallImageContainer} style={{ position: 'relative' }}>
+                  <Image
+                    src="/editorial-bridal.jpg"
+                    alt="Diseño para novias y ocasiones especiales"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 360px"
+                    className={styles.tallImg}
+                  />
+                </div>
+              </div>
+
+              {/* Right Column: Story text, CTA button and craft detail */}
+              <div className={styles.storiesRightColumn}>
+                <div className={styles.storiesHeader}>
+                  <span className={styles.storiesOverline}>DISEÑO A MEDIDA</span>
+                  <h3 className={styles.storiesTitle}>
+                    Tu historia reflejada en tu mirada
+                  </h3>
+                  <p className={styles.storiesDescription}>
+                    Bodas, aniversarios, celebraciones íntimas y eventos especiales. Creamos una sesión de visagismo
+                    1 a 1 para diseñar la curvatura, tono y densidad perfecta que cuente tu propia historia.
+                  </p>
+                  <a
+                    href="https://wa.me/5215512345678?text=Hola%20Bell%20Brows%2C%20quisiera%20agendar%20un%20dise%C3%B1o%20a%20medida%20o%20para%20evento."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.storiesPillBtn}
+                  >
+                    <span>Agendar diseño a medida</span>
+                    <ArrowRight size={16} className={styles.btnArrowHover} />
+                  </a>
+                </div>
+
+                {/* Craft Detail Thumbnail and Highlights */}
+                <div className={styles.craftDetailRow}>
+                  <div className={styles.craftThumb} style={{ position: 'relative' }}>
+                    <Image
+                      src="/editorial-craft.jpg"
+                      alt="Visagismo de precisión artesanal"
+                      fill
+                      sizes="140px"
+                      className={styles.craftImg}
+                    />
+                  </div>
+                  <div className={styles.craftTags}>
+                    <span className={styles.craftTagItem}>DISEÑO MILIMÉTRICO</span>
+                    <span className={styles.craftTagItem}>PIGMENTOS ORGÁNICOS</span>
+                    <span className={styles.craftTagItem}>SIN COMPROMISOS</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* -------------------------------------------------------------------
+                BLOQUE 5: BARRA DE MÉTRICAS & CONVERSIÓN RÁPIDA
+                (Imagen 1: "500+ / 4.9 / 100% / Сделаем ваш момент особенным ->")
+               ------------------------------------------------------------------- */}
+            <div className={styles.metricsConversionBar}>
+              <div className={styles.metricItem}>
+                <span className={styles.metricNumber}>500+</span>
+                <span className={styles.metricLabel}>CLIENTAS SATISFECHAS</span>
+              </div>
+              <div className={styles.metricDivider} />
+
+              <div className={styles.metricItem}>
+                <span className={styles.metricNumber}>4.9</span>
+                <span className={styles.metricLabel}>PROMEDIO EN RESEÑAS</span>
+              </div>
+              <div className={styles.metricDivider} />
+
+              <div className={styles.metricItem}>
+                <span className={styles.metricNumber}>100%</span>
+                <span className={styles.metricLabel}>PIGMENTOS ORGÁNICOS</span>
+              </div>
+              <div className={styles.metricDivider} />
+
+              <div className={styles.conversionCallout}>
+                <span className={styles.calloutText}>Hacemos de tu momento algo único</span>
+                <a
+                  href="https://wa.me/5215512345678?text=Hola%20Bell%20Brows%2C%20quiero%20agendar%20mi%20cita%20ahora."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.circleArrowBtn}
+                  aria-label="Agendar cita por WhatsApp"
+                >
+                  <ArrowRight size={22} />
+                </a>
+              </div>
+            </div>
+
           </div>
         </section>
 

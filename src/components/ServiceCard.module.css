@@ -1,39 +1,57 @@
 .card {
   background: #ffffff;
-  border: 1px solid rgba(23, 56, 38, 0.08);
-  border-radius: 24px;
-  overflow: hidden;
+  border: 1px solid rgba(23, 56, 38, 0.07);
+  border-radius: 28px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: 0 10px 30px -8px rgba(23, 56, 38, 0.08);
+  align-items: center;
+  text-align: center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 32px -10px rgba(23, 56, 38, 0.06);
   height: 100%;
+  box-sizing: border-box;
 }
 
 @media (hover: hover) {
   .card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(23, 56, 38, 0.25);
-    box-shadow: 0 20px 40px -10px rgba(23, 56, 38, 0.16);
+    transform: translateY(-8px);
+    border-color: rgba(23, 56, 38, 0.22);
+    box-shadow: 0 24px 50px -12px rgba(23, 56, 38, 0.15);
   }
 
   .card:hover .image {
     transform: scale(1.05);
   }
+
+  .card:hover .btnArrow {
+    transform: translateX(4px);
+  }
+}
+
+/* Editorial Framed Image Wrapper */
+.imageWrapper {
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #edf3ed;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(23, 56, 38, 0.03);
 }
 
 .imageContainer {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  background: #edf3ed;
+  aspect-ratio: 16 / 11;
   overflow: hidden;
 }
 
 .image {
   object-fit: cover;
   object-position: center;
-  transition: transform 0.4s ease;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .imagePlaceholder {
@@ -54,120 +72,159 @@
   opacity: 0.7;
 }
 
-.imageGradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(23, 56, 38, 0.4) 0%, transparent 60%);
-  pointer-events: none;
-}
-
+/* Discreet Frosted Glass Badge */
 .badgeContainer {
   position: absolute;
   top: 12px;
-  left: 12px;
   right: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   z-index: 2;
-  gap: 8px;
-}
-
-.categoryBadge {
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(8px);
-  color: var(--forest-primary);
-  font-size: 0.72rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 4px 12px;
-  border-radius: var(--radius-full);
-  border: 1px solid rgba(23, 56, 38, 0.1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  pointer-events: none;
 }
 
 .durationBadge {
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--text-secondary);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  padding: 4px 12px;
+  padding: 4px 11px;
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
-  gap: 4px;
-  border: 1px solid rgba(23, 56, 38, 0.1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  gap: 5px;
+  border: 1px solid rgba(23, 56, 38, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.content {
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  gap: 12px;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.title {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  line-height: 1.3;
-}
-
-.priceTag {
-  background: rgba(23, 56, 38, 0.06);
-  border: 1px solid rgba(23, 56, 38, 0.12);
-  padding: 4px 12px;
-  border-radius: var(--radius-full);
-  white-space: nowrap;
+.badgeIcon {
+  color: var(--forest-light);
   flex-shrink: 0;
 }
 
-.priceAmount {
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: var(--forest-primary);
+/* Content Area - Center Aligned matching Image 1 */
+.content {
+  padding: 22px 8px 6px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-grow: 1;
+  width: 100%;
+  box-sizing: border-box;
 }
 
+/* Title in Luxury Editorial Serif Typography */
+.title {
+  font-family: var(--font-serif);
+  font-size: 1.42rem;
+  font-weight: 600;
+  color: var(--forest-primary);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0 0 6px 0;
+}
+
+/* Subtitle with Slashes matching Image 1: e.g. "CEJAS / TRATAMIENTO / 2H" */
+.subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sage-muted);
+  margin-bottom: 12px;
+}
+
+/* Price Row matching Image 1 */
+.priceRow {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.priceAmount {
+  font-family: var(--font-sans);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--forest-primary);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.priceCurrency {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--sage-muted);
+  text-transform: uppercase;
+}
+
+/* Description paragraph */
 .description {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--text-secondary);
-  line-height: 1.55;
+  line-height: 1.6;
+  margin: 0 auto 20px auto;
+  max-width: 95%;
   flex-grow: 1;
 }
 
-.footer {
+/* Action Button Wrapper */
+.actionWrap {
   margin-top: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
   padding-top: 14px;
+  border-top: 1px solid rgba(23, 56, 38, 0.07);
 }
 
+/* Signature Image 1 Dark Olive/Forest Green Pill CTA Button */
 .bookButton {
   width: 100%;
-  font-size: 0.88rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  min-height: 46px;
-  border-radius: var(--radius-full);
-  background: var(--forest-primary);
-  color: #ffffff;
-  transition: all 0.2s ease;
+  min-height: 46px !important;
+  border-radius: var(--radius-full) !important;
+  background: var(--forest-primary) !important;
+  color: #ffffff !important;
+  font-size: 0.84rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 12px 24px !important;
+  box-shadow: 0 4px 16px rgba(23, 56, 38, 0.25) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  user-select: none;
 }
 
 .bookButton:hover {
-  background: var(--forest-dark);
-  box-shadow: 0 8px 20px -4px rgba(23, 56, 38, 0.35);
+  background: var(--forest-dark) !important;
+  box-shadow: 0 8px 24px -2px rgba(23, 56, 38, 0.38) !important;
+  transform: translateY(-1.5px);
 }
 
 .bookButton:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
+}
+
+.btnIconLeft {
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.btnLabel {
+  flex-grow: 0;
+}
+
+.btnArrow {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+  stroke-width: 2.5;
 }
