@@ -16,9 +16,12 @@ export default function Footer() {
           {/* Brand info */}
           <div className={styles.brandCol}>
             <div className={styles.brandTitle}>
-              <div className={styles.logoBadge}>
-                <Sparkles size={16} />
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/logo.svg"
+                alt="Logo Bell Brows"
+                className={styles.footerLogoImg}
+              />
               <span>BELL BROWS</span>
             </div>
             <p className={styles.brandDesc}>

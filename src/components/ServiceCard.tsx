@@ -12,6 +12,8 @@ interface ServiceCardProps {
 }
 
 export default function ServiceCard({ service }: ServiceCardProps) {
+  const [imgSrc, setImgSrc] = React.useState<string>(service.image_url || '/product-cream.jpg');
+
   const handleBooking = () => {
     const url = buildWhatsAppBookingLink(service.title, service.price);
     window.open(url, '_blank');
@@ -21,14 +23,15 @@ export default function ServiceCard({ service }: ServiceCardProps) {
     <article className={styles.card} aria-label={`Servicio: ${service.title}`}>
       {/* Image Container with 16:10 or 4:3 Aspect Ratio */}
       <div className={styles.imageContainer}>
-        {service.image_url ? (
+        {imgSrc ? (
           <Image
-            src={service.image_url}
+            src={imgSrc}
             alt={service.title}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
             className={styles.image}
             loading="lazy"
+            onError={() => setImgSrc('/product-cream.jpg')}
           />
         ) : (
           <div className={styles.imagePlaceholder}>

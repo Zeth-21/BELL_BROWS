@@ -1,0 +1,236 @@
+'use client';
+
+import React from 'react';
+import { 
+  Sprout, 
+  ShoppingBag, 
+  Menu, 
+  ArrowRight, 
+  ShieldCheck, 
+  Droplets, 
+  Leaf, 
+  Sparkles 
+} from 'lucide-react';
+import { Promotion } from '@/types/database';
+import { buildWhatsAppPromoLink, buildWhatsAppBookingLink } from '@/lib/utils';
+import styles from './SkincareHero.module.css';
+
+interface SkincareHeroProps {
+  promotion: Promotion | null;
+}
+
+export default function SkincareHero({ promotion }: SkincareHeroProps) {
+  // Action when clicking main CTA ("SHOP NOW ->" or "APROVECHAR OFERTA ->")
+  const handleMainAction = () => {
+    if (promotion && promotion.is_active) {
+      const url = buildWhatsAppPromoLink(promotion.title);
+      window.open(url, '_blank');
+    } else {
+      const url = buildWhatsAppBookingLink('Nueva Colección Skincare & Belleza Natural', 0);
+      window.open(url, '_blank');
+    }
+  };
+
+  const handleProductClick = (productName: string) => {
+    const text = `¡Hola Bell Brows! Vi su producto "${productName}" en la nueva colección y me gustaría consultar disponibilidad y precio.`;
+    window.open(`https://wa.me/5215512345678?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
+  return (
+    <section className={styles.heroWrapper} aria-label="Colección Skincare Bell Brows">
+      <div className={styles.heroCard}>
+        {/* Top Integrated Navigation Bar */}
+        <header className={styles.heroNav}>
+          <a href="#" className={styles.brandLogo} aria-label="Inicio Bell Brows">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo.svg"
+              alt="Logo Bell Brows"
+              className={styles.brandLogoImg}
+            />
+            <div className={styles.brandTitles}>
+              <span className={styles.brandName}>BELL BROWS</span>
+              <span className={styles.brandSub}>SKINCARE & BEAUTY</span>
+            </div>
+          </a>
+
+          <nav className={styles.navLinks} aria-label="Navegación principal">
+            <a href="#catalogo" className={styles.navLink}>SKINCARE</a>
+            <a href="#catalogo" className={styles.navLink}>CEJAS</a>
+            <a href="#catalogo" className={styles.navLink}>PESTAÑAS</a>
+            <a href="#catalogo" className={styles.navLink}>TRATAMIENTOS</a>
+            <a href="#catalogo" className={styles.navLink}>PROMOCIONES</a>
+            <a href="/portal-interno" className={styles.navLink}>ACCESO</a>
+          </nav>
+
+          <div className={styles.navActions}>
+            <button 
+              onClick={() => {
+                const el = document.getElementById('catalogo');
+                el?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className={styles.iconBtn}
+              aria-label="Ver carrito y catálogo"
+              title="Explorar servicios"
+            >
+              <ShoppingBag size={18} />
+              <span className={styles.cartBadge}>{promotion ? '1' : '0'}</span>
+            </button>
+
+            <button 
+              onClick={() => {
+                const el = document.getElementById('catalogo');
+                el?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className={styles.iconBtn}
+              aria-label="Menú de navegación"
+            >
+              <Menu size={18} />
+            </button>
+          </div>
+        </header>
+
+        {/* High-Impact Headline: NEW SKIN CARE COLLECTION */}
+        <div className={styles.headlineContainer}>
+          <h1 className={styles.headlineText}>
+            <span className={styles.headlineNew}>NEW</span>
+            <span className={styles.headlineRest}>SKIN CARE COLLECTION</span>
+          </h1>
+        </div>
+
+        {/* Editorial Layout: Left Details, Center Mascot with Floating Badges, Right Products */}
+        <div className={styles.editorialGrid}>
+          {/* Left Column: Tagline, Description & CTA */}
+          <div className={styles.leftColumn}>
+            {promotion && promotion.is_active && (
+              <div className={styles.promoTag}>
+                <Sparkles size={13} />
+                <span>{promotion.badge || 'PROMO ACTIVA'}</span>
+              </div>
+            )}
+
+            <h2 className={styles.tagline}>
+              {promotion && promotion.is_active ? (
+                promotion.title
+              ) : (
+                <>
+                  NATURALLY BEAUTIFUL.<br />
+                  SCIENTIFICALLY PROVEN.
+                </>
+              )}
+            </h2>
+
+            <p className={styles.description}>
+              {promotion && promotion.is_active && promotion.description
+                ? promotion.description
+                : 'Dermatologist-approved skincare that combines the power of natural ingredients with advanced science for clear, healthy, radiant skin.'}
+            </p>
+
+            <div className={styles.btnGroup}>
+              <button
+                onClick={handleMainAction}
+                className={styles.primaryPillBtn}
+                aria-label={promotion ? `Aprovechar: ${promotion.title}` : 'Comprar o agendar ahora'}
+              >
+                <span>{promotion && promotion.is_active ? 'APROVECHAR OFERTA' : 'SHOP NOW'}</span>
+                <ArrowRight size={16} />
+              </button>
+
+              <a href="#catalogo" className={styles.secondaryPillBtn}>
+                EXPLORE
+              </a>
+            </div>
+          </div>
+
+          {/* Center Column: Cat Mascot in Green Robe + Floating Badges */}
+          <div className={styles.centerColumn}>
+            <div className={styles.mascotStage}>
+              {/* Badge 1: Left of Cat */}
+              <div className={`${styles.floatingBadge} ${styles.badgeLeft} ${styles.desktopBadges}`}>
+                <ShieldCheck size={16} className={styles.badgeIcon} />
+                <span>DERMATOLOGIST TESTED</span>
+              </div>
+
+              {/* Main Cat Mascot cut-out */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/GATO.png"
+                alt="Bell Brows Spa Skincare Cat Mascot"
+                className={styles.catImg}
+              />
+
+              {/* Badge 2: Center Bottom */}
+              <div className={`${styles.floatingBadge} ${styles.badgeBottom} ${styles.desktopBadges}`}>
+                <Droplets size={16} className={styles.badgeIcon} />
+                <span>SUITABLE FOR SENSITIVE SKIN</span>
+              </div>
+
+              {/* Badge 3: Right of Cat */}
+              <div className={`${styles.floatingBadge} ${styles.badgeRight} ${styles.desktopBadges}`}>
+                <Leaf size={16} className={styles.badgeIcon} />
+                <span>NATURAL INGREDIENTS</span>
+              </div>
+            </div>
+
+            {/* Mobile badges row for clean mobile layout */}
+            <div className={styles.mobileBadgesRow}>
+              <div className={styles.floatingBadge}>
+                <ShieldCheck size={15} className={styles.badgeIcon} />
+                <span>DERMATOLOGIST TESTED</span>
+              </div>
+              <div className={styles.floatingBadge}>
+                <Droplets size={15} className={styles.badgeIcon} />
+                <span>SUITABLE FOR SENSITIVE SKIN</span>
+              </div>
+              <div className={styles.floatingBadge}>
+                <Leaf size={15} className={styles.badgeIcon} />
+                <span>NATURAL INGREDIENTS</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Clean Beauty Badge & 2 Stacked Product Preview Cards */}
+          <div className={styles.rightColumn}>
+            {/* Clean Beauty Circular Seal */}
+            <div className={styles.cleanBeautySeal}>
+              <Leaf size={20} className={styles.sealIcon} />
+              <span className={styles.sealTitle}>CLEAN BEAUTY</span>
+              <span className={styles.sealSub}>FOR EVERY SKIN</span>
+            </div>
+
+            {/* Stack of 2 Product Cards */}
+            <div className={styles.productsStack}>
+              {/* Product 1: Botanical Facial Serum */}
+              <div 
+                className={styles.productCard}
+                onClick={() => handleProductClick('Sérum Facial Botánico')}
+                title="Sérum Facial Botánico - Clic para consultar por WhatsApp"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/product-serum.jpg"
+                  alt="Sérum Facial Botánico Bell Brows"
+                  className={styles.productImg}
+                />
+              </div>
+
+              {/* Product 2: Botanical Hydration Moisturizer */}
+              <div 
+                className={styles.productCard}
+                onClick={() => handleProductClick('Crema Hidratante Botánica')}
+                title="Crema Hidratante Botánica - Clic para consultar por WhatsApp"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/product-cream.jpg"
+                  alt="Crema Hidratante Botánica Bell Brows"
+                  className={styles.productImg}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

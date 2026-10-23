@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useMemo } from 'react';
-import Header from '@/components/Header';
-import PromoBanner from '@/components/PromoBanner';
+import SkincareHero from '@/components/SkincareHero';
 import ServiceCard from '@/components/ServiceCard';
 import Footer from '@/components/Footer';
 import { supabase } from '@/lib/supabase/client';
@@ -115,29 +114,13 @@ export default function HomePage() {
 
   return (
     <div className={styles.page}>
-      <Header />
-
       <main className={styles.mainContent}>
-        {/* Dynamic Promotion Banner: Appears only when active, zero gaps when paused */}
-        <PromoBanner promotion={promotion} />
+        {/* Editorial Skincare Hero Banner with Cat Mascot, Floating Badges & Products */}
+        <SkincareHero promotion={promotion} />
 
-        {/* Hero Section */}
-        <section className={styles.heroSection}>
-          <div className={`container ${styles.heroContainer}`}>
-            <div className={styles.heroBadge}>
-              <Sparkles size={14} className={styles.heroBadgeIcon} />
-              <span>Estudio Certificado de Belleza & Mirada</span>
-            </div>
-
-            <h1 className={styles.heroTitle}>
-              Realza la Belleza Natural de tus <span className={styles.highlightText}>Cejas & Pestañas</span>
-            </h1>
-
-            <p className={styles.heroSubtitle}>
-              Técnicas hiperrealistas de microblading, visagismo personalizado y tratamientos de spa diseñados para realzar tu expresión con la máxima armonía y elegancia.
-            </p>
-
-            {/* Trust markers */}
+        {/* Social Proof & Trust markers */}
+        <section className={styles.trustSection}>
+          <div className="container">
             <div className={styles.trustRow}>
               <div className={styles.trustItem}>
                 <div className={styles.stars}>

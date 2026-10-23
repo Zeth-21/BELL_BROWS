@@ -1,45 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
 :root {
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-display: 'Bebas Neue', sans-serif;
   
-  /* Brand Luxury Palette */
-  --bg-main: #0c0a09;
-  --bg-surface: #171412;
-  --bg-card: #1f1b18;
-  --bg-card-hover: #26211e;
-  --bg-glass: rgba(26, 22, 20, 0.75);
+  /* Brand Luxury Botanical Skincare & Spa Palette */
+  --bg-main: #dce5dc;
+  --bg-surface: #edf3ed;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f9fbf9;
+  --bg-glass: rgba(255, 255, 255, 0.88);
   
-  --border-subtle: rgba(212, 175, 55, 0.15);
-  --border-light: rgba(255, 255, 255, 0.08);
-  --border-focus: #d4af37;
+  --border-subtle: rgba(23, 56, 38, 0.08);
+  --border-light: rgba(23, 56, 38, 0.06);
+  --border-focus: #173826;
   
-  --gold-primary: #d4af37;
-  --gold-light: #f5e296;
-  --gold-dark: #aa8620;
-  --rose-accent: #e0a990;
-  --gold-gradient: linear-gradient(135deg, #f8df8c 0%, #d4af37 50%, #aa8620 100%);
-  --rose-gradient: linear-gradient(135deg, #fbcfe8 0%, #e0a990 60%, #c084fc 100%);
-  --glass-gradient: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+  --forest-primary: #173826;
+  --forest-dark: #0f261a;
+  --forest-light: #245238;
+  --sage-accent: #8fa691;
+  --sage-muted: #6f8770;
+  --gold-primary: #173826;
+  --gold-light: #8fa691;
+  --gold-dark: #0f261a;
+  --rose-accent: #6f8770;
   
-  --text-primary: #fafaf9;
-  --text-secondary: #d6d3d1;
-  --text-muted: #a8a29e;
-  --text-dark: #0c0a09;
+  --forest-gradient: linear-gradient(135deg, #245238 0%, #173826 100%);
+  --gold-gradient: linear-gradient(135deg, #245238 0%, #173826 100%);
+  --sage-gradient: linear-gradient(135deg, #a4baa6 0%, #8fa691 100%);
+  --glass-gradient: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 100%);
   
-  --status-active: #10b981;
-  --status-active-bg: rgba(16, 185, 129, 0.12);
-  --status-paused: #f59e0b;
-  --status-paused-bg: rgba(245, 158, 11, 0.12);
-  --danger: #ef4444;
-  --danger-bg: rgba(239, 68, 68, 0.12);
+  --text-primary: #173826;
+  --text-secondary: #3d5947;
+  --text-muted: #5f7a68;
+  --text-dark: #ffffff;
+  
+  --status-active: #15803d;
+  --status-active-bg: rgba(21, 128, 61, 0.1);
+  --status-paused: #d97706;
+  --status-paused-bg: rgba(217, 119, 6, 0.1);
+  --danger: #dc2626;
+  --danger-bg: rgba(220, 38, 38, 0.1);
   
   --radius-sm: 8px;
   --radius-md: 14px;
-  --radius-lg: 20px;
+  --radius-lg: 24px;
   --radius-full: 9999px;
   
-  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
-  --shadow-gold: 0 8px 24px -6px rgba(212, 175, 55, 0.35);
-  --shadow-glow: 0 0 25px rgba(212, 175, 55, 0.2);
+  --shadow-card: 0 12px 32px -8px rgba(23, 56, 38, 0.08);
+  --shadow-gold: 0 8px 24px -6px rgba(23, 56, 38, 0.28);
+  --shadow-glow: 0 0 25px rgba(23, 56, 38, 0.12);
 }
 
 *, *::before, *::after {
@@ -55,7 +65,6 @@ html {
   color: var(--text-primary);
   scroll-behavior: smooth;
   font-size: 16px;
-  /* Prevent horizontal scroll */
   overflow-x: hidden;
   width: 100%;
 }
@@ -63,10 +72,6 @@ html {
 body {
   min-height: 100vh;
   background-color: var(--bg-main);
-  background-image: 
-    radial-gradient(ellipse at 50% -20%, rgba(212, 175, 55, 0.12), transparent 70%),
-    radial-gradient(circle at 100% 50%, rgba(224, 169, 144, 0.05), transparent 40%);
-  background-attachment: fixed;
   color: var(--text-primary);
   line-height: 1.5;
   overflow-x: hidden;
@@ -78,11 +83,11 @@ body {
 /* Touch-optimized container */
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(16px, 4vw, 24px);
-  padding-right: clamp(16px, 4vw, 24px);
+  padding-left: clamp(16px, 4vw, 36px);
+  padding-right: clamp(16px, 4vw, 36px);
 }
 
 /* Typography */
@@ -113,12 +118,12 @@ button, .btn {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 0.92rem;
+  border-radius: var(--radius-full);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   min-height: 48px;
-  padding: 12px 20px;
+  padding: 12px 24px;
   user-select: none;
 }
 
@@ -127,27 +132,27 @@ button:active, .btn:active {
 }
 
 .btn-primary {
-  background: var(--gold-gradient);
-  color: var(--text-dark);
+  background: var(--forest-primary);
+  color: #ffffff;
   font-weight: 700;
-  box-shadow: var(--shadow-gold);
+  box-shadow: 0 6px 18px -4px rgba(23, 56, 38, 0.35);
 }
 
 .btn-primary:hover {
-  filter: brightness(1.08);
-  box-shadow: 0 10px 28px -4px rgba(212, 175, 55, 0.45);
+  background: var(--forest-dark);
+  filter: none;
+  transform: translateY(-1.5px);
+  box-shadow: 0 10px 24px -4px rgba(23, 56, 38, 0.45);
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text-primary);
-  border: 1px solid var(--border-light);
-  backdrop-filter: blur(8px);
+  background: #ffffff;
+  color: var(--forest-primary);
+  border: 1.5px solid var(--forest-primary);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(23, 56, 38, 0.06);
 }
 
 .btn-whatsapp {
@@ -175,8 +180,8 @@ select {
   font-size: 16px; /* Prevents auto zoom in iOS */
   font-family: inherit;
   color: var(--text-primary);
-  background: rgba(20, 17, 15, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #ffffff;
+  border: 1px solid rgba(23, 56, 38, 0.15);
   border-radius: var(--radius-md);
   outline: none;
   transition: all 0.2s ease;
@@ -185,9 +190,9 @@ select {
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: var(--gold-primary);
-  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
-  background: rgba(26, 22, 19, 0.95);
+  border-color: var(--forest-primary);
+  box-shadow: 0 0 0 3px rgba(23, 56, 38, 0.15);
+  background: #ffffff;
 }
 
 textarea {

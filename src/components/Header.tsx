@@ -30,9 +30,13 @@ export default function Header() {
       {/* Main navigation / brand bar */}
       <div className={`container ${styles.mainBar}`}>
         <div className={styles.brand}>
-          <div className={styles.logoIcon}>
-            <Sparkles size={20} />
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo.svg"
+            alt="Logo Bell Brows"
+            className={styles.headerLogoImg}
+            style={{ width: '38px', height: '38px', objectFit: 'contain', borderRadius: '8px', flexShrink: 0 }}
+          />
           <div className={styles.brandText}>
             <span className={styles.brandName}>BELL BROWS</span>
             <span className={styles.brandTagline}>ESTUDIO DE MIRADA & BELLEZA</span>

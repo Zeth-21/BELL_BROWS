@@ -1,0 +1,559 @@
+/* ============================================================
+   SKINCARE HERO SECTION - EDITORIAL DESIGN (RESPONSIVE & EXPANSIVE)
+   Reference: Skincare Cat Mascot Banner
+   ============================================================ */
+
+.heroWrapper {
+  width: 100%;
+  padding: clamp(10px, 2vw, 28px);
+  background-color: #dce5dc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.heroCard {
+  width: 100%;
+  max-width: 1560px; /* Takes full advantage of desktop monitors */
+  background-color: #ffffff;
+  border-radius: clamp(20px, 2.5vw, 40px);
+  box-shadow: 0 24px 60px -15px rgba(23, 56, 38, 0.1);
+  border: 1px solid rgba(23, 56, 38, 0.06);
+  padding: clamp(16px, 2.5vw, 32px) clamp(16px, 3.5vw, 56px) clamp(20px, 3.5vw, 44px);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* ------------------------------------------------------------
+   Top Navigation inside the Hero Card
+   ------------------------------------------------------------ */
+.heroNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: clamp(12px, 2vw, 22px);
+  gap: 16px;
+  position: relative;
+  z-index: 10;
+}
+
+.brandLogo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #173826;
+}
+
+.brandLogoImg {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 8px;
+}
+
+.leafIcon {
+  color: #245238;
+  flex-shrink: 0;
+}
+
+.brandTitles {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.brandName {
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #173826;
+}
+
+.brandSub {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  color: #5d7565;
+}
+
+.navLinks {
+  display: none;
+  align-items: center;
+  gap: clamp(16px, 2.2vw, 36px);
+}
+
+@media (min-width: 960px) {
+  .navLinks {
+    display: flex;
+  }
+}
+
+.navLink {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #173826;
+  text-decoration: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
+  position: relative;
+  padding: 4px 0;
+}
+
+.navLink:hover {
+  color: #436e52;
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.iconBtn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #173826;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.iconBtn:hover {
+  background-color: #0e271a;
+  transform: scale(1.05);
+}
+
+.cartBadge {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  background-color: #6f8770;
+  color: #ffffff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #173826;
+}
+
+/* ------------------------------------------------------------
+   Massive Headline: NEW SKIN CARE COLLECTION
+   ------------------------------------------------------------ */
+.headlineContainer {
+  width: 100%;
+  text-align: center;
+  margin-top: clamp(4px, 1.2vw, 14px);
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.headlineText {
+  font-family: 'Bebas Neue', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(3.2rem, 9.8vw, 10.5rem);
+  line-height: 0.85;
+  letter-spacing: 0.02em;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(10px, 2.2vw, 36px);
+  white-space: nowrap;
+}
+
+.headlineNew {
+  color: #8fa691;
+}
+
+.headlineRest {
+  color: #173826;
+}
+
+/* ------------------------------------------------------------
+   Main Editorial Grid (Left Column, Central Mascot, Right Column)
+   ------------------------------------------------------------ */
+.editorialGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: end;
+  position: relative;
+  margin-top: clamp(-10px, -2vw, -20px);
+  z-index: 2;
+  gap: 28px;
+}
+
+@media (min-width: 960px) {
+  .editorialGrid {
+    grid-template-columns: minmax(320px, 400px) 1fr minmax(190px, 230px);
+    align-items: center;
+    min-height: 480px;
+    margin-top: clamp(-45px, -5.5vw, -80px);
+    gap: clamp(20px, 3vw, 48px);
+  }
+}
+
+/* ------------------------------------------------------------
+   Left Column: Tagline, Body & Buttons
+   ------------------------------------------------------------ */
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  position: relative;
+  z-index: 5;
+  order: 2;
+}
+
+@media (min-width: 960px) {
+  .leftColumn {
+    order: 1;
+    margin-bottom: 24px;
+  }
+}
+
+.promoTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(23, 56, 38, 0.08);
+  color: #173826;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(23, 56, 38, 0.15);
+}
+
+.tagline {
+  font-size: clamp(1.15rem, 1.55vw, 1.45rem);
+  font-weight: 900;
+  color: #173826;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.description {
+  font-size: clamp(0.88rem, 1vw, 0.98rem);
+  color: #496353;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 360px;
+}
+
+.btnGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.primaryPillBtn {
+  background-color: #173826;
+  color: #ffffff;
+  border: none;
+  border-radius: 9999px;
+  padding: 13px 28px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 6px 18px -4px rgba(23, 56, 38, 0.35);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.primaryPillBtn:hover {
+  background-color: #0d2519;
+  transform: translateY(-1.5px);
+  box-shadow: 0 10px 24px -4px rgba(23, 56, 38, 0.45);
+}
+
+.secondaryPillBtn {
+  background-color: transparent;
+  color: #173826;
+  border: 1.5px solid #173826;
+  border-radius: 9999px;
+  padding: 12px 24px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.secondaryPillBtn:hover {
+  background-color: rgba(23, 56, 38, 0.08);
+}
+
+/* ------------------------------------------------------------
+   Center Column: Cat Mascot & Floating Badges
+   ------------------------------------------------------------ */
+.centerColumn {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+  z-index: 4;
+  order: 1;
+}
+
+@media (min-width: 960px) {
+  .centerColumn {
+    order: 2;
+  }
+}
+
+.mascotStage {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.catImg {
+  width: 100%;
+  height: auto;
+  max-height: clamp(380px, 46vw, 560px);
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 20px 35px rgba(23, 56, 38, 0.12));
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Floating Badges Positioned Clearly Away from Cat Face */
+.badgeLeft {
+  position: absolute;
+  top: 64%;
+  left: -20px;
+  z-index: 6;
+  animation: floatSlow 4s ease-in-out infinite alternate;
+}
+
+.badgeRight {
+  position: absolute;
+  top: 66%;
+  right: -20px;
+  z-index: 6;
+  animation: floatSlow 4.5s ease-in-out 1s infinite alternate;
+}
+
+.badgeBottom {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 7;
+  white-space: nowrap;
+  animation: floatSlow 5s ease-in-out 0.5s infinite alternate;
+}
+
+/* Mobile & Tablet arrangement */
+@media (max-width: 959px) {
+  .badgeLeft,
+  .badgeRight,
+  .badgeBottom {
+    position: static;
+    transform: none;
+    animation: none;
+  }
+
+  .desktopBadges {
+    display: none;
+  }
+
+  .mobileBadgesRow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 16px;
+    width: 100%;
+  }
+}
+
+@media (min-width: 960px) {
+  .mobileBadgesRow {
+    display: none;
+  }
+}
+
+.floatingBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(23, 56, 38, 0.08);
+  border-radius: 9999px;
+  padding: 8px 18px;
+  box-shadow: 0 8px 24px -4px rgba(23, 56, 38, 0.12);
+  color: #173826;
+  font-size: clamp(0.7rem, 0.8vw, 0.76rem);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.badgeIcon {
+  color: #2b573a;
+  flex-shrink: 0;
+}
+
+/* ------------------------------------------------------------
+   Right Column: Circular Seal & Product Preview Cards
+   ------------------------------------------------------------ */
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 18px;
+  position: relative;
+  z-index: 5;
+  order: 3;
+}
+
+@media (max-width: 959px) {
+  .rightColumn {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 10px;
+  }
+}
+
+/* Clean Beauty Circular Seal */
+.cleanBeautySeal {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background-color: #6f8770;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 10px 25px -5px rgba(23, 56, 38, 0.22);
+  margin-bottom: 6px;
+  transition: transform 0.3s ease;
+}
+
+.cleanBeautySeal:hover {
+  transform: rotate(5deg) scale(1.05);
+}
+
+.sealIcon {
+  margin-bottom: 2px;
+}
+
+.sealTitle {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.sealSub {
+  font-size: 0.54rem;
+  letter-spacing: 0.04em;
+  opacity: 0.9;
+  text-transform: uppercase;
+}
+
+/* Stack of 2 Product Cards */
+.productsStack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (max-width: 959px) {
+  .productsStack {
+    flex-direction: row;
+    gap: 16px;
+  }
+}
+
+.productCard {
+  width: 116px;
+  height: 116px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #f5f8f5;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 25px -4px rgba(23, 56, 38, 0.12);
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+@media (min-width: 1200px) {
+  .productCard {
+    width: 132px;
+    height: 132px;
+  }
+}
+
+.productCard:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 16px 32px -4px rgba(23, 56, 38, 0.2);
+}
+
+.productImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Micro animation for floating badges */
+@keyframes floatSlow {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-6px);
+  }
+}

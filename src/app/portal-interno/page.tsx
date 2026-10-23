@@ -75,9 +75,12 @@ export default function PortalInternoPage() {
       <header className={styles.adminNavbar}>
         <div className={`container ${styles.adminNavContainer}`}>
           <div className={styles.adminBrand}>
-            <div className={styles.adminLogoIcon}>
-              <Sparkles size={18} />
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo.svg"
+              alt="Logo Bell Brows"
+              style={{ width: '36px', height: '36px', objectFit: 'contain', borderRadius: '8px', flexShrink: 0 }}
+            />
             <div>
               <span className={styles.adminTitle}>Portal de Gestión</span>
               <span className={styles.adminUserBadge}>
