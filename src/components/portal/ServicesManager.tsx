@@ -17,7 +17,6 @@ import {
   Loader2,
   CheckCircle2,
   AlertTriangle,
-  Clock,
   Layers,
   Power,
 } from 'lucide-react';
@@ -376,10 +375,6 @@ export default function ServicesManager() {
                   <Layers size={12} />
                   {service.category || 'General'}
                 </span>
-                <span className={styles.metaBadge}>
-                  <Clock size={12} />
-                  {service.duration_minutes} min
-                </span>
               </div>
 
               {service.description && (
@@ -452,32 +447,19 @@ export default function ServicesManager() {
                 />
               </div>
 
-              {/* Price & Duration */}
-              <div className={styles.formRow}>
-                <div className={styles.formGroup}>
-                  <label htmlFor="service-price">Precio ($ MXN) *</label>
-                  <input
-                    id="service-price"
-                    type="number"
-                    step="0.01"
-                    min="0"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    required
-                  />
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label htmlFor="service-duration">Duración (minutos)</label>
-                  <input
-                    id="service-duration"
-                    type="number"
-                    step="5"
-                    min="10"
-                    value={durationMinutes}
-                    onChange={(e) => setDurationMinutes(parseInt(e.target.value) || 60)}
-                  />
-                </div>
+              {/* Price */}
+              <div className={styles.formGroup}>
+                <label htmlFor="service-price">Precio en Soles (S/) *</label>
+                <input
+                  id="service-price"
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  placeholder="Ej. 65"
+                  required
+                />
               </div>
 
               {/* Category */}

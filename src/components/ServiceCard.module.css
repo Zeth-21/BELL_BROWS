@@ -1,151 +1,124 @@
-.card {
+/* =========================================================================
+   ESTILO DE TARJETAS DE SERVICIOS - REPLICA EXACTA DE IMAGEN 1
+   Paleta: #CA908D (Oro Rosa), #E8BEBB (Rose Mist), #1C0207 (Deep Dark), #FFFFFF
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   VARIANTE 1: TARJETA HORIZONTAL LATERAL (Image 1 side cards)
+   ------------------------------------------------------------------------- */
+.horizontalCard {
   background: #ffffff;
-  border: 1px solid rgba(28, 2, 7, 0.08);
-  border-radius: 28px;
-  padding: 20px;
+  border-radius: 26px;
+  padding: 12px 18px 12px 14px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  text-align: center;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
-              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 10px 32px -10px rgba(28, 2, 7, 0.06);
-  height: 100%;
+  gap: 16px;
+  border: 1px solid rgba(202, 144, 141, 0.18);
+  box-shadow: 0 10px 24px -6px rgba(28, 2, 7, 0.04), 0 2px 6px rgba(28, 2, 7, 0.02);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  width: 100%;
   box-sizing: border-box;
+  text-align: left;
 }
 
 @media (hover: hover) {
-  .card:hover {
-    transform: translateY(-8px);
+  .horizontalCard:hover {
+    transform: translateY(-4px);
     border-color: rgba(202, 144, 141, 0.5);
-    box-shadow: 0 24px 50px -12px rgba(28, 2, 7, 0.15);
+    box-shadow: 0 16px 36px -8px rgba(28, 2, 7, 0.1);
   }
 
-  .card:hover .image {
-    transform: scale(1.05);
+  .horizontalCard:hover .horizontalImg {
+    transform: scale(1.06);
   }
 
-  .card:hover .btnArrow {
-    transform: translateX(4px);
+  .horizontalCard:hover .horizontalLeafSprig {
+    transform: scale(1.1) rotate(4deg);
+    color: #1C0207;
   }
 }
 
-/* Editorial Framed Image Wrapper */
-.imageWrapper {
+/* Marco visual con hojas botánicas orgánicas */
+.horizontalVisualWrap {
+  position: relative;
+  width: 104px;
+  height: 104px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.horizontalLeafSprig {
+  position: absolute;
+  top: -14px;
+  left: -12px;
+  width: 86px;
+  height: 86px;
+  color: #CA908D;
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 0;
+  transition: transform 0.4s ease, color 0.4s ease;
+}
+
+.horizontalImageFrame {
+  position: relative;
   width: 100%;
+  height: 100%;
   border-radius: 20px;
   overflow: hidden;
   background: #E8BEBB;
-  position: relative;
-  box-shadow: 0 4px 16px rgba(28, 2, 7, 0.03);
+  z-index: 1;
+  box-shadow: 0 6px 16px rgba(28, 2, 7, 0.08);
 }
 
-.imageContainer {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 11;
-  overflow: hidden;
-}
-
-.image {
+.horizontalImg {
   object-fit: cover;
   object-position: center;
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.imagePlaceholder {
-  width: 100%;
-  height: 100%;
+/* Información del servicio */
+.horizontalInfoWrap {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  gap: 8px;
-  color: #7a5a61;
-  font-size: 0.85rem;
-  background: linear-gradient(135deg, #ffffff 0%, #E8BEBB 100%);
+  align-items: flex-start;
+  min-width: 0;
+  flex: 1;
 }
 
-.placeholderIcon {
-  color: var(--forest-primary);
-  opacity: 0.7;
-}
-
-/* Discreet Frosted Glass Badge */
-.badgeContainer {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.durationBadge {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  color: var(--text-secondary);
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 4px 11px;
-  border-radius: var(--radius-full);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  border: 1px solid rgba(28, 2, 7, 0.08);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.badgeIcon {
-  color: var(--forest-light);
-  flex-shrink: 0;
-}
-
-/* Content Area - Center Aligned matching Image 1 */
-.content {
-  padding: 22px 8px 6px 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  flex-grow: 1;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Title in Luxury Editorial Serif Typography */
-.title {
+.horizontalTitle {
   font-family: var(--font-serif);
-  font-size: 1.42rem;
+  font-size: 1.15rem;
   font-weight: 600;
   color: var(--forest-primary);
   line-height: 1.25;
+  margin: 0;
   letter-spacing: -0.01em;
-  margin: 0 0 6px 0;
+  word-break: break-word;
 }
 
-/* Subtitle with Slashes matching Image 1: e.g. "CEJAS / TRATAMIENTO / 2H" */
-.subtitle {
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--sage-muted);
-  margin-bottom: 12px;
+.horizontalDivider {
+  width: 32px;
+  height: 2px;
+  background-color: #CA908D;
+  border-radius: 2px;
+  margin: 8px 0;
 }
 
-/* Price Row matching Image 1 */
-.priceRow {
-  display: inline-flex;
+.horizontalPriceRow {
+  display: flex;
   align-items: baseline;
-  justify-content: center;
-  gap: 6px;
-  margin-bottom: 12px;
 }
 
-.priceAmount {
+.horizontalPriceAmount {
   font-family: var(--font-sans);
   font-size: 1.45rem;
   font-weight: 800;
@@ -154,77 +127,258 @@
   line-height: 1;
 }
 
-.priceCurrency {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--sage-muted);
-  text-transform: uppercase;
-}
-
-/* Description paragraph */
-.description {
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin: 0 auto 20px auto;
-  max-width: 95%;
-  flex-grow: 1;
-}
-
-/* Action Button Wrapper */
-.actionWrap {
-  margin-top: auto;
-  width: 100%;
+/* -------------------------------------------------------------------------
+   VARIANTE 2: TARJETA DESTACADA CENTRAL (Image 1 center card)
+   ------------------------------------------------------------------------- */
+.featuredCard {
+  background: linear-gradient(175deg, #2A040C 0%, #1C0207 100%);
+  border: 1px solid rgba(232, 190, 187, 0.2);
+  border-radius: 30px;
+  padding: 22px 20px 24px 20px;
   display: flex;
-  justify-content: center;
-  padding-top: 14px;
-  border-top: 1px solid rgba(28, 2, 7, 0.08);
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 24px 54px -10px rgba(28, 2, 7, 0.45);
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  height: 100%;
+  box-sizing: border-box;
+  text-align: center;
 }
 
-/* Signature Image 1 Dark Olive/Forest Green Pill CTA Button */
-.bookButton {
+@media (hover: hover) {
+  .featuredCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 32px 68px -12px rgba(28, 2, 7, 0.6);
+  }
+
+  .featuredCard:hover .featuredImg {
+    transform: scale(1.05);
+  }
+
+  .featuredCard:hover .featuredCtaButton {
+    background: #E8BEBB;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  }
+}
+
+.featuredWatermark {
+  position: absolute;
+  right: -24px;
+  bottom: 24px;
+  width: 190px;
+  height: 230px;
+  color: #ffffff;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.featuredImageWrap {
+  position: relative;
   width: 100%;
-  min-height: 46px !important;
-  border-radius: var(--radius-full) !important;
-  background: var(--forest-primary) !important;
-  color: #ffffff !important;
-  font-size: 0.84rem !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.05em !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  border: none !important;
-  cursor: pointer !important;
-  padding: 12px 24px !important;
-  box-shadow: 0 4px 16px rgba(28, 2, 7, 0.25) !important;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  user-select: none;
+  margin-bottom: 20px;
+  z-index: 1;
 }
 
-.bookButton:hover {
-  background: var(--forest-dark) !important;
-  box-shadow: 0 8px 24px -2px rgba(28, 2, 7, 0.38) !important;
-  transform: translateY(-1.5px);
+.featuredLeafLeft {
+  position: absolute;
+  top: -16px;
+  left: -14px;
+  width: 90px;
+  height: 90px;
+  color: #CA908D;
+  opacity: 0.85;
+  z-index: 2;
+  pointer-events: none;
 }
 
-.bookButton:active {
-  transform: scale(0.97);
+.featuredLeafRight {
+  position: absolute;
+  bottom: -12px;
+  right: -12px;
+  width: 85px;
+  height: 85px;
+  color: #CA908D;
+  opacity: 0.8;
+  z-index: 2;
+  pointer-events: none;
+  transform: scaleX(-1);
 }
 
-.btnIconLeft {
-  flex-shrink: 0;
-  opacity: 0.9;
+.featuredImageContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3.2;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #2A040C;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
 }
 
-.btnLabel {
-  flex-grow: 0;
+.featuredImg {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.btnArrow {
-  flex-shrink: 0;
-  transition: transform 0.25s ease;
-  stroke-width: 2.5;
+.featuredImageGlow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 65%, rgba(28, 2, 7, 0.5) 100%);
+  pointer-events: none;
+}
+
+/* Flechas de carrusel */
+.navArrowsRow {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  right: 10px;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.navArrowBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(28, 2, 7, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.25s ease;
+}
+
+.navArrowBtn:hover {
+  background: #CA908D;
+  color: #1C0207;
+  border-color: #CA908D;
+  transform: scale(1.1);
+}
+
+/* Contenido de la tarjeta destacada */
+.featuredContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.featuredTitle {
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  margin: 0 0 10px 0;
+  line-height: 1.25;
+}
+
+.featuredDivider {
+  width: 38px;
+  height: 2px;
+  background-color: #CA908D;
+  border-radius: 2px;
+  margin: 0 auto 12px auto;
+}
+
+.featuredPriceRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.featuredPriceAmount {
+  font-family: var(--font-sans);
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.featuredCtaButton {
+  background: #ffffff;
+  color: #1C0207;
+  border: none;
+  border-radius: 9999px;
+  padding: 13px 26px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 250px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Placeholder */
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #CA908D;
+  background: #2A040C;
+}
+
+/* Responsividad en pantallas pequeñas */
+@media (max-width: 640px) {
+  .horizontalCard {
+    padding: 10px 14px;
+    gap: 14px;
+    border-radius: 22px;
+  }
+
+  .horizontalVisualWrap {
+    width: 90px;
+    height: 90px;
+  }
+
+  .horizontalTitle {
+    font-size: 1.05rem;
+  }
+
+  .horizontalPriceAmount {
+    font-size: 1.3rem;
+  }
+
+  .featuredCard {
+    padding: 18px 16px 20px 16px;
+    border-radius: 24px;
+  }
+
+  .featuredTitle {
+    font-size: 1.35rem;
+  }
+
+  .featuredPriceAmount {
+    font-size: 1.6rem;
+  }
 }

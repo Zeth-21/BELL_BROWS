@@ -2,12 +2,13 @@
 
 import React from 'react';
 import { Sparkles, MessageCircle, Clock, MapPin } from 'lucide-react';
+import { WHATSAPP_PHONE } from '@/lib/utils';
 import styles from './Header.module.css';
 
 export default function Header() {
   const handleBooking = () => {
     const text = '¡Hola Bell Brows! Me gustaría obtener información sobre sus servicios y disponibilidad de citas.';
-    window.open(`https://wa.me/5215512345678?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   return (

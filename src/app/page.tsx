@@ -3,11 +3,12 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import Image from 'next/image';
 import SkincareHero from '@/components/SkincareHero';
-import ServiceCard from '@/components/ServiceCard';
+import ServicesMosaic from '@/components/ServicesMosaic';
 import Footer from '@/components/Footer';
 import { supabase } from '@/lib/supabase/client';
 import { Service, Promotion } from '@/types/database';
 import { Sparkles, MessageCircle, ArrowRight } from 'lucide-react';
+import { WHATSAPP_PHONE } from '@/lib/utils';
 import styles from './page.module.css';
 
 export default function HomePage() {
@@ -141,7 +142,7 @@ export default function HomePage() {
                 <div className={styles.introLinkWrapper}>
                   <div className={styles.introDividerLine} />
                   <a
-                    href="https://wa.me/5215512345678?text=Hola%20Bell%20Brows%2C%20quisiera%20conocer%20m%C3%A1s%20sobre%20su%20filosof%C3%ADa%20y%20t%C3%A9cnicas."
+                    href={`https://wa.me/${WHATSAPP_PHONE}?text=Hola%20Bell%20Brows%2C%20quisiera%20conocer%20m%C3%A1s%20sobre%20su%20filosof%C3%ADa%20y%20t%C3%A9cnicas.`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.introLink}
@@ -218,11 +219,7 @@ export default function HomePage() {
                   ))}
                 </div>
               ) : filteredServices.length > 0 ? (
-                <div className={styles.servicesGrid}>
-                  {filteredServices.map((service) => (
-                    <ServiceCard key={service.id} service={service} />
-                  ))}
-                </div>
+                <ServicesMosaic services={filteredServices} />
               ) : (
                 <div className={styles.emptyState}>
                   <Sparkles size={40} className={styles.emptyIcon} />
@@ -253,7 +250,7 @@ export default function HomePage() {
                   profunda con sérums vitamínicos, diseño visagista y fijación natural.
                 </p>
                 <a
-                  href="https://wa.me/5215512345678?text=Hola%20Bell%20Brows%2C%20me%20interesa%20reservar%20el%20tratamiento%20de%20temporada."
+                  href={`https://wa.me/${WHATSAPP_PHONE}?text=Hola%20Bell%20Brows%2C%20me%20interesa%20reservar%20el%20tratamiento%20de%20temporada.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.spotlightPillBtn}
@@ -315,7 +312,7 @@ export default function HomePage() {
                     1 a 1 para diseñar la curvatura, tono y densidad perfecta que cuente tu propia historia.
                   </p>
                   <a
-                    href="https://wa.me/5215512345678?text=Hola%20Bell%20Brows%2C%20quisiera%20agendar%20un%20dise%C3%B1o%20a%20medida%20o%20para%20evento."
+                    href={`https://wa.me/${WHATSAPP_PHONE}?text=Hola%20Bell%20Brows%2C%20quisiera%20agendar%20un%20dise%C3%B1o%20a%20medida%20o%20para%20evento.`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.storiesPillBtn}
@@ -371,7 +368,7 @@ export default function HomePage() {
               <div className={styles.conversionCallout}>
                 <span className={styles.calloutText}>Hacemos de tu momento algo único</span>
                 <a
-                  href="https://wa.me/5215512345678?text=Hola%20Bell%20Brows%2C%20quiero%20agendar%20mi%20cita%20ahora."
+                  href={`https://wa.me/${WHATSAPP_PHONE}?text=Hola%20Bell%20Brows%2C%20quiero%20agendar%20mi%20cita%20ahora.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.circleArrowBtn}
@@ -387,7 +384,7 @@ export default function HomePage() {
 
         {/* Omnipresent Floating WhatsApp Action Button */}
         <a
-          href="https://wa.me/5215512345678?text=Hola%20Bell%20Brows%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita%20o%20recibir%20asesor%C3%ADa."
+          href={`https://wa.me/${WHATSAPP_PHONE}?text=Hola%20Bell%20Brows%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita%20o%20recibir%20asesor%C3%ADa.`}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.fabWhatsApp}

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: 'BELL BROWS | Estudio Profesional de Cejas & Belleza',
     description: 'Resalta tu belleza natural con técnicas hiperrealistas de microblading, laminado y cuidado facial.',
     type: 'website',
-    locale: 'es_MX',
+    locale: 'es_PE',
     siteName: 'BELL BROWS',
   },
 };

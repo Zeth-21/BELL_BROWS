@@ -5,7 +5,7 @@
 
 .heroWrapper {
   width: 100%;
-  padding: clamp(10px, 2vw, 28px);
+  padding: clamp(10px, 1.5vw, 18px);
   background-color: #E8BEBB;
   display: flex;
   justify-content: center;
@@ -13,11 +13,21 @@
   box-sizing: border-box;
 }
 
+@media (min-width: 960px) {
+  .heroWrapper {
+    height: 100vh;
+    min-height: 640px;
+    max-height: 100vh;
+    padding: clamp(8px, 1.6vh, 18px) clamp(12px, 1.8vw, 24px);
+    overflow: hidden;
+  }
+}
+
 .heroCard {
   width: 100%;
   max-width: 1560px; /* Takes full advantage of desktop monitors */
   background-color: #ffffff;
-  border-radius: clamp(20px, 2.5vw, 40px);
+  border-radius: clamp(20px, 2.5vw, 36px);
   box-shadow: 0 24px 60px -15px rgba(28, 2, 7, 0.1);
   border: 1px solid rgba(28, 2, 7, 0.06);
   padding: clamp(16px, 2.5vw, 32px) clamp(16px, 3.5vw, 56px) clamp(20px, 3.5vw, 44px);
@@ -28,18 +38,90 @@
   box-sizing: border-box;
 }
 
+@media (min-width: 960px) {
+  .heroCard {
+    height: 100%;
+    max-height: calc(100vh - clamp(16px, 3.2vh, 36px));
+    padding: clamp(14px, 1.8vh, 22px) clamp(20px, 2.8vw, 44px) clamp(14px, 2vh, 24px);
+    justify-content: space-between;
+  }
+}
+
 /* ------------------------------------------------------------
-   Top Navigation inside the Hero Card
+   Background Video Layer (inside heroCard)
    ------------------------------------------------------------ */
+.videoBgLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  isolation: isolate;
+  background-color: #ffffff;
+}
+
+.videoBgLayer video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+
+/* Desktop: show landscape video, hide portrait */
+.videoBgDesktop {
+  display: block;
+}
+
+.videoBgMobile {
+  display: none;
+}
+
+/* Mobile & portrait devices: show 9:16 portrait video */
+@media (max-width: 768px), (max-aspect-ratio: 1/1) {
+  .videoBgDesktop {
+    display: none;
+  }
+
+  .videoBgMobile {
+    display: block;
+  }
+}
+
+/* Clean, elegant scrim to preserve video brilliance and ensure crystal-clear text contrast */
+.videoOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.24) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+
 .heroNav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding-bottom: clamp(12px, 2vw, 22px);
+  padding-bottom: clamp(10px, 1.5vw, 18px);
   gap: 16px;
   position: relative;
   z-index: 10;
+  flex-shrink: 0;
+}
+
+@media (min-width: 960px) {
+  .heroNav {
+    padding-bottom: clamp(6px, 1vh, 14px);
+  }
 }
 
 .brandLogo {
@@ -271,6 +353,8 @@
 /* Mobile Quick Navigation Bar - Displays ALL Desktop Categories on Mobile */
 .mobileCategoriesBar {
   display: flex;
+  position: relative;
+  z-index: 5;
   align-items: center;
   gap: 8px;
   overflow-x: auto;
@@ -468,25 +552,33 @@
 .headlineContainer {
   width: 100%;
   text-align: center;
-  margin-top: clamp(4px, 1.2vw, 14px);
+  margin-top: clamp(2px, 0.8vw, 8px);
   position: relative;
   z-index: 1;
   pointer-events: none;
   user-select: none;
+  flex-shrink: 0;
 }
 
 .headlineText {
   font-family: 'Bebas Neue', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(2.1rem, 7.5vw, 10.5rem);
+  font-size: clamp(2.1rem, 7.5vw, 8.5rem);
   line-height: 0.9;
   letter-spacing: 0.02em;
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: clamp(8px, 2vw, 36px);
+  gap: clamp(8px, 2vw, 32px);
   flex-wrap: wrap;
   text-align: center;
+}
+
+@media (min-width: 960px) {
+  .headlineText {
+    font-size: clamp(2.8rem, 5.2vw, 5.8rem);
+    gap: clamp(12px, 1.6vw, 26px);
+  }
 }
 
 .headlineNew {
@@ -512,11 +604,12 @@
 
 @media (min-width: 960px) {
   .editorialGrid {
-    grid-template-columns: minmax(320px, 400px) 1fr minmax(190px, 230px);
+    grid-template-columns: minmax(280px, 350px) 1fr minmax(170px, 210px);
     align-items: center;
-    min-height: 480px;
-    margin-top: clamp(-45px, -5.5vw, -80px);
-    gap: clamp(20px, 3vw, 48px);
+    flex: 1;
+    min-height: 0;
+    margin-top: clamp(-18px, -2.5vh, -36px);
+    gap: clamp(16px, 2.5vw, 36px);
   }
 }
 
@@ -538,8 +631,9 @@
 @media (min-width: 960px) {
   .leftColumn {
     order: 1;
-    margin-bottom: 24px;
+    margin-bottom: 0;
     width: auto;
+    gap: clamp(10px, 1.4vh, 16px);
   }
 }
 
@@ -661,6 +755,13 @@
   align-items: flex-end;
 }
 
+@media (min-width: 960px) {
+  .mascotStage {
+    height: 100%;
+    max-height: 100%;
+  }
+}
+
 .catImg {
   width: 100%;
   height: auto;
@@ -672,10 +773,16 @@
   user-select: none;
 }
 
+@media (min-width: 960px) {
+  .catImg {
+    max-height: clamp(250px, 44vh, 420px) !important;
+  }
+}
+
 /* Floating Badges Positioned Clearly Away from Cat Face */
 .badgeLeft {
   position: absolute;
-  top: 64%;
+  top: 60%;
   left: -20px;
   z-index: 6;
   animation: floatSlow 4s ease-in-out infinite alternate;
@@ -683,7 +790,7 @@
 
 .badgeRight {
   position: absolute;
-  top: 66%;
+  top: 62%;
   right: -20px;
   z-index: 6;
   animation: floatSlow 4.5s ease-in-out 1s infinite alternate;
@@ -691,7 +798,7 @@
 
 .badgeBottom {
   position: absolute;
-  bottom: 16px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 7;
@@ -845,7 +952,7 @@
 @media (min-width: 960px) {
   .productsStack {
     flex-direction: column;
-    gap: 16px;
+    gap: clamp(8px, 1.2vh, 14px);
   }
 }
 
@@ -864,10 +971,16 @@
   box-sizing: border-box;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 960px) {
+  .cleanBeautySeal {
+    width: clamp(66px, 5.2vw, 80px);
+    height: clamp(66px, 5.2vw, 80px);
+  }
+
   .productCard {
-    width: 132px;
-    height: 132px;
+    width: clamp(80px, 6.2vw, 104px);
+    height: clamp(80px, 6.2vw, 104px);
+    border-radius: 16px;
   }
 }
 

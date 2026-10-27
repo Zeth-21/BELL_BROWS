@@ -1,0 +1,136 @@
+/* =========================================================================
+   ESTILOS DEL MOSAICO DE SERVICIOS - REPLICA EXACTA DE IMAGEN 1
+   Estructura: Columna Izquierda (3 horizontales) | Centro Destacado | Columna Derecha (3 horizontales)
+   ========================================================================= */
+
+.mosaicSection {
+  position: relative;
+  width: 100%;
+  margin-top: 24px;
+}
+
+/* Bloque individual de mosaico (7 servicios por bloque) */
+.mosaicBlock {
+  position: relative;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.mosaicBlock:last-child {
+  margin-bottom: 0;
+}
+
+/* Aura ambiental suave detrás de la tarjeta central (visible en Imagen 1) */
+.ambientAura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(340px, 45vw, 620px);
+  height: clamp(340px, 45vw, 620px);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(232, 190, 187, 0.45) 0%,
+    rgba(202, 144, 141, 0.15) 60%,
+    transparent 80%
+  );
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Cuadrícula Desktop: 3 columnas perfectamente ajustadas */
+.mosaicGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.16fr 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+/* Columnas laterales de tarjetas horizontales */
+.sideColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+/* Columna central destacada */
+.centerColumn {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Contenedor responsivo para tablets */
+.sideColumnsResponsive {
+  display: contents;
+}
+
+/* Filas residuales para cuando sobran 1 o 2 tarjetas al final */
+.residualRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsividad Tablet (768px a 1079px) */
+@media (max-width: 1079px) and (min-width: 768px) {
+  .mosaicGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .centerColumn {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .sideColumnsResponsive {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .sideColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: flex-start;
+  }
+}
+
+/* Responsividad Móvil (< 768px) */
+@media (max-width: 767px) {
+  .mosaicGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .centerColumn {
+    width: 100%;
+  }
+
+  .sideColumnsResponsive {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .sideColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}

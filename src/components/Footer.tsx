@@ -2,11 +2,12 @@
 
 import React from 'react';
 import { Sparkles, MessageCircle, MapPin, Clock, Heart } from 'lucide-react';
+import { WHATSAPP_PHONE, WHATSAPP_DISPLAY } from '@/lib/utils';
 import styles from './Footer.module.css';
 
 export default function Footer() {
   const handleWhatsApp = () => {
-    window.open('https://wa.me/5215512345678?text=Hola%20Bell%20Brows%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n.', '_blank');
+    window.open(`https://wa.me/${WHATSAPP_PHONE}?text=Hola%20Bell%20Brows%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n.`, '_blank');
   };
 
   return (

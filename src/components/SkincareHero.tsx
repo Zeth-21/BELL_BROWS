@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Sprout, 
   ShoppingBag, 
@@ -16,7 +16,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { Promotion } from '@/types/database';
-import { buildWhatsAppPromoLink, buildWhatsAppBookingLink } from '@/lib/utils';
+import { buildWhatsAppPromoLink, buildWhatsAppBookingLink, WHATSAPP_PHONE } from '@/lib/utils';
 import styles from './SkincareHero.module.css';
 
 interface SkincareHeroProps {
@@ -25,6 +25,21 @@ interface SkincareHeroProps {
 
 export default function SkincareHero({ promotion }: SkincareHeroProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const desktopVideoRef = useRef<HTMLVideoElement | null>(null);
+  const mobileVideoRef = useRef<HTMLVideoElement | null>(null);
+
+  // Guarantee seamless video autoplay across all browsers
+  useEffect(() => {
+    [desktopVideoRef.current, mobileVideoRef.current].forEach((video) => {
+      if (video) {
+        video.muted = true;
+        video.defaultMuted = true;
+        video.play().catch(() => {
+          // Fallback if autoplay is restricted before user gesture
+        });
+      }
+    });
+  }, []);
 
   // Close mobile drawer on ESC key
   useEffect(() => {
@@ -64,12 +79,44 @@ export default function SkincareHero({ promotion }: SkincareHeroProps) {
 
   const handleProductClick = (productName: string) => {
     const text = `¡Hola Bell Brows! Vi su producto "${productName}" en la nueva colección y me gustaría consultar disponibilidad y precio.`;
-    window.open(`https://wa.me/5215512345678?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   return (
     <section className={styles.heroWrapper} aria-label="Colección Skincare Bell Brows">
       <div className={styles.heroCard}>
+        {/* Background Video Layer — sits behind all content */}
+        <div className={styles.videoBgLayer} aria-hidden="true">
+          {/* Desktop video (16:9 landscape) */}
+          <video
+            ref={desktopVideoRef}
+            className={styles.videoBgDesktop}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+          >
+            <source src="/videoFondo/fondoweb.mp4" type="video/mp4" />
+          </video>
+
+          {/* Mobile video (9:16 portrait) */}
+          <video
+            ref={mobileVideoRef}
+            className={styles.videoBgMobile}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+          >
+            <source src="/videoFondo/Fondomobil.mp4" type="video/mp4" />
+          </video>
+
+          {/* Subtle overlay for text readability without washing out the video */}
+          <div className={styles.videoOverlay} />
+        </div>
+
         {/* Top Integrated Navigation Bar */}
         <header className={styles.heroNav}>
           <a href="#" className={styles.brandLogo} aria-label="Inicio Bell Brows">
