@@ -131,10 +131,27 @@
   margin-bottom: clamp(64px, 8vw, 96px);
 }
 
-@media (max-width: 860px) {
+@media (max-width: 960px) {
   .editorialIntroBlock {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+
+  .introRightVisual {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .introArtBadge {
+    align-self: flex-start;
+    margin-top: 14px;
+    gap: 10px;
+  }
+
+  .badgeVerticalText {
+    white-space: nowrap;
+    font-size: .63rem;
+    letter-spacing: .16em;
   }
 }
 
@@ -923,5 +940,34 @@
     padding: 0;
     justify-content: center;
     border-radius: 50%;
+  }
+}
+
+@media (max-width: 960px) {
+  .introRightVisual { align-items: stretch; }
+  .introArtBadge .badgeVerticalText {
+    font-size: .63rem;
+    letter-spacing: .16em;
+    white-space: nowrap;
+  }
+  .filterScrollWrapper {
+    width: 100%;
+    max-width: 100%;
+    mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent);
+  }
+}
+
+@media (max-width: 380px) {
+  .featuredTitleWrap { width: 100%; }
+  .featuredOverline { font-size: .74rem; letter-spacing: .14em; white-space: nowrap; }
+  .featuredLineRule { flex: 1; min-width: 16px; }
+  .spotlightPillBtn { white-space: nowrap; font-size: .78rem; padding: 12px 18px; max-width: 100%; }
+}
+
+@media (max-width: 640px) {
+  .spotlightScriptAccent {
+    top: -27px;
+    left: 8px;
+    font-size: 1.35rem;
   }
 }

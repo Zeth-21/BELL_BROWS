@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import Image from 'next/image';
 import SkincareHero from '@/components/SkincareHero';
+import RoseOverlay from '@/components/RoseOverlay';
 import ServicesMosaic from '@/components/ServicesMosaic';
 import Footer from '@/components/Footer';
 import { supabase } from '@/lib/supabase/client';
@@ -119,6 +120,8 @@ export default function HomePage() {
         {/* Editorial Skincare Hero Banner */}
         <SkincareHero promotion={promotion} />
 
+        <RoseOverlay />
+
         {/* =========================================================================
             EDITORIAL CATALOG SECTION: Exact 5-Module Structure from Image 1
            ========================================================================= */}
@@ -154,7 +157,7 @@ export default function HomePage() {
               </div>
 
               <div className={styles.introRightVisual}>
-                <div className={styles.introImageFrame} style={{ position: 'relative' }}>
+                <div className={styles.introImageFrame} data-rose-anchor="intro" style={{ position: 'relative' }}>
                   <Image
                     src="/editorial-intro.jpg"
                     alt="Filosofía Bell Brows"
@@ -176,7 +179,7 @@ export default function HomePage() {
                 BLOQUE 2: MENÚ DE SERVICIOS EXCLUSIVOS
                 (Imagen 1: "ФИРМЕННАЯ КОЛЛЕКЦИЯ ─── / Смотреть всю коллекцию ->")
                ------------------------------------------------------------------- */}
-            <div className={styles.featuredMenuSection}>
+            <div className={styles.featuredMenuSection} data-rose-anchor="services">
               <div className={styles.featuredHeaderRow}>
                 <div className={styles.featuredTitleWrap}>
                   <span className={styles.featuredOverline}>COLECCIÓN EXCLUSIVA</span>
@@ -264,7 +267,7 @@ export default function HomePage() {
                 <div className={styles.spotlightScriptAccent}>
                   Creado con devoción
                 </div>
-                <div className={styles.spotlightImageContainer} style={{ position: 'relative' }}>
+                <div className={styles.spotlightImageContainer} data-rose-anchor="season" style={{ position: 'relative' }}>
                   <Image
                     src="/editorial-spotlight.jpg"
                     alt="Tratamiento de temporada Bell Brows"
@@ -289,7 +292,7 @@ export default function HomePage() {
                   <span>EXCLUSIVOS</span>
                   <span>PARA TU MOMENTO</span>
                 </div>
-                <div className={styles.tallImageContainer} style={{ position: 'relative' }}>
+                <div className={styles.tallImageContainer} data-rose-anchor="bridal" style={{ position: 'relative' }}>
                   <Image
                     src="/editorial-bridal.jpg"
                     alt="Diseño para novias y ocasiones especiales"

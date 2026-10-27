@@ -28,17 +28,35 @@ export default function SkincareHero({ promotion }: SkincareHeroProps) {
   const desktopVideoRef = useRef<HTMLVideoElement | null>(null);
   const mobileVideoRef = useRef<HTMLVideoElement | null>(null);
 
-  // Guarantee seamless video autoplay across all browsers
+  // Only load the video for the current viewport; never play either with reduced motion.
   useEffect(() => {
-    [desktopVideoRef.current, mobileVideoRef.current].forEach((video) => {
-      if (video) {
-        video.muted = true;
-        video.defaultMuted = true;
-        video.play().catch(() => {
-          // Fallback if autoplay is restricted before user gesture
+    const mobile = window.matchMedia('(max-width: 768px), (max-aspect-ratio: 1/1)');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const syncVideo = () => {
+      const active = mobile.matches ? mobileVideoRef.current : desktopVideoRef.current;
+      const inactive = mobile.matches ? desktopVideoRef.current : mobileVideoRef.current;
+      inactive?.pause();
+      if (reducedMotion.matches) {
+        active?.pause();
+        return;
+      }
+      if (active) {
+        active.muted = true;
+        active.defaultMuted = true;
+        active.play().catch(() => {
+          // The hero remains usable if autoplay is restricted.
         });
       }
-    });
+    };
+    syncVideo();
+    mobile.addEventListener('change', syncVideo);
+    reducedMotion.addEventListener('change', syncVideo);
+    return () => {
+      mobile.removeEventListener('change', syncVideo);
+      reducedMotion.removeEventListener('change', syncVideo);
+      desktopVideoRef.current?.pause();
+      mobileVideoRef.current?.pause();
+    };
   }, []);
 
   // Close mobile drawer on ESC key
@@ -91,11 +109,10 @@ export default function SkincareHero({ promotion }: SkincareHeroProps) {
           <video
             ref={desktopVideoRef}
             className={styles.videoBgDesktop}
-            autoPlay
             loop
             muted
             playsInline
-            preload="auto"
+            preload="none"
           >
             <source src="/videoFondo/fondoweb.mp4" type="video/mp4" />
           </video>
@@ -104,11 +121,10 @@ export default function SkincareHero({ promotion }: SkincareHeroProps) {
           <video
             ref={mobileVideoRef}
             className={styles.videoBgMobile}
-            autoPlay
             loop
             muted
             playsInline
-            preload="auto"
+            preload="none"
           >
             <source src="/videoFondo/Fondomobil.mp4" type="video/mp4" />
           </video>

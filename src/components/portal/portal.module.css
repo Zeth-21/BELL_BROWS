@@ -399,9 +399,27 @@
     display: none;
   }
   .previewSiteBtn, .logoutBtn {
-    padding: 8px 12px;
+    padding: 0;
+    width: 40px;
     min-height: 40px;
   }
+
+  .adminNavContainer { gap: 8px; }
+  .adminBrand { gap: 7px; }
+  .adminTitle { font-size: .88rem; }
+  .navActions { gap: 5px; }
+
+  .tabBtn {
+    min-width: 0;
+    padding: 8px 5px;
+    gap: 5px;
+    font-size: .73rem;
+    line-height: 1.2;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .tabBtn svg { flex-shrink: 0; }
 }
 
 /* ============================================================
@@ -1149,4 +1167,13 @@
   margin-top: 12px;
   border-top: 1px solid var(--border-light);
   padding-top: 16px;
+}
+
+@media (max-width: 480px) {
+  .serviceTitleRow { flex-wrap: wrap; }
+  .serviceCardFooter .actionCardBtn { min-width: 100%; }
+  .modalActions { flex-wrap: wrap; }
+  .modalActions button { flex: 1 1 130px; }
+  .switchLabel { flex-wrap: wrap; gap: 8px; }
+  .toast { right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); max-width: calc(100vw - 32px); }
 }

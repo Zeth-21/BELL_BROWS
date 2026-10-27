@@ -143,3 +143,14 @@
 .heartIcon {
   color: #CA908D;
 }
+
+@media (max-width: 640px) {
+  .footer {
+    padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .crafted {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
