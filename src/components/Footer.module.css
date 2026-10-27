@@ -1,6 +1,6 @@
 .footer {
   width: 100%;
-  background: #11281c;
+  background: #1C0207;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-top: clamp(36px, 6vw, 60px);
   padding-bottom: calc(clamp(24px, 4vw, 36px) + env(safe-area-inset-bottom, 0px));
@@ -52,15 +52,15 @@
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  background: #1f4731;
-  color: #ffffff;
+  background: #CA908D;
+  color: #1C0207;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .brandDesc {
-  color: #a7bfae;
+  color: #E8BEBB;
   font-size: 0.9rem;
   line-height: 1.6;
   max-width: 360px;
@@ -82,7 +82,7 @@
 }
 
 .colIcon {
-  color: #8fa691;
+  color: #CA908D;
 }
 
 .infoList {
@@ -91,12 +91,12 @@
   flex-direction: column;
   gap: 8px;
   font-size: 0.88rem;
-  color: #c5d8cb;
+  color: #E8BEBB;
 }
 
 .locationText {
   font-size: 0.88rem;
-  color: #c5d8cb;
+  color: #E8BEBB;
   line-height: 1.5;
 }
 
@@ -119,7 +119,7 @@
   gap: 12px;
   text-align: center;
   font-size: 0.82rem;
-  color: #8fa691;
+  color: #CA908D;
 }
 
 @media (min-width: 640px) {
@@ -130,16 +130,16 @@
 }
 
 .copyright {
-  color: #8fa691;
+  color: #CA908D;
 }
 
 .crafted {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #8fa691;
+  color: #CA908D;
 }
 
 .heartIcon {
-  color: #8fa691;
+  color: #CA908D;
 }

@@ -12,9 +12,9 @@
 .promoCard {
   position: relative;
   border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, #173826 0%, #0f261a 100%);
+  background: linear-gradient(135deg, #2e0811 0%, #1C0207 100%);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 14px 40px -10px rgba(15, 38, 26, 0.35);
+  box-shadow: 0 14px 40px -10px rgba(28, 2, 7, 0.35);
   overflow: hidden;
   transition: border-color 0.3s ease;
 }
@@ -25,7 +25,7 @@
   left: -20%;
   width: 140%;
   height: 200%;
-  background: radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.08), transparent 60%);
+  background: radial-gradient(circle at 30% 30%, rgba(202, 144, 141, 0.15), transparent 60%);
   pointer-events: none;
 }
 
@@ -71,12 +71,12 @@
 .imageOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 40%, rgba(20, 16, 14, 0.8) 100%);
+  background: linear-gradient(to bottom, transparent 40%, rgba(28, 2, 7, 0.85) 100%);
 }
 
 @media (min-width: 768px) {
   .imageOverlay {
-    background: linear-gradient(to right, transparent 50%, rgba(20, 16, 14, 0.95) 100%);
+    background: linear-gradient(to right, transparent 50%, rgba(28, 2, 7, 0.95) 100%);
   }
 }
 
@@ -101,12 +101,12 @@
 }
 
 .badgePulse {
-  box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
+  box-shadow: 0 0 12px rgba(202, 144, 141, 0.35);
 }
 
 .promoUrgency {
   font-size: 0.8rem;
-  color: #a4baa6;
+  color: #E8BEBB;
   font-weight: 600;
   letter-spacing: 0.02em;
 }
@@ -120,7 +120,7 @@
 
 .promoDescription {
   font-size: clamp(0.9rem, 2vw, 1rem);
-  color: #d2ded2;
+  color: #E8BEBB;
   line-height: 1.55;
 }
 

@@ -1,6 +1,6 @@
 .card {
   background: #ffffff;
-  border: 1px solid rgba(23, 56, 38, 0.07);
+  border: 1px solid rgba(28, 2, 7, 0.08);
   border-radius: 28px;
   padding: 20px;
   display: flex;
@@ -10,7 +10,7 @@
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
               border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
               box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 10px 32px -10px rgba(23, 56, 38, 0.06);
+  box-shadow: 0 10px 32px -10px rgba(28, 2, 7, 0.06);
   height: 100%;
   box-sizing: border-box;
 }
@@ -18,8 +18,8 @@
 @media (hover: hover) {
   .card:hover {
     transform: translateY(-8px);
-    border-color: rgba(23, 56, 38, 0.22);
-    box-shadow: 0 24px 50px -12px rgba(23, 56, 38, 0.15);
+    border-color: rgba(202, 144, 141, 0.5);
+    box-shadow: 0 24px 50px -12px rgba(28, 2, 7, 0.15);
   }
 
   .card:hover .image {
@@ -36,9 +36,9 @@
   width: 100%;
   border-radius: 20px;
   overflow: hidden;
-  background: #edf3ed;
+  background: #E8BEBB;
   position: relative;
-  box-shadow: 0 4px 16px rgba(23, 56, 38, 0.03);
+  box-shadow: 0 4px 16px rgba(28, 2, 7, 0.03);
 }
 
 .imageContainer {
@@ -62,9 +62,9 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  color: #496353;
+  color: #7a5a61;
   font-size: 0.85rem;
-  background: linear-gradient(135deg, #f4f8f4 0%, #e2ece2 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #E8BEBB 100%);
 }
 
 .placeholderIcon {
@@ -93,7 +93,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  border: 1px solid rgba(23, 56, 38, 0.08);
+  border: 1px solid rgba(28, 2, 7, 0.08);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
@@ -179,7 +179,7 @@
   display: flex;
   justify-content: center;
   padding-top: 14px;
-  border-top: 1px solid rgba(23, 56, 38, 0.07);
+  border-top: 1px solid rgba(28, 2, 7, 0.08);
 }
 
 /* Signature Image 1 Dark Olive/Forest Green Pill CTA Button */
@@ -199,14 +199,14 @@
   border: none !important;
   cursor: pointer !important;
   padding: 12px 24px !important;
-  box-shadow: 0 4px 16px rgba(23, 56, 38, 0.25) !important;
+  box-shadow: 0 4px 16px rgba(28, 2, 7, 0.25) !important;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
   user-select: none;
 }
 
 .bookButton:hover {
   background: var(--forest-dark) !important;
-  box-shadow: 0 8px 24px -2px rgba(23, 56, 38, 0.38) !important;
+  box-shadow: 0 8px 24px -2px rgba(28, 2, 7, 0.38) !important;
   transform: translateY(-1.5px);
 }
 

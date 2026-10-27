@@ -7,35 +7,35 @@
   --font-serif-display: 'Cormorant Garamond', Georgia, serif;
   --font-script: 'Caveat', cursive, serif;
   
-  /* Brand Luxury Botanical Skincare & Spa Palette */
-  --bg-main: #dce5dc;
-  --bg-surface: #edf3ed;
+  /* Brand Luxury Palette: #CA908D (Mauve Rose), #E8BEBB (Blush Tint), #1C0207 (Blackish Wine), #FFFFFF (White) */
+  --bg-main: #E8BEBB;
+  --bg-surface: #f7ebe9;
   --bg-card: #ffffff;
-  --bg-card-hover: #f9fbf9;
-  --bg-glass: rgba(255, 255, 255, 0.88);
+  --bg-card-hover: #fdf8f7;
+  --bg-glass: rgba(255, 255, 255, 0.92);
   
-  --border-subtle: rgba(23, 56, 38, 0.08);
-  --border-light: rgba(23, 56, 38, 0.06);
-  --border-focus: #173826;
+  --border-subtle: rgba(28, 2, 7, 0.08);
+  --border-light: rgba(28, 2, 7, 0.06);
+  --border-focus: #CA908D;
   
-  --forest-primary: #173826;
-  --forest-dark: #0f261a;
-  --forest-light: #245238;
-  --sage-accent: #8fa691;
-  --sage-muted: #6f8770;
-  --gold-primary: #173826;
-  --gold-light: #8fa691;
-  --gold-dark: #0f261a;
-  --rose-accent: #6f8770;
+  --forest-primary: #1C0207;
+  --forest-dark: #120104;
+  --forest-light: #2e0811;
+  --sage-accent: #CA908D;
+  --sage-muted: #9e6d6b;
+  --gold-primary: #CA908D;
+  --gold-light: #E8BEBB;
+  --gold-dark: #1C0207;
+  --rose-accent: #CA908D;
   
-  --forest-gradient: linear-gradient(135deg, #245238 0%, #173826 100%);
-  --gold-gradient: linear-gradient(135deg, #245238 0%, #173826 100%);
-  --sage-gradient: linear-gradient(135deg, #a4baa6 0%, #8fa691 100%);
+  --forest-gradient: linear-gradient(135deg, #2e0811 0%, #1C0207 100%);
+  --gold-gradient: linear-gradient(135deg, #CA908D 0%, #1C0207 100%);
+  --sage-gradient: linear-gradient(135deg, #E8BEBB 0%, #CA908D 100%);
   --glass-gradient: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 100%);
   
-  --text-primary: #173826;
-  --text-secondary: #3d5947;
-  --text-muted: #5f7a68;
+  --text-primary: #1C0207;
+  --text-secondary: #4d2d34;
+  --text-muted: #7a5a61;
   --text-dark: #ffffff;
   
   --status-active: #15803d;
@@ -50,9 +50,9 @@
   --radius-lg: 24px;
   --radius-full: 9999px;
   
-  --shadow-card: 0 12px 32px -8px rgba(23, 56, 38, 0.08);
-  --shadow-gold: 0 8px 24px -6px rgba(23, 56, 38, 0.28);
-  --shadow-glow: 0 0 25px rgba(23, 56, 38, 0.12);
+  --shadow-card: 0 12px 32px -8px rgba(28, 2, 7, 0.08);
+  --shadow-gold: 0 8px 24px -6px rgba(202, 144, 141, 0.35);
+  --shadow-glow: 0 0 25px rgba(202, 144, 141, 0.2);
 }
 
 *, *::before, *::after {
@@ -144,14 +144,14 @@ button:active, .btn:active {
   background: var(--forest-primary);
   color: #ffffff;
   font-weight: 700;
-  box-shadow: 0 6px 18px -4px rgba(23, 56, 38, 0.35);
+  box-shadow: 0 6px 18px -4px rgba(28, 2, 7, 0.35);
 }
 
 .btn-primary:hover {
   background: var(--forest-dark);
   filter: none;
   transform: translateY(-1.5px);
-  box-shadow: 0 10px 24px -4px rgba(23, 56, 38, 0.45);
+  box-shadow: 0 10px 24px -4px rgba(28, 2, 7, 0.45);
 }
 
 .btn-secondary {
@@ -161,7 +161,7 @@ button:active, .btn:active {
 }
 
 .btn-secondary:hover {
-  background: rgba(23, 56, 38, 0.06);
+  background: rgba(28, 2, 7, 0.06);
 }
 
 .btn-whatsapp {
@@ -190,7 +190,7 @@ select {
   font-family: inherit;
   color: var(--text-primary);
   background: #ffffff;
-  border: 1px solid rgba(23, 56, 38, 0.15);
+  border: 1px solid rgba(28, 2, 7, 0.15);
   border-radius: var(--radius-md);
   outline: none;
   transition: all 0.2s ease;
@@ -200,7 +200,7 @@ input:focus,
 textarea:focus,
 select:focus {
   border-color: var(--forest-primary);
-  box-shadow: 0 0 0 3px rgba(23, 56, 38, 0.15);
+  box-shadow: 0 0 0 3px rgba(202, 144, 141, 0.25);
   background: #ffffff;
 }
 
@@ -231,9 +231,9 @@ label {
 }
 
 .badge-gold {
-  background: rgba(212, 175, 55, 0.15);
-  color: var(--gold-light);
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: rgba(202, 144, 141, 0.15);
+  color: var(--gold-primary);
+  border: 1px solid rgba(202, 144, 141, 0.35);
 }
 
 .badge-active {
@@ -267,8 +267,8 @@ label {
 }
 
 @keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
-  50% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.45); }
+  0%, 100% { box-shadow: 0 0 15px rgba(202, 144, 141, 0.2); }
+  50% { box-shadow: 0 0 30px rgba(202, 144, 141, 0.45); }
 }
 
 .animate-fade-in {

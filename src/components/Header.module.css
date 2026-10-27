@@ -3,7 +3,7 @@
   background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(23, 56, 38, 0.08);
+  border-bottom: 1px solid rgba(28, 2, 7, 0.08);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -15,7 +15,7 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   padding: 6px 0;
   font-size: 0.75rem;
-  color: #c5d8cb;
+  color: #E8BEBB;
 }
 
 .topBarContent {

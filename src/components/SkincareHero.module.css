@@ -6,7 +6,7 @@
 .heroWrapper {
   width: 100%;
   padding: clamp(10px, 2vw, 28px);
-  background-color: #dce5dc;
+  background-color: #E8BEBB;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,8 +18,8 @@
   max-width: 1560px; /* Takes full advantage of desktop monitors */
   background-color: #ffffff;
   border-radius: clamp(20px, 2.5vw, 40px);
-  box-shadow: 0 24px 60px -15px rgba(23, 56, 38, 0.1);
-  border: 1px solid rgba(23, 56, 38, 0.06);
+  box-shadow: 0 24px 60px -15px rgba(28, 2, 7, 0.1);
+  border: 1px solid rgba(28, 2, 7, 0.06);
   padding: clamp(16px, 2.5vw, 32px) clamp(16px, 3.5vw, 56px) clamp(20px, 3.5vw, 44px);
   position: relative;
   overflow: hidden;
@@ -47,7 +47,7 @@
   align-items: center;
   gap: 12px;
   text-decoration: none;
-  color: #173826;
+  color: #1C0207;
 }
 
 .brandLogoImg {
@@ -59,7 +59,7 @@
 }
 
 .leafIcon {
-  color: #245238;
+  color: #CA908D;
   flex-shrink: 0;
 }
 
@@ -73,14 +73,14 @@
   font-size: clamp(1rem, 1.3vw, 1.25rem);
   font-weight: 800;
   letter-spacing: 0.06em;
-  color: #173826;
+  color: #1C0207;
 }
 
 .brandSub {
   font-size: 0.65rem;
   letter-spacing: 0.15em;
   font-weight: 700;
-  color: #5d7565;
+  color: #CA908D;
 }
 
 .navLinks {
@@ -100,7 +100,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #173826;
+  color: #1C0207;
   text-decoration: none;
   transition: color 0.2s ease, opacity 0.2s ease;
   position: relative;
@@ -108,7 +108,7 @@
 }
 
 .navLink:hover {
-  color: #436e52;
+  color: #CA908D;
 }
 
 .navActions {
@@ -133,7 +133,7 @@
   padding: 0 !important;
   cursor: pointer !important;
   position: relative !important;
-  box-shadow: 0 4px 12px rgba(23, 56, 38, 0.25) !important;
+  box-shadow: 0 4px 12px rgba(28, 2, 7, 0.25) !important;
   transition: transform 0.2s ease, background-color 0.2s ease !important;
   flex-shrink: 0;
   user-select: none;
@@ -158,8 +158,8 @@
   position: absolute;
   top: -2px;
   right: -2px;
-  background-color: #8fa691;
-  color: #173826;
+  background-color: #CA908D;
+  color: #ffffff;
   font-size: 0.65rem;
   font-weight: 800;
   width: 17px;
@@ -186,14 +186,14 @@
   cursor: pointer;
   transition: all 0.2s ease;
   letter-spacing: 0.03em;
-  box-shadow: 0 4px 14px rgba(23, 56, 38, 0.25);
+  box-shadow: 0 4px 14px rgba(28, 2, 7, 0.25);
   user-select: none;
 }
 
 .desktopBookingBtn:hover {
-  background: #0f261a;
+  background: #120104;
   transform: translateY(-1.5px);
-  box-shadow: 0 6px 18px rgba(23, 56, 38, 0.35);
+  box-shadow: 0 6px 18px rgba(28, 2, 7, 0.35);
 }
 
 @media (min-width: 960px) {
@@ -221,14 +221,14 @@
   font-weight: 800 !important;
   letter-spacing: 0.08em !important;
   cursor: pointer !important;
-  box-shadow: 0 4px 14px rgba(23, 56, 38, 0.3) !important;
+  box-shadow: 0 4px 14px rgba(28, 2, 7, 0.3) !important;
   transition: all 0.2s ease !important;
   user-select: none;
   flex-shrink: 0;
 }
 
 .menuPillBtn:hover {
-  background: #0f261a !important;
+  background: #120104 !important;
   transform: scale(1.03);
 }
 
@@ -278,7 +278,7 @@
   padding: 4px 0 14px 0;
   scrollbar-width: none;
   width: 100%;
-  border-bottom: 1px solid rgba(23, 56, 38, 0.08);
+  border-bottom: 1px solid rgba(28, 2, 7, 0.08);
   margin-bottom: 8px;
   box-sizing: border-box;
 }
@@ -297,9 +297,9 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  background: rgba(23, 56, 38, 0.05);
+  background: rgba(28, 2, 7, 0.05);
   color: var(--forest-primary);
-  border: 1px solid rgba(23, 56, 38, 0.12);
+  border: 1px solid rgba(28, 2, 7, 0.12);
   border-radius: var(--radius-full);
   padding: 6px 14px !important;
   min-height: 34px !important;
@@ -326,7 +326,7 @@
 .drawerBackdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 38, 26, 0.6);
+  background: rgba(28, 2, 7, 0.65);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   z-index: 1000;
@@ -340,7 +340,7 @@
   max-width: 360px;
   height: 100%;
   background: #ffffff;
-  box-shadow: -10px 0 35px rgba(23, 56, 38, 0.2);
+  box-shadow: -10px 0 35px rgba(28, 2, 7, 0.2);
   display: flex;
   flex-direction: column;
   padding: clamp(20px, 4vw, 28px);
@@ -359,7 +359,7 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 20px;
-  border-bottom: 1px solid rgba(23, 56, 38, 0.08);
+  border-bottom: 1px solid rgba(28, 2, 7, 0.08);
 }
 
 .drawerBrand {
@@ -372,7 +372,7 @@
   font-size: 1.05rem;
   font-weight: 800;
   letter-spacing: 0.05em;
-  color: #173826;
+  color: #1C0207;
   display: block;
 }
 
@@ -380,7 +380,7 @@
   font-size: 0.62rem;
   letter-spacing: 0.12em;
   font-weight: 700;
-  color: #5d7565;
+  color: #CA908D;
   display: block;
 }
 
@@ -388,8 +388,8 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(23, 56, 38, 0.06);
-  color: #173826;
+  background: rgba(28, 2, 7, 0.06);
+  color: #1C0207;
   border: none;
   display: flex;
   align-items: center;
@@ -399,7 +399,7 @@
 }
 
 .drawerCloseBtn:hover {
-  background: rgba(23, 56, 38, 0.12);
+  background: rgba(28, 2, 7, 0.12);
 }
 
 .drawerBody {
@@ -422,10 +422,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 16px;
-  background: rgba(23, 56, 38, 0.03);
-  border: 1px solid rgba(23, 56, 38, 0.06);
+  background: rgba(28, 2, 7, 0.03);
+  border: 1px solid rgba(28, 2, 7, 0.06);
   border-radius: var(--radius-md);
-  color: #173826;
+  color: #1C0207;
   font-weight: 700;
   font-size: 0.92rem;
   text-decoration: none;
@@ -435,8 +435,8 @@
 }
 
 .drawerLink:hover {
-  background: rgba(23, 56, 38, 0.08);
-  border-color: rgba(23, 56, 38, 0.15);
+  background: rgba(202, 144, 141, 0.15);
+  border-color: rgba(202, 144, 141, 0.35);
   transform: translateX(3px);
 }
 
@@ -446,7 +446,7 @@
   flex-direction: column;
   gap: 12px;
   padding-top: 20px;
-  border-top: 1px solid rgba(23, 56, 38, 0.08);
+  border-top: 1px solid rgba(28, 2, 7, 0.08);
 }
 
 .drawerWaBtn {
@@ -457,7 +457,7 @@
 
 .drawerHours {
   font-size: 0.78rem;
-  color: #5d7565;
+  color: #7a5a61;
   text-align: center;
   margin: 0;
 }
@@ -490,11 +490,11 @@
 }
 
 .headlineNew {
-  color: #8fa691;
+  color: #CA908D;
 }
 
 .headlineRest {
-  color: #173826;
+  color: #1C0207;
 }
 
 /* ------------------------------------------------------------
@@ -547,20 +547,20 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background-color: rgba(23, 56, 38, 0.08);
-  color: #173826;
+  background-color: rgba(202, 144, 141, 0.18);
+  color: #1C0207;
   padding: 5px 14px;
   border-radius: 9999px;
   font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: 0.04em;
-  border: 1px solid rgba(23, 56, 38, 0.15);
+  border: 1px solid rgba(202, 144, 141, 0.35);
 }
 
 .tagline {
   font-size: clamp(1.15rem, 4.2vw, 1.45rem);
   font-weight: 900;
-  color: #173826;
+  color: #1C0207;
   line-height: 1.2;
   letter-spacing: 0.01em;
   text-transform: uppercase;
@@ -573,7 +573,7 @@
 
 .description {
   font-size: clamp(0.88rem, 1vw, 0.98rem);
-  color: #496353;
+  color: #7a5a61;
   line-height: 1.55;
   margin: 0;
   max-width: 360px;
@@ -588,7 +588,7 @@
 }
 
 .primaryPillBtn {
-  background-color: #173826;
+  background-color: #1C0207;
   color: #ffffff;
   border: none;
   border-radius: 9999px;
@@ -602,20 +602,20 @@
   gap: 8px;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 6px 18px -4px rgba(23, 56, 38, 0.35);
+  box-shadow: 0 6px 18px -4px rgba(28, 2, 7, 0.35);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .primaryPillBtn:hover {
-  background-color: #0d2519;
+  background-color: #120104;
   transform: translateY(-1.5px);
-  box-shadow: 0 10px 24px -4px rgba(23, 56, 38, 0.45);
+  box-shadow: 0 10px 24px -4px rgba(28, 2, 7, 0.45);
 }
 
 .secondaryPillBtn {
   background-color: transparent;
-  color: #173826;
-  border: 1.5px solid #173826;
+  color: #1C0207;
+  border: 1.5px solid #1C0207;
   border-radius: 9999px;
   padding: 12px 24px;
   font-size: 0.84rem;
@@ -631,7 +631,7 @@
 }
 
 .secondaryPillBtn:hover {
-  background-color: rgba(23, 56, 38, 0.08);
+  background-color: rgba(28, 2, 7, 0.08);
 }
 
 /* ------------------------------------------------------------
@@ -667,7 +667,7 @@
   max-height: clamp(240px, 48vw, 560px);
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 20px 35px rgba(23, 56, 38, 0.12));
+  filter: drop-shadow(0 20px 35px rgba(28, 2, 7, 0.12));
   pointer-events: none;
   user-select: none;
 }
@@ -706,11 +706,11 @@
   background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(23, 56, 38, 0.08);
+  border: 1px solid rgba(28, 2, 7, 0.08);
   border-radius: 9999px;
   padding: 8px 18px;
-  box-shadow: 0 8px 24px -4px rgba(23, 56, 38, 0.12);
-  color: #173826;
+  box-shadow: 0 8px 24px -4px rgba(28, 2, 7, 0.12);
+  color: #1C0207;
   font-size: clamp(0.7rem, 0.8vw, 0.76rem);
   font-weight: 800;
   letter-spacing: 0.05em;
@@ -744,11 +744,11 @@
   align-items: center;
   gap: 6px;
   background-color: #ffffff;
-  border: 1px solid rgba(23, 56, 38, 0.12);
+  border: 1px solid rgba(28, 2, 7, 0.12);
   border-radius: var(--radius-full);
   padding: 6px 12px;
-  box-shadow: 0 3px 10px rgba(23, 56, 38, 0.06);
-  color: #173826;
+  box-shadow: 0 3px 10px rgba(28, 2, 7, 0.06);
+  color: #1C0207;
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.04em;
@@ -756,7 +756,7 @@
 }
 
 .badgeIcon {
-  color: #2b573a;
+  color: #CA908D;
   flex-shrink: 0;
 }
 
@@ -794,7 +794,7 @@
   width: clamp(74px, 19vw, 96px);
   height: clamp(74px, 19vw, 96px);
   border-radius: 50%;
-  background-color: #6f8770;
+  background-color: #CA908D;
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -802,7 +802,7 @@
   justify-content: center;
   text-align: center;
   padding: 6px;
-  box-shadow: 0 8px 20px -4px rgba(23, 56, 38, 0.2);
+  box-shadow: 0 8px 20px -4px rgba(28, 2, 7, 0.2);
   flex-shrink: 0;
   box-sizing: border-box;
   transition: transform 0.3s ease;
@@ -854,9 +854,9 @@
   height: clamp(80px, 22vw, 116px);
   border-radius: clamp(12px, 3vw, 20px);
   overflow: hidden;
-  background-color: #f5f8f5;
+  background-color: #E8BEBB;
   border: 2px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 0 8px 20px -4px rgba(23, 56, 38, 0.12);
+  box-shadow: 0 8px 20px -4px rgba(28, 2, 7, 0.12);
   position: relative;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
@@ -874,7 +874,7 @@
 @media (hover: hover) {
   .productCard:hover {
     transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 16px 32px -4px rgba(23, 56, 38, 0.2);
+    box-shadow: 0 16px 32px -4px rgba(28, 2, 7, 0.2);
   }
 }
 

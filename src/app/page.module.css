@@ -27,8 +27,8 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(212, 175, 55, 0.1);
-  border: 1px solid rgba(212, 175, 55, 0.25);
+  background: rgba(202, 144, 141, 0.15);
+  border: 1px solid rgba(202, 144, 141, 0.35);
   padding: 6px 14px;
   border-radius: var(--radius-full);
   font-size: 0.8rem;
@@ -96,8 +96,8 @@
   padding-top: 22px;
   padding-bottom: 22px;
   background: #ffffff;
-  border-top: 1px solid rgba(23, 56, 38, 0.08);
-  border-bottom: 1px solid rgba(23, 56, 38, 0.08);
+  border-top: 1px solid rgba(28, 2, 7, 0.08);
+  border-bottom: 1px solid rgba(28, 2, 7, 0.08);
 }
 
 .trustRow {
@@ -221,7 +221,7 @@
   aspect-ratio: 4 / 3;
   border-radius: 28px;
   overflow: hidden;
-  box-shadow: 0 16px 44px -8px rgba(23, 56, 38, 0.14);
+  box-shadow: 0 16px 44px -8px rgba(28, 2, 7, 0.14);
 }
 
 .introImg {
@@ -352,19 +352,19 @@
   text-transform: uppercase !important;
   background: #ffffff !important;
   color: var(--forest-primary) !important;
-  border: 1px solid rgba(23, 56, 38, 0.14) !important;
+  border: 1px solid rgba(28, 2, 7, 0.14) !important;
   white-space: nowrap !important;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  box-shadow: 0 2px 8px rgba(23, 56, 38, 0.03) !important;
+  box-shadow: 0 2px 8px rgba(28, 2, 7, 0.03) !important;
   cursor: pointer !important;
   user-select: none;
 }
 
 .editorialFilterBtn:hover {
-  background: #f4f8f4 !important;
-  border-color: rgba(23, 56, 38, 0.3) !important;
+  background: #fdf8f7 !important;
+  border-color: #CA908D !important;
   transform: translateY(-1.5px);
-  box-shadow: 0 6px 16px rgba(23, 56, 38, 0.08) !important;
+  box-shadow: 0 6px 16px rgba(202, 144, 141, 0.18) !important;
 }
 
 .editorialFilterBtnActive {
@@ -372,14 +372,14 @@
   color: #ffffff !important;
   font-weight: 800 !important;
   border-color: var(--forest-primary) !important;
-  box-shadow: 0 6px 20px rgba(23, 56, 38, 0.25) !important;
+  box-shadow: 0 6px 20px rgba(28, 2, 7, 0.25) !important;
 }
 
 /* =========================================================================
    BLOQUE 3: TRATAMIENTO DE TEMPORADA / SPOTLIGHT (Image 1 Row 3)
    ========================================================================= */
 .seasonalSpotlightBlock {
-  background: linear-gradient(135deg, #1b3827 0%, #11281c 100%);
+  background: linear-gradient(135deg, #2e0811 0%, #1C0207 100%);
   border-radius: 32px;
   padding: clamp(36px, 5vw, 64px);
   display: grid;
@@ -390,7 +390,7 @@
   color: #ffffff;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 24px 50px -12px rgba(17, 40, 28, 0.25);
+  box-shadow: 0 24px 50px -12px rgba(28, 2, 7, 0.25);
 }
 
 @media (max-width: 900px) {
@@ -520,8 +520,8 @@
   grid-template-columns: 1fr 1.25fr;
   gap: clamp(32px, 5vw, 64px);
   align-items: center;
-  border: 1px solid rgba(23, 56, 38, 0.08);
-  box-shadow: 0 12px 36px -10px rgba(23, 56, 38, 0.06);
+  border: 1px solid rgba(28, 2, 7, 0.08);
+  box-shadow: 0 12px 36px -10px rgba(28, 2, 7, 0.06);
 }
 
 @media (max-width: 900px) {
@@ -564,7 +564,7 @@
   aspect-ratio: 3 / 4;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 12px 30px rgba(23, 56, 38, 0.08);
+  box-shadow: 0 12px 30px rgba(28, 2, 7, 0.08);
 }
 
 .tallImg {
@@ -628,13 +628,13 @@
   font-size: 0.85rem;
   letter-spacing: 0.05em;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 16px rgba(23, 56, 38, 0.25);
+  box-shadow: 0 4px 16px rgba(28, 2, 7, 0.25);
   align-self: flex-start;
 }
 
 .storiesPillBtn:hover {
   background: var(--forest-dark);
-  box-shadow: 0 8px 24px rgba(23, 56, 38, 0.35);
+  box-shadow: 0 8px 24px rgba(28, 2, 7, 0.35);
   transform: translateY(-2px);
 }
 
@@ -643,7 +643,7 @@
   align-items: center;
   gap: 20px;
   padding-top: 24px;
-  border-top: 1px solid rgba(23, 56, 38, 0.08);
+  border-top: 1px solid rgba(28, 2, 7, 0.08);
 }
 
 .craftThumb {
@@ -653,7 +653,7 @@
   border-radius: 14px;
   overflow: hidden;
   flex-shrink: 0;
-  box-shadow: 0 4px 14px rgba(23, 56, 38, 0.08);
+  box-shadow: 0 4px 14px rgba(28, 2, 7, 0.08);
 }
 
 .craftImg {
@@ -688,7 +688,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 24px;
-  box-shadow: 0 16px 40px -10px rgba(23, 56, 38, 0.3);
+  box-shadow: 0 16px 40px -10px rgba(28, 2, 7, 0.3);
 }
 
 .metricItem {
@@ -795,7 +795,7 @@
   padding: 60px 20px;
   background: #ffffff;
   border-radius: var(--radius-lg);
-  border: 1px dashed rgba(23, 56, 38, 0.2);
+  border: 1px dashed rgba(28, 2, 7, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -823,7 +823,7 @@
 .skeletonImg {
   width: 100%;
   height: 200px;
-  background: linear-gradient(90deg, #e4ede4 25%, #f2f7f2 50%, #e4ede4 75%);
+  background: linear-gradient(90deg, #f0dfdd 25%, #f8edea 50%, #f0dfdd 75%);
   background-size: 200% 100%;
   animation: skeletonShimmer 1.5s infinite;
 }
@@ -840,7 +840,7 @@
   width: 70%;
   height: 22px;
   border-radius: 4px;
-  background: linear-gradient(90deg, #e4ede4 25%, #f2f7f2 50%, #e4ede4 75%);
+  background: linear-gradient(90deg, #f0dfdd 25%, #f8edea 50%, #f0dfdd 75%);
   background-size: 200% 100%;
   animation: skeletonShimmer 1.5s infinite;
 }
@@ -849,7 +849,7 @@
   width: 90%;
   height: 40px;
   border-radius: 4px;
-  background: linear-gradient(90deg, #e4ede4 25%, #f2f7f2 50%, #e4ede4 75%);
+  background: linear-gradient(90deg, #f0dfdd 25%, #f8edea 50%, #f0dfdd 75%);
   background-size: 200% 100%;
   animation: skeletonShimmer 1.5s infinite;
 }
@@ -859,7 +859,7 @@
   width: 100%;
   height: 46px;
   border-radius: var(--radius-md);
-  background: linear-gradient(90deg, #e4ede4 25%, #f2f7f2 50%, #e4ede4 75%);
+  background: linear-gradient(90deg, #f0dfdd 25%, #f8edea 50%, #f0dfdd 75%);
   background-size: 200% 100%;
   animation: skeletonShimmer 1.5s infinite;
 }

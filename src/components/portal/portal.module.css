@@ -223,7 +223,7 @@
 }
 
 .customCheckboxChecked {
-  background: linear-gradient(135deg, #aa903d, #766320);
+  background: linear-gradient(135deg, #CA908D, #9e5d59);
   border-color: rgba(255, 255, 255, 0.85);
 }
 
@@ -239,7 +239,7 @@
   height: 52px !important;
   min-height: 52px !important;
   border-radius: 9999px !important;
-  background: linear-gradient(180deg, #aa903d 0%, #766320 100%) !important;
+  background: linear-gradient(180deg, #CA908D 0%, #1C0207 100%) !important;
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
   color: #ffffff !important;
   font-size: 1.05rem !important;
@@ -288,7 +288,7 @@
 
 .signupLink:hover {
   text-decoration: underline;
-  color: #fbf1c7;
+  color: #E8BEBB;
 }
 
 /* ============================================================
@@ -308,7 +308,7 @@
   top: 0;
   z-index: 90;
   backdrop-filter: blur(12px);
-  box-shadow: 0 4px 20px rgba(15, 38, 26, 0.15);
+  box-shadow: 0 4px 20px rgba(28, 2, 7, 0.15);
 }
 
 .adminNavContainer {
@@ -350,7 +350,7 @@
 .adminUserBadge {
   display: block;
   font-size: 0.72rem;
-  color: #c5d8cb;
+  color: #E8BEBB;
   font-weight: 600;
   max-width: 150px;
   overflow: hidden;
@@ -427,10 +427,10 @@
   background: #ffffff;
   padding: 6px;
   border-radius: var(--radius-full);
-  border: 1px solid rgba(23, 56, 38, 0.12);
+  border: 1px solid rgba(28, 2, 7, 0.12);
   width: 100%;
   max-width: 520px;
-  box-shadow: 0 4px 16px rgba(23, 56, 38, 0.05);
+  box-shadow: 0 4px 16px rgba(28, 2, 7, 0.05);
   box-sizing: border-box;
 }
 
@@ -455,7 +455,7 @@
   background: var(--forest-primary);
   color: #ffffff;
   font-weight: 800;
-  box-shadow: 0 4px 14px rgba(23, 56, 38, 0.3);
+  box-shadow: 0 4px 14px rgba(28, 2, 7, 0.3);
 }
 
 .tabContentArea {
@@ -544,7 +544,7 @@
 }
 
 .statusCardActive {
-  background: linear-gradient(135deg, #ffffff 0%, #f0f7f2 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f7ebe9 100%);
   border-color: rgba(21, 128, 61, 0.25);
   box-shadow: 0 10px 30px -8px rgba(21, 128, 61, 0.12);
 }
@@ -694,10 +694,10 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background: #f4f8f4;
+  background: #fdf8f7;
   padding: 16px;
   border-radius: var(--radius-md);
-  border: 1px solid rgba(23, 56, 38, 0.12);
+  border: 1px solid rgba(28, 2, 7, 0.12);
 }
 
 @media (min-width: 640px) {
@@ -714,7 +714,7 @@
   aspect-ratio: 16 / 9;
   border-radius: var(--radius-sm);
   overflow: hidden;
-  background: #e2ece2;
+  background: #E8BEBB;
 }
 
 .previewImg {
@@ -747,16 +747,16 @@
   justify-content: center;
   gap: 8px;
   padding: 32px 20px;
-  border: 2px dashed rgba(23, 56, 38, 0.25);
+  border: 2px dashed rgba(28, 2, 7, 0.25);
   border-radius: var(--radius-md);
-  background: #f4f8f4;
+  background: #fdf8f7;
   cursor: pointer;
   text-align: center;
   transition: all 0.2s ease;
 }
 
 .uploadPlaceholder:hover {
-  background: #eaf1ea;
+  background: #f7ebe9;
   border-color: var(--forest-primary);
 }
 
@@ -764,7 +764,7 @@
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: rgba(23, 56, 38, 0.08);
+  background: rgba(28, 2, 7, 0.08);
   color: var(--forest-primary);
   display: flex;
   align-items: center;
@@ -868,9 +868,9 @@
   height: 80px;
   border-radius: var(--radius-md);
   overflow: hidden;
-  background: #edf3ed;
+  background: #E8BEBB;
   flex-shrink: 0;
-  border: 1px solid rgba(23, 56, 38, 0.1);
+  border: 1px solid rgba(28, 2, 7, 0.1);
 }
 
 .thumbImg {
@@ -884,13 +884,13 @@
   align-items: center;
   justify-content: center;
   color: var(--forest-primary);
-  background: #e2ede2;
+  background: #f7ebe9;
 }
 
 .thumbUploadingOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(23, 56, 38, 0.75);
+  background: rgba(28, 2, 7, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -946,8 +946,8 @@
 .metaBadge {
   font-size: 0.75rem;
   color: var(--forest-primary);
-  background: rgba(23, 56, 38, 0.06);
-  border: 1px solid rgba(23, 56, 38, 0.08);
+  background: rgba(28, 2, 7, 0.06);
+  border: 1px solid rgba(28, 2, 7, 0.08);
   padding: 3px 8px;
   border-radius: var(--radius-sm);
   display: inline-flex;
@@ -970,7 +970,7 @@
   align-items: center;
   gap: 8px;
   padding-top: 12px;
-  border-top: 1px solid rgba(23, 56, 38, 0.08);
+  border-top: 1px solid rgba(28, 2, 7, 0.08);
   margin-top: auto;
   flex-wrap: wrap;
 }
@@ -1016,7 +1016,7 @@
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: rgba(15, 38, 26, 0.65);
+  background: rgba(28, 2, 7, 0.65);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: flex-end;
@@ -1043,7 +1043,7 @@
   border-top-right-radius: 28px;
   padding: clamp(20px, 4vw, 32px);
   padding-bottom: calc(clamp(20px, 4vw, 32px) + env(safe-area-inset-bottom, 0px));
-  box-shadow: 0 -10px 40px rgba(15, 38, 26, 0.35);
+  box-shadow: 0 -10px 40px rgba(28, 2, 7, 0.35);
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -1098,7 +1098,7 @@
   aspect-ratio: 16 / 9;
   border-radius: var(--radius-md);
   overflow: hidden;
-  background: #e2ece2;
+  background: #E8BEBB;
 }
 
 .modalImgPreview {
@@ -1107,8 +1107,8 @@
 
 .modalNoImg {
   padding: 16px;
-  background: #f4f8f4;
-  border: 1px dashed rgba(23, 56, 38, 0.18);
+  background: #fdf8f7;
+  border: 1px dashed rgba(28, 2, 7, 0.18);
   border-radius: var(--radius-md);
   font-size: 0.85rem;
   color: var(--forest-light);
