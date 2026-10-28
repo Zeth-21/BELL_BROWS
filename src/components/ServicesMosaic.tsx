@@ -3,17 +3,23 @@
 import React, { useState } from 'react';
 import { Service } from '@/types/database';
 import ServiceCard from './ServiceCard';
+import ServiceDetailModal from './ServiceDetailModal';
 import styles from './ServicesMosaic.module.css';
 
 interface ServicesMosaicProps {
   services: Service[];
 }
 
+interface SingleMosaicBlockProps {
+  blockServices: Service[];
+  onSelectService: (service: Service) => void;
+}
+
 /**
  * Bloque individual de mosaico bento con 3 columnas (Izquierda: 3 | Centro: 1 | Derecha: 3)
  * Exactamente como en la Imagen 1 de referencia.
  */
-function SingleMosaicBlock({ blockServices }: { blockServices: Service[] }) {
+function SingleMosaicBlock({ blockServices, onSelectService }: SingleMosaicBlockProps) {
   // Elegimos el servicio central por defecto (idealmente el servicio en índice 3 o mitad)
   const defaultIdx = blockServices.length >= 4 ? 3 : Math.floor(blockServices.length / 2);
   const [featuredIdx, setFeaturedIdx] = useState<number>(defaultIdx);
@@ -49,6 +55,7 @@ function SingleMosaicBlock({ blockServices }: { blockServices: Service[] }) {
               key={service.id}
               service={service}
               variant="horizontal"
+              onClick={() => onSelectService(service)}
             />
           ))}
         </div>
@@ -62,6 +69,7 @@ function SingleMosaicBlock({ blockServices }: { blockServices: Service[] }) {
               hasNavigation={blockServices.length > 1}
               onPrev={handlePrev}
               onNext={handleNext}
+              onClick={() => onSelectService(featuredService)}
             />
           )}
         </div>
@@ -73,6 +81,7 @@ function SingleMosaicBlock({ blockServices }: { blockServices: Service[] }) {
               key={service.id}
               service={service}
               variant="horizontal"
+              onClick={() => onSelectService(service)}
             />
           ))}
         </div>
@@ -82,6 +91,8 @@ function SingleMosaicBlock({ blockServices }: { blockServices: Service[] }) {
 }
 
 export default function ServicesMosaic({ services }: ServicesMosaicProps) {
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
+
   if (!services || services.length === 0) {
     return null;
   }
@@ -90,7 +101,16 @@ export default function ServicesMosaic({ services }: ServicesMosaicProps) {
   if (services.length <= 7) {
     return (
       <div className={styles.mosaicSection}>
-        <SingleMosaicBlock blockServices={services} />
+        <SingleMosaicBlock
+          blockServices={services}
+          onSelectService={setSelectedService}
+        />
+        {selectedService && (
+          <ServiceDetailModal
+            service={selectedService}
+            onClose={() => setSelectedService(null)}
+          />
+        )}
       </div>
     );
   }
@@ -113,6 +133,7 @@ export default function ServicesMosaic({ services }: ServicesMosaicProps) {
                   key={service.id}
                   service={service}
                   variant="horizontal"
+                  onClick={() => setSelectedService(service)}
                 />
               ))}
             </div>
@@ -123,9 +144,18 @@ export default function ServicesMosaic({ services }: ServicesMosaicProps) {
           <SingleMosaicBlock
             key={`block-${index}-${block[0]?.id || index}`}
             blockServices={block}
+            onSelectService={setSelectedService}
           />
         );
       })}
+
+      {/* Modal flotante de vista detallada */}
+      {selectedService && (
+        <ServiceDetailModal
+          service={selectedService}
+          onClose={() => setSelectedService(null)}
+        />
+      )}
     </div>
   );
 }

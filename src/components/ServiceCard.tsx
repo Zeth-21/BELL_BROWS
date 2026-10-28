@@ -14,6 +14,7 @@ interface ServiceCardProps {
   onPrev?: () => void;
   onNext?: () => void;
   hasNavigation?: boolean;
+  onClick?: () => void;
 }
 
 export default function ServiceCard({
@@ -22,13 +23,13 @@ export default function ServiceCard({
   onPrev,
   onNext,
   hasNavigation = false,
+  onClick,
 }: ServiceCardProps) {
   const [imgSrc, setImgSrc] = useState<string>(service.image_url || '/product-cream.jpg');
 
-  const handleBooking = (e?: React.MouseEvent) => {
+  const handleCardClick = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
-    const url = buildWhatsAppBookingLink(service.title, service.price);
-    window.open(url, '_blank');
+    onClick?.();
   };
 
   // =========================================================================
@@ -38,14 +39,14 @@ export default function ServiceCard({
     return (
       <article
         className={styles.featuredCard}
-        onClick={handleBooking}
+        onClick={handleCardClick}
         aria-label={`Servicio destacado: ${service.title}`}
         role="button"
         tabIndex={0}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            handleBooking();
+            handleCardClick();
           }
         }}
       >
@@ -117,15 +118,15 @@ export default function ServiceCard({
             </span>
           </div>
 
-          {/* Botón píldora blanco idéntico en forma al botón de la Imagen 1, adaptado para reserva */}
+          {/* Botón píldora blanco idéntico en forma al botón de la Imagen 1, adaptado para ver detalles */}
           <button
             type="button"
-            onClick={handleBooking}
+            onClick={handleCardClick}
             className={styles.featuredCtaButton}
-            aria-label={`Reservar ${service.title} por WhatsApp`}
+            aria-label={`Ver detalles de ${service.title}`}
           >
-            <MessageCircle size={16} />
-            <span>Reservar Cita</span>
+            <Sparkles size={16} />
+            <span>Ver Detalles</span>
             <ArrowRight size={15} />
           </button>
         </div>
@@ -140,14 +141,14 @@ export default function ServiceCard({
   return (
     <article
       className={styles.horizontalCard}
-      onClick={handleBooking}
+      onClick={handleCardClick}
       aria-label={`Servicio: ${service.title}`}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          handleBooking();
+          handleCardClick();
         }
       }}
     >
@@ -160,7 +161,7 @@ export default function ServiceCard({
               src={imgSrc}
               alt={service.title}
               fill
-              sizes="(max-width: 640px) 100px, 110px"
+              sizes="(max-width: 640px) 140px, 220px"
               className={styles.horizontalImg}
               loading="lazy"
               onError={() => setImgSrc('/product-cream.jpg')}

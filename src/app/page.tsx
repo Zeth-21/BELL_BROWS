@@ -9,14 +9,154 @@ import Footer from '@/components/Footer';
 import { supabase } from '@/lib/supabase/client';
 import { Service, Promotion } from '@/types/database';
 import { Sparkles, MessageCircle, ArrowRight } from 'lucide-react';
-import { WHATSAPP_PHONE } from '@/lib/utils';
+import { WHATSAPP_PHONE, MAIN_CATEGORIES, normalizeServiceCategory } from '@/lib/utils';
 import styles from './page.module.css';
 
+const DEFAULT_SERVICES: Service[] = [
+  // 1. Pestañas
+  {
+    id: '1',
+    title: 'Lash Lifting + Baño de Keratina',
+    description: 'Curvatura natural desde la raíz, fortalecimiento de folículos y color negro intenso.',
+    price: 160,
+    category: 'Pestañas',
+    image_url: '/product-cream.jpg',
+    duration_minutes: 75,
+    display_order: 1,
+    is_active: true,
+  },
+  {
+    id: '2',
+    title: 'Extensiones de Pestañas Volumen Ruso',
+    description: 'Abanicos hechos a mano para una mirada densa, ligera y aterciopelada.',
+    price: 240,
+    category: 'Pestañas',
+    image_url: '/product-cream.jpg',
+    duration_minutes: 150,
+    display_order: 2,
+    is_active: true,
+  },
+  {
+    id: '3',
+    title: 'Extensiones Clásicas Efecto Rímel',
+    description: 'Colocación una a una para alargar y potenciar la mirada con sutileza.',
+    price: 190,
+    category: 'Pestañas',
+    image_url: '/product-cream.jpg',
+    duration_minutes: 90,
+    display_order: 3,
+    is_active: true,
+  },
+  // 2. Micro
+  {
+    id: '4',
+    title: 'Microblading Hiperrealista',
+    description: 'Diseño pelo a pelo con acabado ultra natural que armoniza con la fisionomía de tu rostro.',
+    price: 320,
+    category: 'Micro',
+    image_url: '/product-cream.jpg',
+    duration_minutes: 120,
+    display_order: 4,
+    is_active: true,
+  },
+  {
+    id: '5',
+    title: 'Brow Lamination & Henna Spa',
+    description: 'Direccionamiento, nutrición profunda y fijación estética con tinte vegetal.',
+    price: 150,
+    category: 'Micro',
+    image_url: '/product-cream.jpg',
+    duration_minutes: 60,
+    display_order: 5,
+    is_active: true,
+  },
+  {
+    id: '6',
+    title: 'Micropigmentación de Labios Velvet',
+    description: 'Efecto acuarela y definición de contornos para labios saludables y luminosos.',
+    price: 290,
+    category: 'Micro',
+    image_url: '/product-cream.jpg',
+    duration_minutes: 120,
+    display_order: 6,
+    is_active: true,
+  },
+  // 3. Limpieza Facial
+  {
+    id: '7',
+    title: 'Glow Facial Hidratación Profunda',
+    description: 'Exfoliación suave, mascarilla botánica y masaje drenante relajante.',
+    price: 180,
+    category: 'Limpieza Facial',
+    image_url: '/product-cream.jpg',
+    duration_minutes: 60,
+    display_order: 7,
+    is_active: true,
+  },
+  {
+    id: '8',
+    title: 'Hidrodermoabrasión & Peeling Ultrasónico',
+    description: 'Limpieza profunda de poros, extracción de impurezas y nutrición celular.',
+    price: 220,
+    category: 'Limpieza Facial',
+    image_url: '/product-cream.jpg',
+    duration_minutes: 75,
+    display_order: 8,
+    is_active: true,
+  },
+  // 4. Uñas
+  {
+    id: '9',
+    title: 'Manicure Ruso Spa & Nivelación Gel',
+    description: 'Tratamiento de cutículas milimétrico, exfoliación botánica y esmaltado de alta duración.',
+    price: 120,
+    category: 'Uñas',
+    image_url: '/product-cream.jpg',
+    duration_minutes: 90,
+    display_order: 9,
+    is_active: true,
+  },
+  {
+    id: '10',
+    title: 'Acripie Completo & Diseño Editorial',
+    description: 'Pedicure profunda, diseño estético en acrílico y mascarilla nutritiva de parafina.',
+    price: 140,
+    category: 'Uñas',
+    image_url: '/product-cream.jpg',
+    duration_minutes: 90,
+    display_order: 10,
+    is_active: true,
+  },
+  // 5. Cabello
+  {
+    id: '11',
+    title: 'Ondulación & Nutrición Capilar',
+    description: 'Definición de ondas con brillo espejo, baño botánico de aminoácidos y fijación sedosa.',
+    price: 180,
+    category: 'Cabello',
+    image_url: '/product-cream.jpg',
+    duration_minutes: 120,
+    display_order: 11,
+    is_active: true,
+  },
+  {
+    id: '12',
+    title: 'Spa Capilar & Hidratación de Keratina',
+    description: 'Reconstrucción de hebra capilar con activos botánicos y sellado térmico con brillo cristal.',
+    price: 160,
+    category: 'Cabello',
+    image_url: '/product-cream.jpg',
+    duration_minutes: 90,
+    display_order: 12,
+    is_active: true,
+  },
+];
+
 export default function HomePage() {
-  const [services, setServices] = useState<Service[]>([]);
+  const [services, setServices] = useState<Service[]>(DEFAULT_SERVICES);
   const [promotion, setPromotion] = useState<Promotion | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('Todos');
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
 
   // Fetch active promotions and services on mount
   useEffect(() => {
@@ -46,7 +186,7 @@ export default function HomePage() {
           .eq('is_active', true)
           .order('display_order', { ascending: true });
 
-        if (!servicesError && servicesData) {
+        if (!servicesError && servicesData && servicesData.length > 0) {
           setServices(servicesData);
         }
       } catch (err) {
@@ -88,7 +228,7 @@ export default function HomePage() {
             .select('*')
             .eq('is_active', true)
             .order('display_order', { ascending: true });
-          if (data) setServices(data);
+          if (data && data.length > 0) setServices(data);
         }
       )
       .subscribe();
@@ -99,19 +239,18 @@ export default function HomePage() {
     };
   }, []);
 
-  // Compute categories from services
-  const categories = useMemo(() => {
-    const set = new Set<string>();
-    services.forEach((s) => {
-      if (s.category) set.add(s.category);
-    });
-    return ['Todos', ...Array.from(set)];
-  }, [services]);
+  // Categorías principales del catálogo (exactamente las 5 solicitadas con "Todos" al inicio)
+  const categories = MAIN_CATEGORIES;
 
-  // Filtered services
+  // Filtrado de servicios con normalización automática a las 5 categorías oficiales
   const filteredServices = useMemo(() => {
-    if (selectedCategory === 'Todos') return services;
-    return services.filter((s) => s.category === selectedCategory);
+    const normalizedServices = services.map((s) => ({
+      ...s,
+      category: normalizeServiceCategory(s),
+    }));
+
+    if (selectedCategory === 'Todos') return normalizedServices;
+    return normalizedServices.filter((s) => s.category === selectedCategory);
   }, [services, selectedCategory]);
 
   return (

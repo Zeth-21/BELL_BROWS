@@ -1,0 +1,418 @@
+/* =========================================================================
+   MODAL DE DETALLE DE SERVICIO - BELL BROWS
+   Paleta: #1C0207 (Vino Profundo), #CA908D (Oro Rosa), #E8BEBB (Rose Mist), #FFFFFF
+   ========================================================================= */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(28, 2, 7, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 3vw, 32px);
+  box-sizing: border-box;
+  animation: modalFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modalContainer {
+  background: #ffffff;
+  border: 1px solid rgba(202, 144, 141, 0.28);
+  border-radius: 32px;
+  width: 100%;
+  max-width: 860px;
+  max-height: 90vh;
+  max-height: 90dvh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 32px 80px -15px rgba(28, 2, 7, 0.55),
+              0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  animation: modalScaleUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #CA908D transparent;
+}
+
+@keyframes modalScaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.93) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modalWatermark {
+  position: absolute;
+  right: -30px;
+  bottom: -30px;
+  width: 220px;
+  height: 260px;
+  color: #CA908D;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Close button */
+.closeBtn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(28, 2, 7, 0.05);
+  border: 1px solid rgba(28, 2, 7, 0.1);
+  color: #1C0207;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+}
+
+.closeBtn:hover {
+  background: #1C0207;
+  color: #ffffff;
+  border-color: #1C0207;
+  transform: rotate(90deg) scale(1.05);
+}
+
+/* Two-column layout */
+.modalLayout {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 32px;
+  padding: 36px 36px 36px 32px;
+  position: relative;
+  z-index: 1;
+  align-items: center;
+}
+
+/* Visual Side */
+.modalVisualWrap {
+  position: relative;
+  width: 100%;
+}
+
+.modalImageFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3.4;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #E8BEBB;
+  box-shadow: 0 14px 34px -8px rgba(28, 2, 7, 0.18);
+}
+
+.modalImg {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modalVisualWrap:hover .modalImg {
+  transform: scale(1.04);
+}
+
+.modalImagePlaceholder {
+  width: 100%;
+  height: 100%;
+  background: #2A040C;
+  color: #CA908D;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+}
+
+.imageGlowOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 70%, rgba(28, 2, 7, 0.35) 100%);
+  pointer-events: none;
+}
+
+.modalLeafSprig {
+  position: absolute;
+  top: -24px;
+  left: -20px;
+  width: 130px;
+  height: 130px;
+  color: #CA908D;
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.visualBadgesRow {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  z-index: 3;
+}
+
+.categoryBadge {
+  background: rgba(28, 2, 7, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.durationBadge {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #1C0207;
+  font-size: 0.74rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  border: 1px solid rgba(28, 2, 7, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Info Side */
+.modalContentWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.modalCategoryPretitle {
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  font-weight: 800;
+  color: #9e6d6b;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.modalTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.45rem, 2.4vw, 1.95rem);
+  font-weight: 700;
+  color: var(--forest-primary);
+  line-height: 1.2;
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+
+.modalDivider {
+  width: 44px;
+  height: 2px;
+  background: #CA908D;
+  border-radius: 2px;
+  margin: 14px 0 16px 0;
+}
+
+.modalPriceContainer {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.priceLabel {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7a5a61;
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.modalPriceAmount {
+  font-family: var(--font-sans);
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--forest-primary);
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+
+.priceCurrency {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #9e6d6b;
+  letter-spacing: 0.08em;
+}
+
+.modalDescriptionBox {
+  background: #fdf8f7;
+  border: 1px solid rgba(202, 144, 141, 0.16);
+  border-radius: 18px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.descHeading {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--forest-primary);
+  margin-bottom: 8px;
+}
+
+.modalDescriptionText {
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: #4d2d34;
+  margin: 0;
+}
+
+/* Service Highlights */
+.serviceHighlights {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.highlightItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #4d2d34;
+}
+
+.highlightIcon {
+  color: #CA908D;
+  flex-shrink: 0;
+}
+
+/* Action Area */
+.modalActionArea {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.whatsappBookingBtn {
+  background: linear-gradient(135deg, #1C0207 0%, #3a0815 100%);
+  color: #ffffff;
+  border: 1px solid rgba(202, 144, 141, 0.4);
+  border-radius: 9999px;
+  padding: 15px 28px;
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 10px 24px -4px rgba(28, 2, 7, 0.35);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+}
+
+.whatsappBookingBtn:hover {
+  background: #25D366;
+  border-color: #20bd5a;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px -4px rgba(37, 211, 102, 0.45);
+}
+
+.btnIcon {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.btnArrow {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.whatsappBookingBtn:hover .btnArrow {
+  transform: translateX(4px);
+}
+
+.actionNote {
+  font-size: 0.78rem;
+  color: #7a5a61;
+  text-align: center;
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .modalLayout {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 24px 20px 28px 20px;
+  }
+
+  .modalImageFrame {
+    aspect-ratio: 16 / 10;
+  }
+
+  .modalContainer {
+    border-radius: 26px;
+    max-height: 92vh;
+  }
+
+  .closeBtn {
+    top: 14px;
+    right: 14px;
+    width: 38px;
+    height: 38px;
+  }
+
+  .modalPriceAmount {
+    font-size: 1.85rem;
+  }
+
+  .whatsappBookingBtn {
+    padding: 14px 22px;
+    font-size: 0.92rem;
+  }
+}

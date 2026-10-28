@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { supabase } from '@/lib/supabase/client';
 import { uploadMediaFile } from '@/lib/supabase/storage';
 import { Service } from '@/types/database';
-import { formatPrice } from '@/lib/utils';
+import { formatPrice, SERVICE_CATEGORIES, normalizeServiceCategory } from '@/lib/utils';
 import {
   Sparkles,
   Camera,
@@ -35,7 +35,7 @@ export default function ServicesManager() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState<number | string>(0);
-  const [category, setCategory] = useState('Cejas');
+  const [category, setCategory] = useState<string>('Pestañas');
   const [durationMinutes, setDurationMinutes] = useState<number>(60);
   const [imageUrl, setImageUrl] = useState<string>('');
   const [isActive, setIsActive] = useState(true);
@@ -75,7 +75,7 @@ export default function ServicesManager() {
     setTitle(service.title);
     setDescription(service.description || '');
     setPrice(service.price);
-    setCategory(service.category || 'Cejas');
+    setCategory(normalizeServiceCategory(service));
     setDurationMinutes(service.duration_minutes || 60);
     setImageUrl(service.image_url || '');
     setIsActive(service.is_active);
@@ -87,7 +87,7 @@ export default function ServicesManager() {
     setTitle('');
     setDescription('');
     setPrice(50);
-    setCategory('Cejas');
+    setCategory('Pestañas');
     setDurationMinutes(60);
     setImageUrl('');
     setIsActive(true);
@@ -373,7 +373,7 @@ export default function ServicesManager() {
               <div className={styles.itemMeta}>
                 <span className={styles.metaBadge}>
                   <Layers size={12} />
-                  {service.category || 'General'}
+                  {normalizeServiceCategory(service)}
                 </span>
               </div>
 
@@ -464,14 +464,19 @@ export default function ServicesManager() {
 
               {/* Category */}
               <div className={styles.formGroup}>
-                <label htmlFor="service-category">Categoría</label>
-                <input
+                <label htmlFor="service-category">Categoría *</label>
+                <select
                   id="service-category"
-                  type="text"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  placeholder="Cejas, Pestañas, Labios, Facial..."
-                />
+                  required
+                >
+                  {SERVICE_CATEGORIES.map((cat) => (
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               {/* Description */}
