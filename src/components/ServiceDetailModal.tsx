@@ -76,7 +76,7 @@ export default function ServiceDetailModal({ service, onClose }: ServiceDetailMo
         </button>
 
         <div className={styles.modalLayout}>
-          {/* Visual Side: Slider interactivo si tiene ambas imágenes, o foto única estática */}
+          {/* Visual Side: Área fotográfica 100% limpia sin etiquetas superpuestas */}
           <div className={styles.modalVisualWrap}>
             {hasBothImages ? (
               <ImageComparisonSlider
@@ -91,7 +91,7 @@ export default function ServiceDetailModal({ service, onClose }: ServiceDetailMo
                     src={service.image_url}
                     alt={service.title}
                     fill
-                    sizes="(max-width: 768px) 100vw, 480px"
+                    sizes="(max-width: 768px) 100vw, 440px"
                     className={styles.modalImg}
                     priority
                   />
@@ -107,27 +107,22 @@ export default function ServiceDetailModal({ service, onClose }: ServiceDetailMo
 
             {/* Botanical decorative sprig on corner */}
             <BotanicalSprig className={styles.modalLeafSprig} />
-
-            {/* Badges floating */}
-            <div
-              className={`${styles.visualBadgesRow} ${
-                hasBothImages ? styles.visualBadgesTop : ''
-              }`}
-            >
-              <span className={styles.categoryBadge}>{categoryName}</span>
-              {service.duration_minutes > 0 && (
-                <span className={styles.durationBadge}>
-                  <Clock size={13} />
-                  <span>{formatDuration(service.duration_minutes)}</span>
-                </span>
-              )}
-            </div>
           </div>
 
-          {/* Info Side: Title, Price, Description, Trust Highlights, and WhatsApp CTA */}
+          {/* Info Side: Etiquetas reubicadas, Título, Precio, Descripción, Highlights y WhatsApp CTA */}
           <div className={styles.modalContentWrap}>
-            <div className={styles.modalCategoryPretitle}>
-              <span>TRATAMIENTO EXCLUSIVO</span>
+            {/* Header Meta: Tratamiento Exclusivo + Badges de Categoría y Tiempo */}
+            <div className={styles.modalHeaderTopRow}>
+              <span className={styles.modalCategoryPretitle}>TRATAMIENTO EXCLUSIVO</span>
+              <div className={styles.infoBadgesRow}>
+                <span className={styles.categoryBadge}>{categoryName}</span>
+                {service.duration_minutes > 0 && (
+                  <span className={styles.durationBadge}>
+                    <Clock size={12} />
+                    <span>{formatDuration(service.duration_minutes)}</span>
+                  </span>
+                )}
+              </div>
             </div>
 
             <h2 id="modal-service-title" className={styles.modalTitle}>
@@ -156,11 +151,11 @@ export default function ServiceDetailModal({ service, onClose }: ServiceDetailMo
             {/* Service Highlights */}
             <div className={styles.serviceHighlights}>
               <div className={styles.highlightItem}>
-                <Sparkles size={16} className={styles.highlightIcon} />
+                <Sparkles size={15} className={styles.highlightIcon} />
                 <span>Atención personalizada & visagismo facial</span>
               </div>
               <div className={styles.highlightItem}>
-                <ShieldCheck size={16} className={styles.highlightIcon} />
+                <ShieldCheck size={15} className={styles.highlightIcon} />
                 <span>Productos botánicos prémium certificados</span>
               </div>
             </div>

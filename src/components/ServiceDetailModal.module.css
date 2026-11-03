@@ -114,7 +114,7 @@
   overflow: hidden;
 }
 
-/* Visual Side */
+/* Visual Side: Área fotográfica limpia, cuadrada y destacada */
 .modalVisualWrap {
   position: relative;
   width: 100%;
@@ -126,12 +126,14 @@
 .modalImageFrame {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3.4;
-  max-height: 400px;
+  aspect-ratio: 1 / 1;
+  max-width: 370px;
+  max-height: 370px;
   border-radius: 24px;
   overflow: hidden;
   background: #E8BEBB;
   box-shadow: 0 14px 34px -8px rgba(28, 2, 7, 0.18);
+  margin: 0 auto;
 }
 
 .modalImg {
@@ -161,7 +163,7 @@
 .imageGlowOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 70%, rgba(28, 2, 7, 0.35) 100%);
+  background: linear-gradient(180deg, transparent 75%, rgba(28, 2, 7, 0.3) 100%);
   pointer-events: none;
 }
 
@@ -177,53 +179,6 @@
   z-index: 2;
 }
 
-.visualBadgesRow {
-  position: absolute;
-  bottom: 14px;
-  left: 14px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  z-index: 7;
-}
-
-.visualBadgesTop {
-  bottom: auto;
-  top: 14px;
-  left: 14px;
-}
-
-.categoryBadge {
-  background: rgba(28, 2, 7, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #ffffff;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 5px 12px;
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.durationBadge {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #1C0207;
-  font-size: 0.72rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 10px;
-  border-radius: 9999px;
-  border: 1px solid rgba(28, 2, 7, 0.08);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
 /* Info Side */
 .modalContentWrap {
   display: flex;
@@ -233,13 +188,56 @@
   min-width: 0;
 }
 
+/* Reubicación de etiquetas sobre el título */
+.modalHeaderTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+.infoBadgesRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.categoryBadge {
+  background: rgba(28, 2, 7, 0.08);
+  border: 1px solid rgba(28, 2, 7, 0.14);
+  color: #1C0207;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 9999px;
+}
+
+.durationBadge {
+  background: rgba(202, 144, 141, 0.2);
+  border: 1px solid rgba(202, 144, 141, 0.38);
+  color: #1C0207;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+}
+
 .modalCategoryPretitle {
   font-size: 0.72rem;
   letter-spacing: 0.2em;
   font-weight: 800;
   color: #9e6d6b;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin: 0;
 }
 
 .modalTitle {
@@ -402,7 +400,9 @@
   margin: 0;
 }
 
-/* Responsive adjustments */
+/* =========================================================================
+   RESPONSIVE EN MÓVILES (Estrictamente proporción 1:1 cuadrada y sin desborde)
+   ========================================================================= */
 @media (max-width: 768px) {
   .modalOverlay {
     padding: 10px;
@@ -421,10 +421,23 @@
     padding: 18px 16px 16px 16px;
   }
 
+  /* Contenedor estrictamente cuadrado (1:1) en pantallas pequeñas */
+  .modalVisualWrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .modalImageFrame {
-    aspect-ratio: 16 / 9;
-    max-height: 180px;
-    border-radius: 16px;
+    width: 100% !important;
+    max-width: clamp(230px, 68vw, 290px) !important;
+    aspect-ratio: 1 / 1 !important;
+    height: auto !important;
+    max-height: none !important;
+    border-radius: 20px !important;
+    margin: 0 auto !important;
+    box-shadow: 0 10px 24px -6px rgba(28, 2, 7, 0.2) !important;
   }
 
   .closeBtn {
@@ -434,9 +447,18 @@
     height: 32px;
   }
 
+  .modalHeaderTopRow {
+    margin-bottom: 4px;
+  }
+
   .modalCategoryPretitle {
     font-size: 0.65rem;
-    margin-bottom: 2px;
+  }
+
+  .categoryBadge,
+  .durationBadge {
+    font-size: 0.65rem;
+    padding: 3px 8px;
   }
 
   .modalTitle {

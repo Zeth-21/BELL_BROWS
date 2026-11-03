@@ -6,9 +6,9 @@
 .sliderContainer {
   position: relative;
   width: 100%;
-  height: 100%;
-  aspect-ratio: 4 / 3.4;
-  max-height: 400px;
+  aspect-ratio: 1 / 1;
+  max-width: 370px;
+  max-height: 370px;
   border-radius: 24px;
   overflow: hidden;
   user-select: none;
@@ -18,13 +18,19 @@
   background: #1C0207;
   box-shadow: 0 16px 40px -10px rgba(28, 2, 7, 0.4),
               0 0 0 1px rgba(202, 144, 141, 0.25) inset;
+  margin: 0 auto;
 }
 
 @media (max-width: 768px) {
   .sliderContainer {
-    aspect-ratio: 16 / 9;
-    max-height: 180px;
-    border-radius: 16px;
+    width: 100% !important;
+    max-width: clamp(230px, 68vw, 290px) !important;
+    aspect-ratio: 1 / 1 !important;
+    height: auto !important;
+    max-height: none !important;
+    border-radius: 20px !important;
+    margin: 0 auto !important;
+    box-shadow: 0 10px 24px -6px rgba(28, 2, 7, 0.2) !important;
   }
 }
 
@@ -48,6 +54,7 @@
 
 .sliderImg {
   object-fit: cover;
+  object-position: center;
   pointer-events: none;
 }
 
@@ -71,8 +78,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: #1C0207;
   border: 2px solid #CA908D;
@@ -103,11 +110,11 @@
 .badgeBefore,
 .badgeAfter {
   position: absolute;
-  bottom: 14px;
+  bottom: 12px;
   z-index: 4;
-  padding: 4px 12px;
+  padding: 4px 10px;
   border-radius: 999px;
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -119,14 +126,14 @@
 }
 
 .badgeBefore {
-  left: 14px;
+  left: 12px;
   background: rgba(28, 2, 7, 0.75);
   color: #E8BEBB;
   border: 1px solid rgba(232, 190, 187, 0.35);
 }
 
 .badgeAfter {
-  right: 14px;
+  right: 12px;
   background: rgba(202, 144, 141, 0.85);
   color: #1C0207;
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -135,7 +142,7 @@
 /* Pista de ayuda sutil para el usuario */
 .hintOverlay {
   position: absolute;
-  top: 14px;
+  top: 12px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(28, 2, 7, 0.7);
