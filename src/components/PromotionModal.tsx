@@ -147,3 +147,4 @@ export default function PromotionModal({ isOpen, onClose, promotion }: Promotion
     </div>
   );
 }
+
