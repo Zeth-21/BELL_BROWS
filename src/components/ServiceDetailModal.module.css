@@ -246,13 +246,6 @@
   line-height: 1;
 }
 
-.priceCurrency {
-  font-size: 0.74rem;
-  font-weight: 700;
-  color: #9e6d6b;
-  letter-spacing: 0.08em;
-}
-
 .modalDescriptionBox {
   background: #fdf8f7;
   border: 1px solid rgba(202, 144, 141, 0.16);

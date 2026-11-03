@@ -125,7 +125,6 @@ export default function ServiceDetailModal({ service, onClose }: ServiceDetailMo
                 <span className={styles.modalPriceAmount}>
                   {formatPrice(service.price)}
                 </span>
-                <span className={styles.priceCurrency}>PEN</span>
               </div>
             </div>
 
