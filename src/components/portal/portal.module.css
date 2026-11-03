@@ -1178,8 +1178,9 @@
   .toast { right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); max-width: calc(100vw - 32px); }
 }
 
+
 /* ============================================================
-   DUAL THUMBNAILS (ANTES & DESPUÉS) FOR ADMIN CARDS
+   DUAL THUMBNAILS (ANTES Y DESPUES) FOR ADMIN CARDS
    ============================================================ */
 .dualThumbContainer {
   display: flex;
