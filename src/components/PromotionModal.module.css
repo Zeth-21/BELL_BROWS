@@ -1,0 +1,217 @@
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(28, 2, 7, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 3vw, 24px);
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modalCard {
+  width: 100%;
+  max-width: 520px;
+  background: #ffffff;
+  border-radius: clamp(20px, 3vw, 28px);
+  box-shadow: 0 25px 60px -15px rgba(28, 2, 7, 0.35);
+  border: 1px solid rgba(202, 144, 141, 0.35);
+  position: relative;
+  overflow: hidden;
+  animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-sizing: border-box;
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1C0207;
+  border: 1px solid rgba(28, 2, 7, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(28, 2, 7, 0.15);
+}
+
+.closeBtn:hover {
+  background: #1C0207;
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: clamp(190px, 32vw, 260px);
+  background-color: #E8BEBB;
+  overflow: hidden;
+}
+
+.promoImg {
+  object-fit: cover;
+  object-position: center;
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(28, 2, 7, 0.05) 0%, rgba(28, 2, 7, 0.35) 100%);
+  pointer-events: none;
+}
+
+.bodyWrapper {
+  padding: clamp(20px, 3.5vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.badgeRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.promoBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(202, 144, 141, 0.18);
+  color: #1C0207;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(202, 144, 141, 0.4);
+  text-transform: uppercase;
+}
+
+.urgencyText {
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #CA908D;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.promoTitle {
+  font-size: clamp(1.2rem, 2.5vw, 1.45rem);
+  font-weight: 900;
+  color: #1C0207;
+  line-height: 1.25;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.promoDescription {
+  font-size: 0.92rem;
+  color: #7a5a61;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.actionRow {
+  margin-top: 8px;
+}
+
+.ctaButton {
+  width: 100%;
+  min-height: 48px;
+  background-color: #1C0207;
+  color: #ffffff;
+  border: none;
+  border-radius: 9999px;
+  padding: 12px 24px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px -4px rgba(28, 2, 7, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-transform: uppercase;
+}
+
+.ctaButton:hover {
+  background-color: #3b0510;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -4px rgba(28, 2, 7, 0.45);
+}
+
+.modalContentFallback {
+  padding: clamp(28px, 4vw, 36px) clamp(20px, 3.5vw, 28px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+}
+
+.fallbackIconWrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: rgba(202, 144, 141, 0.18);
+  color: #CA908D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.fallbackTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1C0207;
+  margin: 0;
+}
+
+.fallbackText {
+  font-size: 0.92rem;
+  color: #7a5a61;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 400px;
+}

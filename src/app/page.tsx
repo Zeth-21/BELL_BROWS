@@ -5,6 +5,7 @@ import Image from 'next/image';
 import SkincareHero from '@/components/SkincareHero';
 import RoseOverlay from '@/components/RoseOverlay';
 import ServicesMosaic from '@/components/ServicesMosaic';
+import PromotionModal from '@/components/PromotionModal';
 import Footer from '@/components/Footer';
 import { supabase } from '@/lib/supabase/client';
 import { Service, Promotion } from '@/types/database';
@@ -157,6 +158,8 @@ export default function HomePage() {
   const [promotion, setPromotion] = useState<Promotion | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('Todos');
   const [loading, setLoading] = useState<boolean>(false);
+  const [isPromoModalOpen, setIsPromoModalOpen] = useState<boolean>(false);
+  const [hasAutoOpenedPromo, setHasAutoOpenedPromo] = useState<boolean>(false);
 
   // Fetch active promotions and services on mount
   useEffect(() => {
@@ -240,6 +243,17 @@ export default function HomePage() {
   }, []);
 
   // Categorías principales del catálogo (exactamente las 5 solicitadas con "Todos" al inicio)
+  // Abre automáticamente la promoción activa en pop-up al ingresar o recargar la página
+  useEffect(() => {
+    if (promotion && promotion.is_active && !hasAutoOpenedPromo) {
+      const timer = setTimeout(() => {
+        setIsPromoModalOpen(true);
+        setHasAutoOpenedPromo(true);
+      }, 600);
+      return () => clearTimeout(timer);
+    }
+  }, [promotion, hasAutoOpenedPromo]);
+
   const categories = MAIN_CATEGORIES;
 
   // Filtrado de servicios con normalización automática a las 5 categorías oficiales
@@ -257,7 +271,12 @@ export default function HomePage() {
     <div className={styles.page}>
       <main className={styles.mainContent}>
         {/* Editorial Skincare Hero Banner */}
-        <SkincareHero promotion={promotion} />
+        <SkincareHero
+          promotion={promotion}
+          activeCategory={selectedCategory}
+          onSelectCategory={(cat) => setSelectedCategory(cat)}
+          onOpenPromotion={() => setIsPromoModalOpen(true)}
+        />
 
         <RoseOverlay />
 
@@ -318,7 +337,7 @@ export default function HomePage() {
                 BLOQUE 2: MENÚ DE SERVICIOS EXCLUSIVOS
                 (Imagen 1: "ФИРМЕННАЯ КОЛЛЕКЦИЯ ─── / Смотреть всю коллекцию ->")
                ------------------------------------------------------------------- */}
-            <div className={styles.featuredMenuSection} data-rose-anchor="services">
+            <div className={styles.featuredMenuSection} id="coleccion-exclusiva" data-rose-anchor="services">
               <div className={styles.featuredHeaderRow}>
                 <div className={styles.featuredTitleWrap}>
                   <span className={styles.featuredOverline}>COLECCIÓN EXCLUSIVA</span>
@@ -539,6 +558,13 @@ export default function HomePage() {
           <span className={styles.fabText}>¿Dudas? Escríbenos</span>
         </a>
       </main>
+
+      {/* Ventana emergente (Pop-up) de Promociones */}
+      <PromotionModal
+        isOpen={isPromoModalOpen}
+        onClose={() => setIsPromoModalOpen(false)}
+        promotion={promotion}
+      />
 
       <Footer />
     </div>

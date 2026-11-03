@@ -2,11 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  Sprout, 
   ShoppingBag, 
-  Menu, 
   X,
-  ArrowRight, 
   ShieldCheck, 
   Droplets, 
   Leaf, 
@@ -21,9 +18,25 @@ import styles from './SkincareHero.module.css';
 
 interface SkincareHeroProps {
   promotion: Promotion | null;
+  activeCategory?: string;
+  onSelectCategory?: (category: string) => void;
+  onOpenPromotion?: () => void;
 }
 
-export default function SkincareHero({ promotion }: SkincareHeroProps) {
+const OFFICIAL_CATEGORIES = [
+  { label: 'PESTAÑAS', value: 'Pestañas', subtext: 'Lifting & Extensiones' },
+  { label: 'UÑAS', value: 'Uñas', subtext: 'Manicure & Acripie' },
+  { label: 'CABELLO', value: 'Cabello', subtext: 'Ondulación & Spa Capilar' },
+  { label: 'MICRO', value: 'Micro', subtext: 'Microblading & Lamination' },
+  { label: 'LIMPIEZA FACIAL', value: 'Limpieza Facial', subtext: 'Glow & Hidrodermoabrasión' },
+];
+
+export default function SkincareHero({ 
+  promotion, 
+  activeCategory = 'Todos', 
+  onSelectCategory,
+  onOpenPromotion 
+}: SkincareHeroProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const desktopVideoRef = useRef<HTMLVideoElement | null>(null);
   const mobileVideoRef = useRef<HTMLVideoElement | null>(null);
@@ -84,13 +97,33 @@ export default function SkincareHero({ promotion }: SkincareHeroProps) {
     }
   };
 
-  // Action when clicking main CTA ("SHOP NOW ->" or "APROVECHAR OFERTA ->")
+  const handleCategoryClick = (categoryValue: string) => {
+    setMobileMenuOpen(false);
+    onSelectCategory?.(categoryValue);
+    const target = document.getElementById('coleccion-exclusiva') || document.getElementById('catalogo');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handlePromotionsClick = () => {
+    setMobileMenuOpen(false);
+    if (onOpenPromotion) {
+      onOpenPromotion();
+    } else if (promotion && promotion.is_active) {
+      window.open(buildWhatsAppPromoLink(promotion.title), '_blank');
+    } else {
+      const target = document.getElementById('coleccion-exclusiva') || document.getElementById('catalogo');
+      target?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const handleMainAction = () => {
     if (promotion && promotion.is_active) {
       const url = buildWhatsAppPromoLink(promotion.title);
       window.open(url, '_blank');
     } else {
-      const url = buildWhatsAppBookingLink('Nueva Colección Skincare & Belleza Natural', 0);
+      const url = buildWhatsAppBookingLink('Nueva Colección Exclusiva & Belleza Natural', 0);
       window.open(url, '_blank');
     }
   };
@@ -101,7 +134,7 @@ export default function SkincareHero({ promotion }: SkincareHeroProps) {
   };
 
   return (
-    <section className={styles.heroWrapper} aria-label="Colección Skincare Bell Brows">
+    <section className={styles.heroWrapper} aria-label="Colección Exclusiva Bell Brows">
       <div className={styles.heroCard}>
         {/* Background Video Layer — sits behind all content */}
         <div className={styles.videoBgLayer} aria-hidden="true">
@@ -144,29 +177,43 @@ export default function SkincareHero({ promotion }: SkincareHeroProps) {
             />
             <div className={styles.brandTitles}>
               <span className={styles.brandName}>BELL BROWS</span>
-              <span className={styles.brandSub}>SKINCARE & BEAUTY</span>
+              <span className={styles.brandSub}>ESTUDIO DE BELLEZA</span>
             </div>
           </a>
 
           <nav className={styles.navLinks} aria-label="Navegación principal">
-            <a href="#catalogo" className={styles.navLink}>SKINCARE</a>
-            <a href="#catalogo" className={styles.navLink}>CEJAS</a>
-            <a href="#catalogo" className={styles.navLink}>PESTAÑAS</a>
-            <a href="#catalogo" className={styles.navLink}>TRATAMIENTOS</a>
-            <a href="#catalogo" className={styles.navLink}>PROMOCIONES</a>
-            <a href="/portal-interno" className={styles.navLink}>ACCESO</a>
+            {OFFICIAL_CATEGORIES.map((cat) => (
+              <button
+                key={cat.value}
+                type="button"
+                onClick={() => handleCategoryClick(cat.value)}
+                className={`${styles.navLink} ${activeCategory === cat.value ? styles.navLinkActive : ''}`}
+              >
+                {cat.label}
+              </button>
+            ))}
+            <button
+              type="button"
+              onClick={handlePromotionsClick}
+              className={styles.navLink}
+            >
+              PROMOCIONES
+            </button>
+            <a href="/portal-interno" className={styles.navLink}>
+              ACCESO
+            </a>
           </nav>
 
           <div className={styles.navActions}>
-            {/* Offer / Catalog Bag with Badge (Present on desktop & mobile, with crystal-clear white icon) */}
+            {/* Offer / Catalog Bag with Badge */}
             <button 
-              onClick={() => scrollToSection('catalogo')}
+              onClick={handlePromotionsClick}
               className={styles.cartIconBtn}
-              aria-label="Ver catálogo y ofertas"
+              aria-label="Ver promociones y servicios"
               title="Promociones y servicios"
             >
               <ShoppingBag size={18} stroke="#ffffff" strokeWidth={2.2} />
-              <span className={styles.cartBadge}>{promotion ? '1' : '0'}</span>
+              <span className={styles.cartBadge}>{promotion && promotion.is_active ? '1' : '0'}</span>
             </button>
 
             {/* Desktop Action: Quick WhatsApp appointment booking CTA */}
@@ -179,7 +226,7 @@ export default function SkincareHero({ promotion }: SkincareHeroProps) {
               <span>Agendar Cita</span>
             </button>
 
-            {/* Mobile Action: Ultra-intuitive 3-bar hamburger button with explicit 'MENÚ' label */}
+            {/* Mobile Action: 3-bar hamburger button */}
             <button 
               onClick={() => setMobileMenuOpen(true)}
               className={styles.menuPillBtn}
@@ -196,26 +243,32 @@ export default function SkincareHero({ promotion }: SkincareHeroProps) {
           </div>
         </header>
 
-        {/* Mobile Quick Navigation Bar: Preserving ALL Desktop Navigation Fields */}
+        {/* Mobile Quick Navigation Bar */}
         <nav className={styles.mobileCategoriesBar} aria-label="Categorías principales">
-          <button onClick={() => scrollToSection('catalogo')} className={`${styles.catChip} ${styles.catChipActive}`}>
+          <button 
+            type="button"
+            onClick={() => handleCategoryClick('Todos')} 
+            className={`${styles.catChip} ${activeCategory === 'Todos' ? styles.catChipActive : ''}`}
+          >
             <Sparkles size={12} />
             <span>TODOS</span>
           </button>
-          <button onClick={() => scrollToSection('catalogo')} className={styles.catChip}>
-            <span>SKINCARE</span>
-          </button>
-          <button onClick={() => scrollToSection('catalogo')} className={styles.catChip}>
-            <span>CEJAS</span>
-          </button>
-          <button onClick={() => scrollToSection('catalogo')} className={styles.catChip}>
-            <span>PESTAÑAS</span>
-          </button>
-          <button onClick={() => scrollToSection('catalogo')} className={styles.catChip}>
-            <span>TRATAMIENTOS</span>
-          </button>
-          <button onClick={() => scrollToSection('catalogo')} className={styles.catChip}>
-            <span>PROMOS</span>
+          {OFFICIAL_CATEGORIES.map((cat) => (
+            <button
+              key={cat.value}
+              type="button"
+              onClick={() => handleCategoryClick(cat.value)}
+              className={`${styles.catChip} ${activeCategory === cat.value ? styles.catChipActive : ''}`}
+            >
+              <span>{cat.label}</span>
+            </button>
+          ))}
+          <button 
+            type="button"
+            onClick={handlePromotionsClick} 
+            className={styles.catChip}
+          >
+            <span>PROMOCIONES</span>
           </button>
           <a href="/portal-interno" className={styles.catChip}>
             <span>ACCESO</span>
@@ -249,6 +302,7 @@ export default function SkincareHero({ promotion }: SkincareHeroProps) {
                   </div>
                 </div>
                 <button
+                  type="button"
                   onClick={() => setMobileMenuOpen(false)}
                   className={styles.drawerCloseBtn}
                   aria-label="Cerrar menú"
@@ -260,31 +314,30 @@ export default function SkincareHero({ promotion }: SkincareHeroProps) {
               <div className={styles.drawerBody}>
                 <nav className={styles.drawerNavLinks} aria-label="Menú de navegación móvil">
                   <button 
-                    onClick={() => scrollToSection('catalogo')}
+                    type="button"
+                    onClick={() => handleCategoryClick('Todos')}
                     className={styles.drawerLink}
                   >
-                    <span>Tratamientos & Catálogo</span>
+                    <span>Ver Catálogo Completo</span>
                     <ChevronRight size={16} />
                   </button>
+                  {OFFICIAL_CATEGORIES.map((cat) => (
+                    <button 
+                      key={cat.value}
+                      type="button"
+                      onClick={() => handleCategoryClick(cat.value)}
+                      className={styles.drawerLink}
+                    >
+                      <span>{cat.label} ({cat.subtext})</span>
+                      <ChevronRight size={16} />
+                    </button>
+                  ))}
                   <button 
-                    onClick={() => scrollToSection('catalogo')}
+                    type="button"
+                    onClick={handlePromotionsClick}
                     className={styles.drawerLink}
                   >
-                    <span>Cejas (Microblading / Lamination)</span>
-                    <ChevronRight size={16} />
-                  </button>
-                  <button 
-                    onClick={() => scrollToSection('catalogo')}
-                    className={styles.drawerLink}
-                  >
-                    <span>Pestañas (Lash Lifting & Extensiones)</span>
-                    <ChevronRight size={16} />
-                  </button>
-                  <button 
-                    onClick={() => scrollToSection('catalogo')}
-                    className={styles.drawerLink}
-                  >
-                    <span>Skincare & Cuidado Facial</span>
+                    <span>Promociones Especiales</span>
                     <ChevronRight size={16} />
                   </button>
                   <a 
@@ -292,13 +345,14 @@ export default function SkincareHero({ promotion }: SkincareHeroProps) {
                     className={styles.drawerLink}
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <span>Portal de Gestión (Admin)</span>
+                    <span>Portal de Gestión (Acceso)</span>
                     <ExternalLink size={15} />
                   </a>
                 </nav>
 
                 <div className={styles.drawerFooter}>
                   <button
+                    type="button"
                     onClick={() => {
                       setMobileMenuOpen(false);
                       handleMainAction();
@@ -317,101 +371,59 @@ export default function SkincareHero({ promotion }: SkincareHeroProps) {
           </div>
         )}
 
-        {/* High-Impact Headline: NEW SKIN CARE COLLECTION */}
+        {/* High-Impact Headline: NUEVA COLECCIÓN EXCLUSIVA */}
         <div className={styles.headlineContainer}>
           <h1 className={styles.headlineText}>
-            <span className={styles.headlineNew}>NEW</span>
-            <span className={styles.headlineRest}>SKIN CARE COLLECTION</span>
+            <span className={styles.headlineNew}>NUEVA</span>
+            <span className={styles.headlineRest}>COLECCIÓN EXCLUSIVA</span>
           </h1>
         </div>
 
-        {/* Editorial Layout: Left Details, Center Mascot with Floating Badges, Right Products */}
+        {/* Editorial Layout: Mascot Centered with Floating Badges + Right Products */}
         <div className={styles.editorialGrid}>
-          {/* Left Column: Tagline, Description & CTA */}
-          <div className={styles.leftColumn}>
-            {promotion && promotion.is_active && (
-              <div className={styles.promoTag}>
-                <Sparkles size={13} />
-                <span>{promotion.badge || 'PROMO ACTIVA'}</span>
-              </div>
-            )}
-
-            <h2 className={styles.tagline}>
-              {promotion && promotion.is_active ? (
-                promotion.title
-              ) : (
-                <>
-                  NATURALLY BEAUTIFUL.<br />
-                  SCIENTIFICALLY PROVEN.
-                </>
-              )}
-            </h2>
-
-            <p className={styles.description}>
-              {promotion && promotion.is_active && promotion.description
-                ? promotion.description
-                : 'Dermatologist-approved skincare that combines the power of natural ingredients with advanced science for clear, healthy, radiant skin.'}
-            </p>
-
-            <div className={styles.btnGroup}>
-              <button
-                onClick={handleMainAction}
-                className={styles.primaryPillBtn}
-                aria-label={promotion ? `Aprovechar: ${promotion.title}` : 'Comprar o agendar ahora'}
-              >
-                <span>{promotion && promotion.is_active ? 'APROVECHAR OFERTA' : 'SHOP NOW'}</span>
-                <ArrowRight size={16} />
-              </button>
-
-              <a href="#catalogo" className={styles.secondaryPillBtn}>
-                EXPLORE
-              </a>
-            </div>
-          </div>
-
-          {/* Center Column: Cat Mascot in Green Robe + Floating Badges */}
+          {/* Central Column: Mascot in Green Robe + Floating Badges */}
           <div className={styles.centerColumn}>
             <div className={styles.mascotStage}>
               {/* Badge 1: Left of Cat */}
               <div className={`${styles.floatingBadge} ${styles.badgeLeft} ${styles.desktopBadges}`}>
                 <ShieldCheck size={16} className={styles.badgeIcon} />
-                <span>DERMATOLOGIST TESTED</span>
+                <span>TESTADO DERMATOLÓGICAMENTE</span>
               </div>
 
               {/* Main Cat Mascot cut-out */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/GATO.png"
-                alt="Bell Brows Spa Skincare Cat Mascot"
+                alt="Mascota Bell Brows Colección de Belleza"
                 className={styles.catImg}
               />
 
               {/* Badge 2: Center Bottom */}
               <div className={`${styles.floatingBadge} ${styles.badgeBottom} ${styles.desktopBadges}`}>
                 <Droplets size={16} className={styles.badgeIcon} />
-                <span>SUITABLE FOR SENSITIVE SKIN</span>
+                <span>APTO PARA PIEL SENSIBLE</span>
               </div>
 
               {/* Badge 3: Right of Cat */}
               <div className={`${styles.floatingBadge} ${styles.badgeRight} ${styles.desktopBadges}`}>
                 <Leaf size={16} className={styles.badgeIcon} />
-                <span>NATURAL INGREDIENTS</span>
+                <span>INGREDIENTES NATURALES</span>
               </div>
             </div>
 
-            {/* Mobile badges row for clean mobile layout: ALL 3 Desktop badges prominently displayed */}
+            {/* Mobile badges row: All 3 badges prominently displayed in Spanish */}
             <div className={styles.mobileBadgesRow}>
               <div className={styles.mobileBadgeChip}>
                 <ShieldCheck size={14} className={styles.badgeIcon} />
-                <span>DERMATOLOGIST TESTED</span>
+                <span>TESTADO DERMATOLÓGICAMENTE</span>
               </div>
               <div className={styles.mobileBadgeChip}>
                 <Droplets size={14} className={styles.badgeIcon} />
-                <span>SUITABLE FOR SENSITIVE SKIN</span>
+                <span>APTO PARA PIEL SENSIBLE</span>
               </div>
               <div className={styles.mobileBadgeChip}>
                 <Leaf size={14} className={styles.badgeIcon} />
-                <span>NATURAL INGREDIENTS</span>
+                <span>INGREDIENTES NATURALES</span>
               </div>
             </div>
           </div>
@@ -421,8 +433,8 @@ export default function SkincareHero({ promotion }: SkincareHeroProps) {
             {/* Clean Beauty Circular Seal */}
             <div className={styles.cleanBeautySeal}>
               <Leaf size={20} className={styles.sealIcon} />
-              <span className={styles.sealTitle}>CLEAN BEAUTY</span>
-              <span className={styles.sealSub}>FOR EVERY SKIN</span>
+              <span className={styles.sealTitle}>BELLEZA LIMPIA</span>
+              <span className={styles.sealSub}>PARA TU PIEL</span>
             </div>
 
             {/* Stack of 2 Product Cards */}

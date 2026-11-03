@@ -187,10 +187,26 @@
   transition: color 0.2s ease, opacity 0.2s ease;
   position: relative;
   padding: 4px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
 }
 
-.navLink:hover {
+.navLink:hover,
+.navLinkActive {
   color: #CA908D;
+}
+
+.navLinkActive::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #CA908D;
+  border-radius: 2px;
 }
 
 .navActions {
@@ -601,142 +617,31 @@
 }
 
 /* ------------------------------------------------------------
-   Main Editorial Grid (Left Column, Central Mascot, Right Column)
+   Main Editorial Grid (Mascot Centered, Right Product Cards)
    ------------------------------------------------------------ */
 .editorialGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
-  margin-top: clamp(-10px, -2vw, -20px);
+  margin-top: clamp(-6px, -1.5vw, -16px);
   z-index: 2;
-  gap: 28px;
+  gap: 16px;
+  width: 100%;
 }
 
 @media (min-width: 960px) {
   .editorialGrid {
-    grid-template-columns: minmax(280px, 350px) 1fr minmax(170px, 210px);
+    display: grid;
+    grid-template-columns: minmax(100px, 1fr) auto minmax(100px, 1fr);
     align-items: center;
+    justify-items: center;
     flex: 1;
     min-height: 0;
-    margin-top: clamp(-18px, -2.5vh, -36px);
-    gap: clamp(16px, 2.5vw, 36px);
+    margin-top: clamp(-10px, -2vh, -24px);
+    gap: clamp(16px, 2.5vw, 40px);
+    width: 100%;
   }
-}
-
-/* ------------------------------------------------------------
-   Left Column: Tagline, Body & Buttons
-   ------------------------------------------------------------ */
-.leftColumn {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-  position: relative;
-  z-index: 5;
-  order: 2;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-@media (min-width: 960px) {
-  .leftColumn {
-    order: 1;
-    margin-bottom: 0;
-    width: auto;
-    gap: clamp(10px, 1.4vh, 16px);
-  }
-}
-
-.promoTag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background-color: rgba(202, 144, 141, 0.18);
-  color: #1C0207;
-  padding: 5px 14px;
-  border-radius: 9999px;
-  font-size: 0.74rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  border: 1px solid rgba(202, 144, 141, 0.35);
-}
-
-.tagline {
-  font-size: clamp(1.15rem, 4.2vw, 1.45rem);
-  font-weight: 900;
-  color: #1C0207;
-  line-height: 1.2;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
-  margin: 0;
-  width: 100%;
-  overflow-wrap: break-word;
-  word-break: normal;
-  box-sizing: border-box;
-}
-
-.description {
-  font-size: clamp(0.88rem, 1vw, 0.98rem);
-  color: #7a5a61;
-  line-height: 1.55;
-  margin: 0;
-  max-width: 360px;
-}
-
-.btnGroup {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 6px;
-  flex-wrap: wrap;
-}
-
-.primaryPillBtn {
-  background-color: #1C0207;
-  color: #ffffff;
-  border: none;
-  border-radius: 9999px;
-  padding: 13px 28px;
-  font-size: 0.84rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  text-decoration: none;
-  box-shadow: 0 6px 18px -4px rgba(28, 2, 7, 0.35);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.primaryPillBtn:hover {
-  background-color: #120104;
-  transform: translateY(-1.5px);
-  box-shadow: 0 10px 24px -4px rgba(28, 2, 7, 0.45);
-}
-
-.secondaryPillBtn {
-  background-color: transparent;
-  color: #1C0207;
-  border: 1.5px solid #1C0207;
-  border-radius: 9999px;
-  padding: 12px 24px;
-  font-size: 0.84rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.secondaryPillBtn:hover {
-  background-color: rgba(28, 2, 7, 0.08);
 }
 
 /* ------------------------------------------------------------
@@ -753,6 +658,7 @@
 
 @media (min-width: 960px) {
   .centerColumn {
+    grid-column: 2;
     order: 2;
   }
 }
@@ -920,17 +826,19 @@
   gap: 12px;
   position: relative;
   z-index: 5;
-  order: 3;
-  margin-top: 12px;
+  order: 2;
+  margin-top: 10px;
   box-sizing: border-box;
   flex-wrap: wrap;
 }
 
 @media (min-width: 960px) {
   .rightColumn {
+    grid-column: 3;
+    justify-self: end;
     flex-direction: column;
     align-items: flex-end;
-    gap: 18px;
+    gap: clamp(12px, 1.8vh, 18px);
     width: auto;
     margin-top: 0;
     flex-wrap: nowrap;
