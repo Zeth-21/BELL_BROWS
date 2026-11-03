@@ -24,7 +24,7 @@
 @media (max-width: 768px) {
   .sliderContainer {
     width: 100% !important;
-    max-width: clamp(230px, 68vw, 290px) !important;
+    max-width: 100% !important;
     aspect-ratio: 1 / 1 !important;
     height: auto !important;
     max-height: none !important;
