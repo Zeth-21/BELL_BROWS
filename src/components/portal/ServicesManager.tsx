@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { supabase } from '@/lib/supabase/client';
-import { uploadMediaFile } from '@/lib/supabase/storage';
+import { uploadServiceImage } from '@/lib/supabase/storage';
 import { Service } from '@/types/database';
 import { formatPrice, SERVICE_CATEGORIES, normalizeServiceCategory } from '@/lib/utils';
 import {
@@ -19,6 +19,7 @@ import {
   AlertTriangle,
   Layers,
   Power,
+  Image as ImageIcon,
 } from 'lucide-react';
 import styles from './portal.module.css';
 
@@ -37,8 +38,11 @@ export default function ServicesManager() {
   const [price, setPrice] = useState<number | string>(0);
   const [category, setCategory] = useState<string>('Pestañas');
   const [durationMinutes, setDurationMinutes] = useState<number>(60);
-  const [imageUrl, setImageUrl] = useState<string>('');
+  const [imageUrl, setImageUrl] = useState<string>(''); // Foto Después (Resultado final)
+  const [imageBefore, setImageBefore] = useState<string>(''); // Foto Antes (Estado inicial)
   const [isActive, setIsActive] = useState(true);
+  const [uploadingAfter, setUploadingAfter] = useState(false);
+  const [uploadingBefore, setUploadingBefore] = useState(false);
 
   useEffect(() => {
     fetchServices();
@@ -78,6 +82,7 @@ export default function ServicesManager() {
     setCategory(normalizeServiceCategory(service));
     setDurationMinutes(service.duration_minutes || 60);
     setImageUrl(service.image_url || '');
+    setImageBefore(service.image_before || '');
     setIsActive(service.is_active);
   };
 
@@ -90,6 +95,7 @@ export default function ServicesManager() {
     setCategory('Pestañas');
     setDurationMinutes(60);
     setImageUrl('');
+    setImageBefore('');
     setIsActive(true);
   };
 
@@ -101,14 +107,15 @@ export default function ServicesManager() {
   // Instant direct image replacement for a specific service card (from camera/gallery)
   const handleDirectImageUpload = async (
     serviceId: string,
+    type: 'after' | 'before',
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     try {
-      setUploadingForId(serviceId);
-      const { url, error } = await uploadMediaFile(file, 'services');
+      setUploadingForId(`${serviceId}-${type}`);
+      const { url, error } = await uploadServiceImage(file, type, serviceId);
 
       if (error || !url) {
         showToast('error', `Error al subir imagen: ${error}`);
@@ -116,30 +123,77 @@ export default function ServicesManager() {
       }
 
       // Update in Supabase immediately
+      const updatePayload =
+        type === 'after'
+          ? { image_url: url, updated_at: new Date().toISOString() }
+          : { image_before: url, updated_at: new Date().toISOString() };
+
       const { error: dbError } = await supabase
         .from('services')
-        .update({
-          image_url: url,
-          updated_at: new Date().toISOString(),
-        })
+        .update(updatePayload)
         .eq('id', serviceId);
 
       if (dbError) throw dbError;
 
       // Update local state
       setServices((prev) =>
-        prev.map((s) => (s.id === serviceId ? { ...s, image_url: url } : s))
+        prev.map((s) => (s.id === serviceId ? { ...s, ...updatePayload } : s))
       );
 
       if (editingService && editingService.id === serviceId) {
-        setImageUrl(url);
+        if (type === 'after') setImageUrl(url);
+        if (type === 'before') setImageBefore(url);
       }
 
-      showToast('success', '¡Foto actualizada en Supabase correctamente!');
+      showToast(
+        'success',
+        `¡Foto del ${type === 'after' ? 'Después' : 'Antes'} optimizada a WebP y guardada!`
+      );
     } catch (err: any) {
       showToast('error', err?.message || 'Error al actualizar la foto');
     } finally {
       setUploadingForId(null);
+    }
+  };
+
+  // Handlers for modal upload
+  const handleModalUploadAfter = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setUploadingAfter(true);
+      const { url, error } = await uploadServiceImage(file, 'after', editingService?.id);
+      if (error || !url) {
+        showToast('error', `Error al optimizar/subir foto después: ${error}`);
+        return;
+      }
+      setImageUrl(url);
+      showToast('success', 'Foto del Después convertida a WebP lista para guardar.');
+    } catch (err: any) {
+      showToast('error', err?.message || 'Error al subir foto');
+    } finally {
+      setUploadingAfter(false);
+    }
+  };
+
+  const handleModalUploadBefore = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setUploadingBefore(true);
+      const { url, error } = await uploadServiceImage(file, 'before', editingService?.id);
+      if (error || !url) {
+        showToast('error', `Error al optimizar/subir foto antes: ${error}`);
+        return;
+      }
+      setImageBefore(url);
+      showToast('success', 'Foto del Antes convertida a WebP lista para guardar.');
+    } catch (err: any) {
+      showToast('error', err?.message || 'Error al subir foto');
+    } finally {
+      setUploadingBefore(false);
     }
   };
 
@@ -199,23 +253,33 @@ export default function ServicesManager() {
       return;
     }
 
+    if (!imageUrl.trim()) {
+      showToast('error', 'La Foto del Después (resultado final) es obligatoria.');
+      return;
+    }
+
     const parsedPrice = typeof price === 'string' ? parseFloat(price) || 0 : price;
 
     try {
       setSavingService(true);
+
+      const payload = {
+        title: title.trim(),
+        description: description.trim() || null,
+        price: parsedPrice,
+        category: category.trim(),
+        duration_minutes: durationMinutes,
+        image_url: imageUrl.trim() || null,
+        image_before: imageBefore.trim() || null,
+        is_active: isActive,
+      };
 
       if (isCreatingNew) {
         // Create new
         const { data, error } = await supabase
           .from('services')
           .insert({
-            title: title.trim(),
-            description: description.trim(),
-            price: parsedPrice,
-            category: category.trim(),
-            duration_minutes: durationMinutes,
-            image_url: imageUrl || null,
-            is_active: isActive,
+            ...payload,
             display_order: services.length + 1,
           })
           .select()
@@ -223,20 +287,14 @@ export default function ServicesManager() {
 
         if (error) throw error;
         setServices((prev) => [...prev, data]);
-        showToast('success', '¡Nuevo servicio agregado exitosamente!');
+        showToast('success', '¡Nuevo servicio con Antes/Después agregado exitosamente!');
         closeModal();
       } else if (editingService) {
         // Update existing
         const { data, error } = await supabase
           .from('services')
           .update({
-            title: title.trim(),
-            description: description.trim(),
-            price: parsedPrice,
-            category: category.trim(),
-            duration_minutes: durationMinutes,
-            image_url: imageUrl || null,
-            is_active: isActive,
+            ...payload,
             updated_at: new Date().toISOString(),
           })
           .eq('id', editingService.id)
@@ -289,7 +347,7 @@ export default function ServicesManager() {
         <div>
           <h2 className={styles.sectionHeaderTitle}>Servicios Permanentes</h2>
           <p className={styles.sectionHeaderSubtitle}>
-            Modifica precios, títulos, descripciones y sustituye fotos al instante desde tu celular
+            Administra precios, fotos de Antes y Después en WebP y visibilidad de tu catálogo
           </p>
         </div>
         <button
@@ -311,45 +369,100 @@ export default function ServicesManager() {
               !service.is_active ? styles.serviceItemCardInactive : ''
             }`}
           >
-            {/* Top row with image & quick replace */}
+            {/* Top row with static dual thumbnails (DESPUÉS y ANTES) - NO COMPARISON SLIDER IN ADMIN */}
             <div className={styles.serviceImageRow}>
-              <div className={styles.serviceThumb}>
-                {service.image_url ? (
-                  <Image
-                    src={service.image_url}
-                    alt={service.title}
-                    fill
-                    sizes="120px"
-                    className={styles.thumbImg}
-                  />
-                ) : (
-                  <div className={styles.thumbPlaceholder}>
-                    <Sparkles size={20} />
+              <div className={styles.dualThumbContainer}>
+                {/* 1. Miniatura Estática: DESPUÉS (Principal) */}
+                <div className={styles.dualThumbItem}>
+                  <div className={styles.dualThumbBox}>
+                    {service.image_url ? (
+                      <Image
+                        src={service.image_url}
+                        alt={`${service.title} - Después`}
+                        fill
+                        sizes="90px"
+                        className={styles.thumbImg}
+                      />
+                    ) : (
+                      <div className={styles.thumbPlaceholder}>
+                        <Sparkles size={16} />
+                      </div>
+                    )}
+                    {uploadingForId === `${service.id}-after` && (
+                      <div className={styles.thumbUploadingOverlay}>
+                        <Loader2 size={20} className={styles.spinner} />
+                      </div>
+                    )}
                   </div>
-                )}
-                {uploadingForId === service.id && (
-                  <div className={styles.thumbUploadingOverlay}>
-                    <Loader2 size={24} className={styles.spinner} />
+                  <span className={`${styles.dualThumbTag} ${styles.dualThumbTagAfter}`}>
+                    Después
+                  </span>
+                </div>
+
+                {/* 2. Miniatura Estática: ANTES (Opcional) */}
+                <div className={styles.dualThumbItem}>
+                  <div className={styles.dualThumbBox}>
+                    {service.image_before ? (
+                      <Image
+                        src={service.image_before}
+                        alt={`${service.title} - Antes`}
+                        fill
+                        sizes="90px"
+                        className={styles.thumbImg}
+                      />
+                    ) : (
+                      <div className={styles.dualThumbPlaceholder}>
+                        <ImageIcon size={14} />
+                        <span>Sin Antes</span>
+                      </div>
+                    )}
+                    {uploadingForId === `${service.id}-before` && (
+                      <div className={styles.thumbUploadingOverlay}>
+                        <Loader2 size={20} className={styles.spinner} />
+                      </div>
+                    )}
                   </div>
-                )}
+                  <span className={`${styles.dualThumbTag} ${styles.dualThumbTagBefore}`}>
+                    Antes
+                  </span>
+                </div>
               </div>
 
-              {/* Direct Camera / File trigger */}
+              {/* Direct Camera / File triggers */}
               <div className={styles.quickPhotoActions}>
                 <label
-                  htmlFor={`file-service-${service.id}`}
+                  htmlFor={`file-after-${service.id}`}
                   className={`btn btn-secondary ${styles.cameraBtn}`}
-                  title="Cambiar foto con cámara o galería"
+                  title="Cambiar foto del Después (WebP)"
                 >
-                  <Camera size={16} />
-                  <span className={styles.cameraBtnText}>Cambiar Foto</span>
+                  <Camera size={15} />
+                  <span className={styles.cameraBtnText}>Foto Después</span>
                 </label>
                 <input
-                  id={`file-service-${service.id}`}
+                  id={`file-after-${service.id}`}
                   type="file"
                   accept="image/*"
-                  onChange={(e) => handleDirectImageUpload(service.id, e)}
-                  disabled={uploadingForId === service.id}
+                  onChange={(e) => handleDirectImageUpload(service.id, 'after', e)}
+                  disabled={uploadingForId === `${service.id}-after`}
+                  style={{ display: 'none' }}
+                />
+
+                <label
+                  htmlFor={`file-before-${service.id}`}
+                  className={`btn btn-secondary ${styles.cameraBtn}`}
+                  title="Subir o cambiar foto del Antes (WebP)"
+                >
+                  <Camera size={15} />
+                  <span className={styles.cameraBtnText}>
+                    {service.image_before ? 'Foto Antes' : '+ Foto Antes'}
+                  </span>
+                </label>
+                <input
+                  id={`file-before-${service.id}`}
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleDirectImageUpload(service.id, 'before', e)}
+                  disabled={uploadingForId === `${service.id}-before`}
                   style={{ display: 'none' }}
                 />
 
@@ -375,6 +488,12 @@ export default function ServicesManager() {
                   <Layers size={12} />
                   {normalizeServiceCategory(service)}
                 </span>
+                {service.image_before && (
+                  <span className={styles.metaBadge} title="Este servicio cuenta con comparación interactiva">
+                    <Sparkles size={12} />
+                    Slider Antes/Después Activo
+                  </span>
+                )}
               </div>
 
               {service.description && (
@@ -491,44 +610,107 @@ export default function ServicesManager() {
                 />
               </div>
 
-              {/* Image URL preview or change */}
+              {/* DUAL IMAGE SELECTORS: FOTO DEL DESPUÉS & FOTO DEL ANTES */}
               <div className={styles.formGroup}>
-                <label>Fotografía del Servicio</label>
-                <div className={styles.modalImageWrap}>
-                  {imageUrl ? (
-                    <div className={styles.modalImgBox}>
-                      <Image
-                        src={imageUrl}
-                        alt="Vista previa"
-                        fill
-                        sizes="200px"
-                        className={styles.modalImgPreview}
-                      />
+                <label>Fotografías de Resultados (Conversión Automática a WebP)</label>
+                <div className={styles.modalDualUploadGrid}>
+                  {/* 1. Foto del Después (Resultado Final - Obligatoria) */}
+                  <div className={styles.uploadSectionBox}>
+                    <div className={styles.uploadSectionHeader}>
+                      <span className={styles.uploadSectionTitle}>Resultado Final (Después)</span>
+                      <span className={styles.uploadBadgeRequired}>Obligatorio</span>
                     </div>
-                  ) : (
-                    <div className={styles.modalNoImg}>Sin fotografía asignada</div>
-                  )}
 
-                  <label
-                    htmlFor="modal-photo-upload"
-                    className={`btn btn-secondary ${styles.modalPhotoBtn}`}
-                  >
-                    <Camera size={16} />
-                    <span>Subir desde Cámara/Galería</span>
-                  </label>
-                  <input
-                    id="modal-photo-upload"
-                    type="file"
-                    accept="image/*"
-                    onChange={async (e) => {
-                      const file = e.target.files?.[0];
-                      if (!file) return;
-                      const { url, error } = await uploadMediaFile(file, 'services');
-                      if (url) setImageUrl(url);
-                      if (error) showToast('error', error);
-                    }}
-                    style={{ display: 'none' }}
-                  />
+                    <div className={styles.modalImgBoxCompact}>
+                      {imageUrl ? (
+                        <Image
+                          src={imageUrl}
+                          alt="Vista previa resultado después"
+                          fill
+                          sizes="240px"
+                          className={styles.modalImgPreview}
+                        />
+                      ) : (
+                        <div className={styles.modalNoImg}>Sin foto final</div>
+                      )}
+                      {uploadingAfter && (
+                        <div className={styles.thumbUploadingOverlay}>
+                          <Loader2 size={24} className={styles.spinner} />
+                        </div>
+                      )}
+                    </div>
+
+                    <label
+                      htmlFor="modal-photo-after"
+                      className={`btn btn-secondary ${styles.modalPhotoBtn}`}
+                    >
+                      <Camera size={16} />
+                      <span>{imageUrl ? 'Cambiar Foto Después' : 'Subir Foto Después'}</span>
+                    </label>
+                    <input
+                      id="modal-photo-after"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleModalUploadAfter}
+                      disabled={uploadingAfter}
+                      style={{ display: 'none' }}
+                    />
+                  </div>
+
+                  {/* 2. Foto del Antes (Estado Inicial - Opcional) */}
+                  <div className={styles.uploadSectionBox}>
+                    <div className={styles.uploadSectionHeader}>
+                      <span className={styles.uploadSectionTitle}>Estado Inicial (Antes)</span>
+                      <span className={styles.uploadBadgeOptional}>Opcional</span>
+                    </div>
+
+                    <div className={styles.modalImgBoxCompact}>
+                      {imageBefore ? (
+                        <Image
+                          src={imageBefore}
+                          alt="Vista previa estado antes"
+                          fill
+                          sizes="240px"
+                          className={styles.modalImgPreview}
+                        />
+                      ) : (
+                        <div className={styles.modalNoImg}>Sin foto inicial</div>
+                      )}
+                      {uploadingBefore && (
+                        <div className={styles.thumbUploadingOverlay}>
+                          <Loader2 size={24} className={styles.spinner} />
+                        </div>
+                      )}
+                    </div>
+
+                    <label
+                      htmlFor="modal-photo-before"
+                      className={`btn btn-secondary ${styles.modalPhotoBtn}`}
+                    >
+                      <Camera size={16} />
+                      <span>{imageBefore ? 'Cambiar Foto Antes' : 'Subir Foto Antes'}</span>
+                    </label>
+                    <input
+                      id="modal-photo-before"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleModalUploadBefore}
+                      disabled={uploadingBefore}
+                      style={{ display: 'none' }}
+                    />
+
+                    {imageBefore && (
+                      <button
+                        type="button"
+                        onClick={() => setImageBefore('')}
+                        className={styles.removeBeforeBtn}
+                        title="Quitar foto de antes y dejar solo foto principal"
+                      >
+                        <Trash2 size={13} />
+                        <span>Quitar foto del Antes</span>
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -563,13 +745,13 @@ export default function ServicesManager() {
                   type="button"
                   onClick={closeModal}
                   className="btn btn-secondary"
-                  disabled={savingService}
+                  disabled={savingService || uploadingAfter || uploadingBefore}
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  disabled={savingService}
+                  disabled={savingService || uploadingAfter || uploadingBefore}
                   className="btn btn-primary"
                 >
                   {savingService ? (

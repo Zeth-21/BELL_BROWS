@@ -172,8 +172,31 @@
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  z-index: 3;
+  z-index: 7;
 }
+
+.visualBadgesTop {
+  bottom: auto;
+  top: 14px;
+  left: 14px;
+}
+
+.visualBadgesRowDeprecated {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  z-index: 7;
+}
+
+.visualBadgesTop {
+  bottom: auto;
+  top: 14px;
+  left: 14px;
+}
+
 
 .categoryBadge {
   background: rgba(28, 2, 7, 0.85);

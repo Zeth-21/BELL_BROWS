@@ -5,6 +5,7 @@ export interface Service {
   price: number;
   category: string;
   image_url: string | null;
+  image_before?: string | null;
   duration_minutes: number;
   display_order: number;
   is_active: boolean;

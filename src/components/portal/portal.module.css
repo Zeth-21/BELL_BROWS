@@ -1177,3 +1177,146 @@
   .switchLabel { flex-wrap: wrap; gap: 8px; }
   .toast { right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); max-width: calc(100vw - 32px); }
 }
+
+/* ============================================================
+   DUAL THUMBNAILS (ANTES & DESPUÉS) FOR ADMIN CARDS
+   ============================================================ */
+.dualThumbContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dualThumbItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.dualThumbBox {
+  position: relative;
+  width: 90px;
+  height: 72px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #E8BEBB;
+  border: 1px solid rgba(28, 2, 7, 0.12);
+  flex-shrink: 0;
+}
+
+.dualThumbPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  background: #fdf8f7;
+  border: 1px dashed rgba(28, 2, 7, 0.22);
+}
+
+.dualThumbTag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  text-align: center;
+}
+
+.dualThumbTagAfter {
+  background: rgba(202, 144, 141, 0.25);
+  color: #1C0207;
+  border: 1px solid rgba(202, 144, 141, 0.5);
+}
+
+.dualThumbTagBefore {
+  background: rgba(28, 2, 7, 0.08);
+  color: #57121c;
+  border: 1px solid rgba(28, 2, 7, 0.15);
+}
+
+/* Modal Dual Upload Grid */
+.modalDualUploadGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 520px) {
+  .modalDualUploadGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.uploadSectionBox {
+  background: #fdf8f7;
+  border: 1px solid rgba(28, 2, 7, 0.12);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.uploadSectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.uploadSectionTitle {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.uploadBadgeRequired {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #be123c;
+  background: #ffe4e6;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.uploadBadgeOptional {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.modalImgBoxCompact {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #E8BEBB;
+}
+
+.removeBeforeBtn {
+  background: transparent;
+  border: 1px dashed rgba(239, 68, 68, 0.4);
+  color: #dc2626;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  justify-content: center;
+}
+
+.removeBeforeBtn:hover {
+  background: rgba(239, 68, 68, 0.08);
+}

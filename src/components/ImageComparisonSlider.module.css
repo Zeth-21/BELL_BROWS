@@ -1,0 +1,171 @@
+/* =========================================================================
+   IMAGE COMPARISON SLIDER - BELL BROWS (EDITORIAL LUXURY)
+   Paleta: #1C0207 (Vino Profundo), #CA908D (Oro Rosa), #E8BEBB (Rose Mist), #FFFFFF
+   ========================================================================= */
+
+.sliderContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  max-height: 520px;
+  aspect-ratio: 4 / 5;
+  border-radius: 24px;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  cursor: ew-resize;
+  background: #1C0207;
+  box-shadow: 0 16px 40px -10px rgba(28, 2, 7, 0.4),
+              0 0 0 1px rgba(202, 144, 141, 0.25) inset;
+}
+
+@media (max-width: 768px) {
+  .sliderContainer {
+    min-height: 320px;
+    max-height: 420px;
+    aspect-ratio: 1 / 1;
+    border-radius: 20px;
+  }
+}
+
+/* Imagen de Fondo (DESPUÉS / RESULTADO FINAL) */
+.afterImageLayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Imagen Superpuesta (ANTES / ESTADO INICIAL) recortada mediante clip-path */
+.beforeImageLayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  will-change: clip-path;
+  z-index: 2;
+}
+
+.sliderImg {
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Línea divisoria vertical */
+.dividerLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2.5px;
+  background: #ffffff;
+  transform: translateX(-50%);
+  z-index: 5;
+  pointer-events: none;
+  box-shadow: 0 0 12px rgba(202, 144, 141, 0.8),
+              0 0 4px rgba(255, 255, 255, 0.9);
+}
+
+/* Botón / Mango central deslizable */
+.sliderHandle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #1C0207;
+  border: 2px solid #CA908D;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5),
+              0 0 0 3px rgba(255, 255, 255, 0.25),
+              0 0 16px rgba(202, 144, 141, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #CA908D;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  pointer-events: auto;
+  cursor: ew-resize;
+  outline: none;
+}
+
+.sliderContainer:hover .sliderHandle,
+.sliderContainer:active .sliderHandle {
+  transform: translate(-50%, -50%) scale(1.1);
+  border-color: #ffffff;
+  color: #ffffff;
+  box-shadow: 0 6px 24px rgba(28, 2, 7, 0.7),
+              0 0 0 4px rgba(202, 144, 141, 0.4),
+              0 0 24px rgba(202, 144, 141, 0.8);
+}
+
+/* Indicadores de texto flotantes (Antes / Después) */
+.badgeBefore,
+.badgeAfter {
+  position: absolute;
+  bottom: 18px;
+  z-index: 4;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: opacity 0.2s ease;
+}
+
+.badgeBefore {
+  left: 18px;
+  background: rgba(28, 2, 7, 0.75);
+  color: #E8BEBB;
+  border: 1px solid rgba(232, 190, 187, 0.35);
+}
+
+.badgeAfter {
+  right: 18px;
+  background: rgba(202, 144, 141, 0.85);
+  color: #1C0207;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Pista de ayuda sutil para el usuario */
+.hintOverlay {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(28, 2, 7, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(202, 144, 141, 0.35);
+  color: #ffffff;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 6;
+  pointer-events: none;
+  animation: fadeInHint 0.5s ease;
+}
+
+@keyframes fadeInHint {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, MessageCircle, ArrowRight, Sparkles } from 'lucide-react';
 import { Service } from '@/types/database';
@@ -26,6 +26,11 @@ export default function ServiceCard({
   onClick,
 }: ServiceCardProps) {
   const [imgSrc, setImgSrc] = useState<string>(service.image_url || '/product-cream.jpg');
+
+  // Sincronizar imagen si service.image_url cambia
+  useEffect(() => {
+    setImgSrc(service.image_url || '/product-cream.jpg');
+  }, [service.image_url]);
 
   const handleCardClick = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
@@ -100,7 +105,7 @@ export default function ServiceCard({
                   onNext?.();
                 }}
                 className={styles.navArrowBtn}
-                aria-label="Siguiente servicio destacado"
+                aria-label="Servicio destacado siguiente"
               >
                 <ChevronRight size={18} />
               </button>
@@ -108,14 +113,13 @@ export default function ServiceCard({
           )}
         </div>
 
-        {/* Contenido Central: Título, Línea y Precio en Soles */}
-        <div className={styles.featuredContent}>
-          <h3 className={styles.featuredTitle}>{service.title}</h3>
-          <div className={styles.featuredDivider} />
-          <div className={styles.featuredPriceRow}>
-            <span className={styles.featuredPriceAmount}>
-              {formatPrice(service.price)}
-            </span>
+        {/* Contenido Inferior: Título, Subtítulo y Botón Píldora Blanco */}
+        <div className={styles.featuredBody}>
+          <div className={styles.featuredTextWrap}>
+            <h3 className={styles.featuredTitle}>{service.title}</h3>
+            <p className={styles.featuredSubtitle}>
+              {service.description || 'Diseño y cuidado exclusivo de autor'}
+            </p>
           </div>
 
           {/* Botón píldora blanco idéntico en forma al botón de la Imagen 1, adaptado para ver detalles */}

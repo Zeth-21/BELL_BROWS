@@ -6,6 +6,7 @@ import { X, MessageCircle, Clock, Sparkles, ArrowRight, ShieldCheck } from 'luci
 import { Service } from '@/types/database';
 import { formatPrice, formatDuration, buildWhatsAppBookingLink, normalizeServiceCategory } from '@/lib/utils';
 import { BotanicalSprig, BotanicalWatermark } from './BotanicalLeaf';
+import ImageComparisonSlider from './ImageComparisonSlider';
 import styles from './ServiceDetailModal.module.css';
 
 interface ServiceDetailModalProps {
@@ -46,6 +47,9 @@ export default function ServiceDetailModal({ service, onClose }: ServiceDetailMo
       ? service.description
       : `Tratamiento exclusivo de ${categoryName} diseñado con técnicas de vanguardia, pigmentos y activos botánicos biocompatibles que realzan tu belleza natural con máxima durabilidad y cuidado dérmico.`;
 
+  // El slider interactivo solo se renderiza si el servicio tiene AMBAS imágenes (antes y después)
+  const hasBothImages = Boolean(service.image_url && service.image_before);
+
   return (
     <div
       className={styles.modalOverlay}
@@ -72,32 +76,44 @@ export default function ServiceDetailModal({ service, onClose }: ServiceDetailMo
         </button>
 
         <div className={styles.modalLayout}>
-          {/* Visual Side: Large Crisp Photography */}
+          {/* Visual Side: Slider interactivo si tiene ambas imágenes, o foto única estática */}
           <div className={styles.modalVisualWrap}>
-            <div className={styles.modalImageFrame}>
-              {service.image_url ? (
-                <Image
-                  src={service.image_url}
-                  alt={service.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 480px"
-                  className={styles.modalImg}
-                  priority
-                />
-              ) : (
-                <div className={styles.modalImagePlaceholder}>
-                  <Sparkles size={40} />
-                  <span>Bell Brows</span>
-                </div>
-              )}
-              <div className={styles.imageGlowOverlay} />
-            </div>
+            {hasBothImages ? (
+              <ImageComparisonSlider
+                beforeImage={service.image_before!}
+                afterImage={service.image_url!}
+                alt={service.title}
+              />
+            ) : (
+              <div className={styles.modalImageFrame}>
+                {service.image_url ? (
+                  <Image
+                    src={service.image_url}
+                    alt={service.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 480px"
+                    className={styles.modalImg}
+                    priority
+                  />
+                ) : (
+                  <div className={styles.modalImagePlaceholder}>
+                    <Sparkles size={40} />
+                    <span>Bell Brows</span>
+                  </div>
+                )}
+                <div className={styles.imageGlowOverlay} />
+              </div>
+            )}
 
             {/* Botanical decorative sprig on corner */}
             <BotanicalSprig className={styles.modalLeafSprig} />
 
-            {/* Badges floating on bottom/top */}
-            <div className={styles.visualBadgesRow}>
+            {/* Badges floating */}
+            <div
+              className={`${styles.visualBadgesRow} ${
+                hasBothImages ? styles.visualBadgesTop : ''
+              }`}
+            >
               <span className={styles.categoryBadge}>{categoryName}</span>
               {service.duration_minutes > 0 && (
                 <span className={styles.durationBadge}>
