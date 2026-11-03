@@ -2,9 +2,9 @@
 
 import React, { useEffect } from 'react';
 import Image from 'next/image';
-import { X, MessageCircle, Clock, Sparkles, ArrowRight, ShieldCheck } from 'lucide-react';
+import { X, MessageCircle, Sparkles, ArrowRight } from 'lucide-react';
 import { Service } from '@/types/database';
-import { formatPrice, formatDuration, buildWhatsAppBookingLink, normalizeServiceCategory } from '@/lib/utils';
+import { formatPrice, buildWhatsAppBookingLink, normalizeServiceCategory } from '@/lib/utils';
 import { BotanicalSprig, BotanicalWatermark } from './BotanicalLeaf';
 import ImageComparisonSlider from './ImageComparisonSlider';
 import styles from './ServiceDetailModal.module.css';
@@ -109,21 +109,9 @@ export default function ServiceDetailModal({ service, onClose }: ServiceDetailMo
             <BotanicalSprig className={styles.modalLeafSprig} />
           </div>
 
-          {/* Info Side: Etiquetas reubicadas, Título, Precio, Descripción, Highlights y WhatsApp CTA */}
+          {/* Info Side: Título, Inversión, Descripción y Botón Directo */}
           <div className={styles.modalContentWrap}>
-            {/* Header Meta: Tratamiento Exclusivo + Badges de Categoría y Tiempo */}
-            <div className={styles.modalHeaderTopRow}>
-              <span className={styles.modalCategoryPretitle}>TRATAMIENTO EXCLUSIVO</span>
-              <div className={styles.infoBadgesRow}>
-                <span className={styles.categoryBadge}>{categoryName}</span>
-                {service.duration_minutes > 0 && (
-                  <span className={styles.durationBadge}>
-                    <Clock size={12} />
-                    <span>{formatDuration(service.duration_minutes)}</span>
-                  </span>
-                )}
-              </div>
-            </div>
+            <span className={styles.modalCategoryPretitle}>TRATAMIENTO EXCLUSIVO</span>
 
             <h2 id="modal-service-title" className={styles.modalTitle}>
               {service.title}
@@ -148,18 +136,6 @@ export default function ServiceDetailModal({ service, onClose }: ServiceDetailMo
               </p>
             </div>
 
-            {/* Service Highlights */}
-            <div className={styles.serviceHighlights}>
-              <div className={styles.highlightItem}>
-                <Sparkles size={15} className={styles.highlightIcon} />
-                <span>Atención personalizada & visagismo facial</span>
-              </div>
-              <div className={styles.highlightItem}>
-                <ShieldCheck size={15} className={styles.highlightIcon} />
-                <span>Productos botánicos prémium certificados</span>
-              </div>
-            </div>
-
             {/* Primary Action Button: WhatsApp Booking */}
             <div className={styles.modalActionArea}>
               <button
@@ -172,9 +148,6 @@ export default function ServiceDetailModal({ service, onClose }: ServiceDetailMo
                 <span className={styles.btnLabel}>Reservar por WhatsApp</span>
                 <ArrowRight size={18} className={styles.btnArrow} />
               </button>
-              <p className={styles.actionNote}>
-                Respuesta inmediata para confirmar fecha, hora y resolver dudas.
-              </p>
             </div>
           </div>
         </div>

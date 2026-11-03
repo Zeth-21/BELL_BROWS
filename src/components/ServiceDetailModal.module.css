@@ -105,8 +105,8 @@
 .modalLayout {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
-  gap: 28px;
-  padding: 28px 30px 28px 28px;
+  gap: 32px;
+  padding: 32px;
   position: relative;
   z-index: 1;
   align-items: center;
@@ -179,96 +179,54 @@
   z-index: 2;
 }
 
-/* Info Side */
+/* Info Side: Diseño minimalista, elegante y equilibrado */
 .modalContentWrap {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
   min-width: 0;
-}
-
-/* Reubicación de etiquetas sobre el título */
-.modalHeaderTopRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
   width: 100%;
-  margin-bottom: 6px;
-}
-
-.infoBadgesRow {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.categoryBadge {
-  background: rgba(28, 2, 7, 0.08);
-  border: 1px solid rgba(28, 2, 7, 0.14);
-  color: #1C0207;
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 9999px;
-}
-
-.durationBadge {
-  background: rgba(202, 144, 141, 0.2);
-  border: 1px solid rgba(202, 144, 141, 0.38);
-  color: #1C0207;
-  font-size: 0.7rem;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
-  border-radius: 9999px;
 }
 
 .modalCategoryPretitle {
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
+  font-size: 0.74rem;
+  letter-spacing: 0.22em;
   font-weight: 800;
   color: #9e6d6b;
   text-transform: uppercase;
-  margin: 0;
+  margin-bottom: 6px;
 }
 
 .modalTitle {
   font-family: var(--font-serif);
-  font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+  font-size: clamp(1.4rem, 2.3vw, 1.9rem);
   font-weight: 700;
   color: var(--forest-primary);
-  line-height: 1.15;
+  line-height: 1.18;
   margin: 0;
   letter-spacing: -0.015em;
 }
 
 .modalDivider {
-  width: 40px;
+  width: 44px;
   height: 2px;
   background: #CA908D;
   border-radius: 2px;
-  margin: 10px 0 12px 0;
+  margin: 12px 0 14px 0;
 }
 
 .modalPriceContainer {
   display: flex;
   align-items: baseline;
   gap: 10px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .priceLabel {
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #7a5a61;
 }
@@ -281,7 +239,7 @@
 
 .modalPriceAmount {
   font-family: var(--font-sans);
-  font-size: 1.9rem;
+  font-size: 2rem;
   font-weight: 800;
   color: var(--forest-primary);
   letter-spacing: -0.025em;
@@ -289,7 +247,7 @@
 }
 
 .priceCurrency {
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 700;
   color: #9e6d6b;
   letter-spacing: 0.08em;
@@ -298,50 +256,27 @@
 .modalDescriptionBox {
   background: #fdf8f7;
   border: 1px solid rgba(202, 144, 141, 0.16);
-  border-radius: 16px;
-  padding: 12px 16px;
-  margin-bottom: 14px;
+  border-radius: 18px;
+  padding: 16px 20px;
+  margin-bottom: 22px;
   width: 100%;
   box-sizing: border-box;
 }
 
 .descHeading {
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--forest-primary);
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 .modalDescriptionText {
-  font-size: 0.88rem;
-  line-height: 1.5;
+  font-size: 0.92rem;
+  line-height: 1.6;
   color: #4d2d34;
   margin: 0;
-}
-
-/* Service Highlights */
-.serviceHighlights {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 16px;
-  width: 100%;
-}
-
-.highlightItem {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #4d2d34;
-}
-
-.highlightIcon {
-  color: #CA908D;
-  flex-shrink: 0;
 }
 
 /* Action Area */
@@ -349,7 +284,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  margin-top: 2px;
 }
 
 .whatsappBookingBtn {
@@ -357,14 +292,14 @@
   color: #ffffff;
   border: 1px solid rgba(202, 144, 141, 0.4);
   border-radius: 9999px;
-  padding: 12px 24px;
-  font-size: 0.92rem;
+  padding: 14px 28px;
+  font-size: 0.96rem;
   font-weight: 700;
   letter-spacing: 0.03em;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   cursor: pointer;
   box-shadow: 0 8px 20px -4px rgba(28, 2, 7, 0.35);
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
@@ -393,13 +328,6 @@
   transform: translateX(4px);
 }
 
-.actionNote {
-  font-size: 0.74rem;
-  color: #7a5a61;
-  text-align: center;
-  margin: 0;
-}
-
 /* =========================================================================
    RESPONSIVE EN MÓVILES (Estrictamente proporción 1:1 cuadrada y sin desborde)
    ========================================================================= */
@@ -417,8 +345,8 @@
 
   .modalLayout {
     grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 14px;
+    gap: 14px;
+    padding: 16px 14px;
   }
 
   /* Contenedor estrictamente cuadrado (1:1) aprovechando el ancho completo disponible */
@@ -455,71 +383,49 @@
     z-index: 20;
   }
 
-  .modalHeaderTopRow {
+  .modalCategoryPretitle {
+    font-size: 0.68rem;
     margin-bottom: 4px;
   }
 
-  .modalCategoryPretitle {
-    font-size: 0.65rem;
-  }
-
-  .categoryBadge,
-  .durationBadge {
-    font-size: 0.65rem;
-    padding: 3px 8px;
-  }
-
   .modalTitle {
-    font-size: 1.35rem;
+    font-size: 1.4rem;
   }
 
   .modalDivider {
-    margin: 6px 0 8px 0;
+    margin: 8px 0 10px 0;
   }
 
   .modalPriceContainer {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
   .modalPriceAmount {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
   }
 
   .modalDescriptionBox {
-    padding: 8px 12px;
-    margin-bottom: 8px;
-    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    border-radius: 14px;
   }
 
   .descHeading {
-    font-size: 0.68rem;
-    margin-bottom: 3px;
+    font-size: 0.7rem;
+    margin-bottom: 4px;
   }
 
   .modalDescriptionText {
-    font-size: 0.8rem;
-    line-height: 1.4;
+    font-size: 0.84rem;
+    line-height: 1.48;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
-  .serviceHighlights {
-    gap: 4px;
-    margin-bottom: 10px;
-  }
-
-  .highlightItem {
-    font-size: 0.74rem;
-  }
-
   .whatsappBookingBtn {
-    padding: 10px 18px;
-    font-size: 0.86rem;
-  }
-
-  .actionNote {
-    font-size: 0.68rem;
+    padding: 13px 20px;
+    font-size: 0.9rem;
   }
 }
