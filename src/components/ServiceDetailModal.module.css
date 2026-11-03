@@ -13,9 +13,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(16px, 3vw, 32px);
+  padding: clamp(12px, 2.5vw, 24px);
   box-sizing: border-box;
   animation: modalFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  overflow: hidden;
 }
 
 @keyframes modalFadeIn {
@@ -33,16 +34,21 @@
   border-radius: 32px;
   width: 100%;
   max-width: 860px;
-  max-height: 90vh;
-  max-height: 90dvh;
-  overflow-y: auto;
   position: relative;
   box-shadow: 0 32px 80px -15px rgba(28, 2, 7, 0.55),
               0 0 0 1px rgba(255, 255, 255, 0.6) inset;
   animation: modalScaleUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   box-sizing: border-box;
-  scrollbar-width: thin;
-  scrollbar-color: #CA908D transparent;
+  /* Supresión total y estricta de barras de desplazamiento vertical y horizontal */
+  overflow: hidden !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.modalContainer::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 @keyframes modalScaleUp {
@@ -71,10 +77,10 @@
 /* Close button */
 .closeBtn {
   position: absolute;
-  top: 18px;
-  right: 18px;
-  width: 42px;
-  height: 42px;
+  top: 16px;
+  right: 16px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: rgba(28, 2, 7, 0.05);
   border: 1px solid rgba(28, 2, 7, 0.1);
@@ -99,23 +105,29 @@
 .modalLayout {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
-  gap: 32px;
-  padding: 36px 36px 36px 32px;
+  gap: 28px;
+  padding: 28px 30px 28px 28px;
   position: relative;
   z-index: 1;
   align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 /* Visual Side */
 .modalVisualWrap {
   position: relative;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modalImageFrame {
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 3.4;
+  max-height: 400px;
   border-radius: 24px;
   overflow: hidden;
   background: #E8BEBB;
@@ -181,33 +193,16 @@
   left: 14px;
 }
 
-.visualBadgesRowDeprecated {
-  position: absolute;
-  bottom: 14px;
-  left: 14px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  z-index: 7;
-}
-
-.visualBadgesTop {
-  bottom: auto;
-  top: 14px;
-  left: 14px;
-}
-
-
 .categoryBadge {
   background: rgba(28, 2, 7, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: #ffffff;
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -218,12 +213,12 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: #1C0207;
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 700;
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 6px 12px;
+  padding: 5px 10px;
   border-radius: 9999px;
   border: 1px solid rgba(28, 2, 7, 0.08);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -235,46 +230,47 @@
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
+  min-width: 0;
 }
 
 .modalCategoryPretitle {
-  font-size: 0.75rem;
-  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
   font-weight: 800;
   color: #9e6d6b;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .modalTitle {
   font-family: var(--font-serif);
-  font-size: clamp(1.45rem, 2.4vw, 1.95rem);
+  font-size: clamp(1.35rem, 2.2vw, 1.8rem);
   font-weight: 700;
   color: var(--forest-primary);
-  line-height: 1.2;
+  line-height: 1.15;
   margin: 0;
   letter-spacing: -0.015em;
 }
 
 .modalDivider {
-  width: 44px;
+  width: 40px;
   height: 2px;
   background: #CA908D;
   border-radius: 2px;
-  margin: 14px 0 16px 0;
+  margin: 10px 0 12px 0;
 }
 
 .modalPriceContainer {
   display: flex;
   align-items: baseline;
-  gap: 12px;
-  margin-bottom: 18px;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
 .priceLabel {
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #7a5a61;
 }
@@ -282,12 +278,12 @@
 .priceRow {
   display: flex;
   align-items: baseline;
-  gap: 6px;
+  gap: 5px;
 }
 
 .modalPriceAmount {
   font-family: var(--font-sans);
-  font-size: 2.1rem;
+  font-size: 1.9rem;
   font-weight: 800;
   color: var(--forest-primary);
   letter-spacing: -0.025em;
@@ -295,7 +291,7 @@
 }
 
 .priceCurrency {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: #9e6d6b;
   letter-spacing: 0.08em;
@@ -304,25 +300,25 @@
 .modalDescriptionBox {
   background: #fdf8f7;
   border: 1px solid rgba(202, 144, 141, 0.16);
-  border-radius: 18px;
-  padding: 16px 20px;
-  margin-bottom: 20px;
+  border-radius: 16px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
   width: 100%;
   box-sizing: border-box;
 }
 
 .descHeading {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--forest-primary);
-  margin-bottom: 8px;
+  margin-bottom: 5px;
 }
 
 .modalDescriptionText {
-  font-size: 0.94rem;
-  line-height: 1.65;
+  font-size: 0.88rem;
+  line-height: 1.5;
   color: #4d2d34;
   margin: 0;
 }
@@ -331,16 +327,16 @@
 .serviceHighlights {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 24px;
+  gap: 6px;
+  margin-bottom: 16px;
   width: 100%;
 }
 
 .highlightItem {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 0.84rem;
+  gap: 8px;
+  font-size: 0.8rem;
   font-weight: 600;
   color: #4d2d34;
 }
@@ -355,7 +351,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
 }
 
 .whatsappBookingBtn {
@@ -363,16 +359,16 @@
   color: #ffffff;
   border: 1px solid rgba(202, 144, 141, 0.4);
   border-radius: 9999px;
-  padding: 15px 28px;
-  font-size: 0.96rem;
+  padding: 12px 24px;
+  font-size: 0.92rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
-  box-shadow: 0 10px 24px -4px rgba(28, 2, 7, 0.35);
+  box-shadow: 0 8px 20px -4px rgba(28, 2, 7, 0.35);
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   width: 100%;
 }
@@ -400,7 +396,7 @@
 }
 
 .actionNote {
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   color: #7a5a61;
   text-align: center;
   margin: 0;
@@ -408,34 +404,92 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .modalLayout {
-    grid-template-columns: 1fr;
-    gap: 22px;
-    padding: 24px 20px 28px 20px;
-  }
-
-  .modalImageFrame {
-    aspect-ratio: 16 / 10;
+  .modalOverlay {
+    padding: 10px;
   }
 
   .modalContainer {
-    border-radius: 26px;
-    max-height: 92vh;
+    border-radius: 24px;
+    max-height: 94vh;
+    max-height: 94dvh;
+    overflow: hidden !important;
+  }
+
+  .modalLayout {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 18px 16px 16px 16px;
+  }
+
+  .modalImageFrame {
+    aspect-ratio: 16 / 9;
+    max-height: 180px;
+    border-radius: 16px;
   }
 
   .closeBtn {
-    top: 14px;
-    right: 14px;
-    width: 38px;
-    height: 38px;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .modalCategoryPretitle {
+    font-size: 0.65rem;
+    margin-bottom: 2px;
+  }
+
+  .modalTitle {
+    font-size: 1.35rem;
+  }
+
+  .modalDivider {
+    margin: 6px 0 8px 0;
+  }
+
+  .modalPriceContainer {
+    margin-bottom: 8px;
   }
 
   .modalPriceAmount {
-    font-size: 1.85rem;
+    font-size: 1.6rem;
+  }
+
+  .modalDescriptionBox {
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    border-radius: 12px;
+  }
+
+  .descHeading {
+    font-size: 0.68rem;
+    margin-bottom: 3px;
+  }
+
+  .modalDescriptionText {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .serviceHighlights {
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+
+  .highlightItem {
+    font-size: 0.74rem;
   }
 
   .whatsappBookingBtn {
-    padding: 14px 22px;
-    font-size: 0.92rem;
+    padding: 10px 18px;
+    font-size: 0.86rem;
+  }
+
+  .actionNote {
+    font-size: 0.68rem;
   }
 }
