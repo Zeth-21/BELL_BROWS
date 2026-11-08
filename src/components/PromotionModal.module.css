@@ -1,10 +1,10 @@
 .modalBackdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(28, 2, 7, 0.65);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 1100;
+  background-color: rgba(0, 0, 0, 0.60);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,12 +26,16 @@
   max-width: 520px;
   background: #ffffff;
   border-radius: clamp(20px, 3vw, 28px);
-  box-shadow: 0 25px 60px -15px rgba(28, 2, 7, 0.35);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(202, 144, 141, 0.35);
   position: relative;
   overflow: hidden;
   animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   box-sizing: border-box;
+  isolation: isolate;
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+  filter: none !important;
 }
 
 @keyframes scaleUp {
